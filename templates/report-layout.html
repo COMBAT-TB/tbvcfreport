@@ -1,0 +1,12 @@
+ {% extends "base.html" %} {% block content %} {% for item in data %}
+<tr>
+    <td>chr1</td>
+    <td>{{ item[3] }}</td>
+    <td>{{ item[4] }}</td>
+    <td>{{ item[1] }}</td>
+    <td>2155169</td>
+    <td>A</td>
+    <td>C</td>
+    <td>{{ item[2] }}</td>
+</tr>
+{% endfor %} {% endblock %}
