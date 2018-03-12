@@ -1,12 +1,15 @@
- {% extends "base.html" %} {% block content %} {% for item in data %}
+ {% extends "base.html" %} {% block content %}{% endblock %} {% block tr %} {% for item in data %}
 <tr>
-    <td>chr1</td>
+    <td>{{ item[16] }}</td>
     <td>{{ item[3] }}</td>
-    <td>{{ item[4] }}</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:{{ item[4] }}">{{ item[4] }}</a>
+    </td>
+    <td>{{ item[19] }}</td>
     <td>{{ item[1] }}</td>
-    <td>2155169</td>
-    <td>A</td>
-    <td>C</td>
+    <td>{{ item[17] }}</td>
+    <td>{{ item[18] }}</td>
+    <td>{{ item[0] }}</td>
     <td>{{ item[2] }}</td>
 </tr>
 {% endfor %} {% endblock %}

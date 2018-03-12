@@ -15,6 +15,6 @@ setup(
         'PyVCF',
     ],
     entry_points={
-        'console_scripts': ['vcfreport=vcfreport.cli:cli']
+        'console_scripts': ['vcfreport=vcfreport:cli']
     },
 )
