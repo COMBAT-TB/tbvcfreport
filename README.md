@@ -12,7 +12,7 @@ $ source envname/bin/activate
 $ pip install -r requirements.txt
 $ pip install --editable .
 $ vcfreport --help
-$ vcfreport generate data/
+$ vcfreport generate vcf_direcory/
 ```
 
 This will generate and open `output.html` on your browser.
