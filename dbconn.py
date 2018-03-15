@@ -1,8 +1,7 @@
-from py2neo import Graph, watch
+from py2neo import Graph
 
 import configparser
 
-watch('neo4j.bolt')
 
 config = configparser.ConfigParser()
 config.read('config.ini')
