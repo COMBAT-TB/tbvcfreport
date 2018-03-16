@@ -15,4 +15,4 @@ $ vcfreport --help
 $ vcfreport generate vcf_direcory/
 ```
 
-This will generate and open `output.html` on your browser.
+This will generate a `{vcf-file-name}.html` file in `pwd`.
