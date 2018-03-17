@@ -1,14 +1,11 @@
+import os
+
 from py2neo import Graph
 
-import configparser
 
+DBHOST = os.environ.get("DATABASE_URI", "combattb.sanbi.ac.za")
 
-config = configparser.ConfigParser()
-config.read('config.ini')
-
-DB = config['DEFAULT']['DB']
-
-graph = Graph(host=DB, bolt=True, password="")
+graph = Graph(host=DBHOST, bolt=True, password="")
 
 
 def get_gene_data(q):
