@@ -10,7 +10,7 @@ $ cd vcf-report
 $ virtualenv envname
 $ source envname/bin/activate
 $ pip install -r requirements.txt
-$ pip install --editable .
+$ pip install -e .
 $ vcfreport --help
 $ vcfreport generate vcf_direcory/
 ```

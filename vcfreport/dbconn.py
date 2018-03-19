@@ -14,7 +14,6 @@ def get_gene_data(q):
     # OR gene.uniquename=~'gene:(?i){0}.*'".format(q)
     where_statement = "WHERE gene.uniquename='gene:{0}'".format(q)
     try:
-
         data = graph.run(
             "MATCH (gene:Gene) {where_statement} "
             "OPTIONAL MATCH (protein:Protein)<-[:ENCODES]-(gene) "
