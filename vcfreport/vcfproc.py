@@ -20,10 +20,11 @@ class VCFProc(object):
         if self.vcf_file.endswith(".vcf"):
             sys.stdout.write(
                 "Processing: {}...\n".format(self.vcf_file))
-            file_name = self.vcf_file.split('/')[-1].split('.')[0]
             with open(self.vcf_file) as _vcf:
                 vcf_reader = vcf.Reader(_vcf)
                 for record in tqdm(vcf_reader):
+                    if record.var_type == 'snp':
+                        record.affected_start += 1
                     affected_region = "..".join([str(record.affected_start), str(record.affected_end)])
                     annotation = self.get_variant_ann(record=record)
                     gene_identifier = annotation[4]
