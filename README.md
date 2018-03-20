@@ -10,9 +10,9 @@ $ cd vcf-report
 $ virtualenv envname
 $ source envname/bin/activate
 $ pip install -r requirements.txt
-$ pip install --editable .
+$ pip install -e .
 $ vcfreport --help
-$ vcfreport generate data/
+$ vcfreport generate vcf_direcory/
 ```
 
-This will generate and open `output.html` on your browser.
+This will generate a `{vcf-file-name}.html` file in `pwd`.
