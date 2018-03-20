@@ -1,41 +1,46 @@
 {% extends "base.html" %} {% block content %}{% endblock %} {% block tr %} {% for item in data %}
-<tr>
-    <td>{{ item[16] }}</td>
-    <td>{{ item[3] }}</td>
-    <td>
-        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:{{ item[4] }}">{{ item[4] }}</a>
-    </td>
-    <td>
-        {% if item[21]['gene'] %}
-        <p class="small">{{ item[21]['gene']['description'][0] }}</p>
-        {% else %}
-        <p>{{ "NA" }}</p>
-        {% endif %}
-        <!-- {% if item[21]['protein'] %}
+    <tr>
+        <td>{{ item[16] }}</td>
+        <td>{{ item[3] }}</td>
+        <td>
+            <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:{{ item[4] }}">{{ item[4] }}</a>
+        </td>
+        <td>
+            {% if item[21]['gene'] %}
+                <p class="small">{{ item[21]['gene']['description'][0] }}</p>
+            {% else %}
+                <p>{{ "NA" }}</p>
+            {% endif %}
+            <!-- {% if item[21]['protein'] %}
         <p>{{ item[21]['protein']['function'][10:] or "Unknown"}}</p>
         {% else %}
         <p>{{ "NA" }}</p>
         {% endif %} -->
-    </td>
-    </td>
-    <td>{{ item[19] }}</td>
-    <td>{{ item[1] }}</td>
-    <td>
-        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[17] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[17] }}">{{ item[17] }}</a>
-    </td>
-    <td>{{ item[18] }}</td>
-    <td>{{ item[0] }}</td>
-    <td>{{ item[2] }}</td>
-    <td>
-        {% if item[21]['pathway']|length >= 1 %} {% for pathway in item[21]['pathway'] %} {% if pathway['accession'].startswith("mtv")
-        %} {% set url = "http://www.genome.jp/dbget-bin/www_bget?" %} {% else %} {% set url = "https://reactome.org/content/detail/"
-        %} {% endif %}
-        <p>
-            <a href="{{ url }}{{ pathway['accession'] }}" target="_blank">{{ pathway['accession'] }}</a>
-        </p>
-        {% endfor %} {% else %}
-        <p>{{ "NA" }}</p>
-        {% endif %}
-    </td>
-</tr>
+        </td>
+        <td>{{ item[19] }}</td>
+        <td>{{ item[1] }}</td>
+        <td>
+            <a target="_blank"
+               href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[17] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[17] }}">{{ item[17] }}</a>
+        </td>
+        <td>
+            <a target="_blank"
+               href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[20] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[20] }}">{{ item[20] }}</a>
+        </td>
+        <td>{{ item[18] }}</td>
+        <td>{{ item[0] }}</td>
+        <td>{{ item[2] }}</td>
+        <td>
+            {% if item[21]['pathway']|length >= 1 %} {% for pathway in item[21]['pathway'] %}
+                {% if pathway['accession'].startswith("mtv") %}
+                    {% set url = "http://www.genome.jp/dbget-bin/www_bget?" %} {% else %}
+                    {% set url = "https://reactome.org/content/detail/" %} {% endif %}
+                <p>
+                    <a href="{{ url }}{{ pathway['accession'] }}" target="_blank">{{ pathway['accession'] }}</a>
+                </p>
+            {% endfor %} {% else %}
+                <p>{{ "NA" }}</p>
+            {% endif %}
+        </td>
+    </tr>
 {% endfor %} {% endblock %}

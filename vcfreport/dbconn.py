@@ -1,3 +1,6 @@
+"""
+Interface to Graph Database
+"""
 import os
 
 from py2neo import Graph
@@ -9,6 +12,11 @@ graph = Graph(host=DBHOST, bolt=True, password="")
 
 
 def get_gene_data(q):
+    """
+    Query DB
+    :param q:
+    :return:
+    """
     # WHERE g.uniquename IN {q}
     # where_statement = "WHERE gene.name =~'(?i){0}.*' \
     # OR gene.uniquename=~'gene:(?i){0}.*'".format(q)

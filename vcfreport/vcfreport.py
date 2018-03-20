@@ -1,14 +1,22 @@
+"""
+Interface to CLI
+"""
 import os
 import sys
 import webbrowser
 
 import click
 
-from report import render_report
+from report import generate_report
 from vcfproc import VCFProc
 
 
 def check_vcf(vcf_file):
+    """
+    Check vcf file for emptiness
+    :param vcf_file:
+    :return:
+    """
     _file = False
     if os.stat(vcf_file).st_size > 0:
         _file = True
@@ -22,6 +30,7 @@ def check_vcf(vcf_file):
 def cli():
     """
     vcfreport is a command line tool that generates an HTML-based VCF report.
+    :return:
     """
     pass
 
@@ -31,6 +40,8 @@ def cli():
 def generate(vcf_dir):
     """
     Generate report from VCF files in VCF_DIR.
+    :param vcf_dir:
+    :return:
     """
     if os.path.isdir(vcf_dir):
         for root, dirs, files in os.walk(vcf_dir):
@@ -45,14 +56,14 @@ def generate(vcf_dir):
                     file_name = vcf_file.split('/')[-1].split('.')[0]
                     vcf_file = VCFProc(vcf_file=vcf_file)
                     snp_list = vcf_file.parse()
-                    render_report(file_name=file_name, data=snp_list)
+                    generate_report(file_name=file_name, data=snp_list)
     elif os.path.isfile(vcf_dir):
         vcf_file = os.path.abspath(vcf_dir)
         if check_vcf(vcf_file):
             file_name = vcf_file.split('/')[-1].split('.')[0]
             vcf_file = VCFProc(vcf_file=vcf_file)
             snp_list = vcf_file.parse()
-            report = render_report(file_name=file_name, data=snp_list)
+            report = generate_report(file_name=file_name, data=snp_list)
             webbrowser.open('file://' + os.path.realpath(report))
     else:
         sys.stderr.write("Can't generate report for {}!".format(vcf_dir))
