@@ -25,18 +25,14 @@ requirements:
     - python
     - pip
     - click
-    - enum34
     - jinja2
-    - markupsafe
     - py2neo==3.1.2
     - pyvcf==0.6.8
     - tqdm
   run:
     - python
     - click
-    - enum34
     - jinja2
-    - markupsafe
     - py2neo==3.1.2
     - pyvcf==0.6.8
     - tqdm
