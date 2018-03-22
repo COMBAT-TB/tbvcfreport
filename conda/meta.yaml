@@ -1,0 +1,46 @@
+{% set name = "vcf-report" %}
+{% set version = "0.0.1" %}
+{% set sha256 = "" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://github.com/COMBAT-TB/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+#    - autopep8
+#    - flake8
+#    - mccabe
+#    - pycodestyle
+#    - pyflakes
+    - python
+    - pip
+    - click
+    - enum34
+    - jinja2
+    - markupsafe
+    - py2neo==3.1.2
+    - pyvcf==0.6.8
+    - tqdm
+  run:
+    - python
+    - click
+    - enum34
+    - jinja2
+    - markupsafe
+    - py2neo==3.1.2
+    - pyvcf==0.6.8
+    - tqdm
+
+  test:
+    imports:
+      - {{ name | lower }}
