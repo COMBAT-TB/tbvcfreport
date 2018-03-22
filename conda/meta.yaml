@@ -1,6 +1,6 @@
-{% set name = "vcf-report" %}
+{% set name = "tb-vcf-report" %}
 {% set version = "0.0.1" %}
-{% set sha256 = "" %}
+{% set sha256 = "692fe342bb491f28e600b5f575a436f30aa9931759ee2ef16bd41afa91ed5214" %}
 
 package:
   name: {{ name|lower }}
@@ -17,26 +17,30 @@ build:
 
 requirements:
   build:
-#    - autopep8
-#    - flake8
-#    - mccabe
-#    - pycodestyle
-#    - pyflakes
     - python
     - pip
     - click
     - jinja2
-    - py2neo==3.1.2
-    - pyvcf==0.6.8
+    - py2neo 3.1.2
+    - pyvcf 0.6.8
     - tqdm
   run:
     - python
     - click
     - jinja2
-    - py2neo==3.1.2
-    - pyvcf==0.6.8
+    - py2neo 3.1.2
+    - pyvcf 0.6.8
     - tqdm
 
-  test:
-    imports:
-      - {{ name | lower }}
+test:
+  imports:
+    - tb_vcfreport
+  commands:
+    - tb_vcfreport generate --help 2>&1 |grep VCF_DIR >/dev/null
+
+about:
+  home: https://github.com/COMBAT-TB/{{ name }}
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE.txt
+  summary: 'Generate a report on M. tuberculosis variants with links to Combat TB Explorer database'
