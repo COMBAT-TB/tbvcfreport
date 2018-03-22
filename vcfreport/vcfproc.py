@@ -4,7 +4,7 @@ Interface to handle VCF files
 import sys
 import vcf
 from tqdm import tqdm
-from dbconn import get_gene_data
+from .dbconn import get_gene_data
 
 
 class VCFProc(object):

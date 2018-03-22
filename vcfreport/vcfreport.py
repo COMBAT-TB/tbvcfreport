@@ -7,8 +7,8 @@ import webbrowser
 
 import click
 
-from report import generate_report
-from vcfproc import VCFProc
+from .report import generate_report
+from .vcfproc import VCFProc
 
 
 def check_vcf(vcf_file):
