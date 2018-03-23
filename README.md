@@ -1,4 +1,4 @@
-# **tb_vcfreport**
+# **tbvcfreport**
 
 A tool to generate an HTML report from SnpEff produced vcf files with links to the
 Combat TB Explorer database.
@@ -6,8 +6,8 @@ Combat TB Explorer database.
 ## Usage
 
 ```sh
-$ git clone https://github.com/COMBAT-TB/tb-vcf-report.git
-$ cd tb-vcf-report
+$ git clone https://github.com/COMBAT-TB/tbvcfreport.git
+$ cd tbvcfreport
 $ virtualenv envname
 $ source envname/bin/activate
 $ pip install -r requirements.txt
