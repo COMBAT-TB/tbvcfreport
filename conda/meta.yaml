@@ -34,9 +34,9 @@ requirements:
 
 test:
   imports:
-    - tb_vcfreport
+    - tbvcfreport
   commands:
-    - tb_vcfreport generate --help 2>&1 |grep VCF_DIR >/dev/null
+    - tbvcfreport generate --help 2>&1 |grep VCF_DIR >/dev/null
 
 about:
   home: https://github.com/COMBAT-TB/{{ name }}
