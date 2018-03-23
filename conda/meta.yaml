@@ -1,6 +1,6 @@
 {% set name = "tb-vcf-report" %}
 {% set version = "0.0.1" %}
-{% set sha256 = "692fe342bb491f28e600b5f575a436f30aa9931759ee2ef16bd41afa91ed5214" %}
+{% set sha256 = "46dd5e7578bf79b7c4e124a75f92d4468443ed692e038ddf23d4dfd07fee145a" %}
 
 package:
   name: {{ name|lower }}
