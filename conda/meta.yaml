@@ -1,6 +1,6 @@
 {% set name = "tbvcfreport" %}
-{% set version = "0.0.1" %}
-{% set sha256 = "82c201feb260da7d0c52d7a89e97e054e19d91375ed87b27cdd7238830a350b6" %}
+{% set version = "0.0.2" %}
+{% set sha256 = "d399bddf91709dba357394c6c923b8c76c68cd77634666d68457c6ae0da87ea1" %}
 {% set py2neo = "3.1.2" %}
 {% set pyvcf = "0.6.8" %}
 
@@ -14,7 +14,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   script: python -m pip install --no-deps --ignore-installed .
 
 requirements:
