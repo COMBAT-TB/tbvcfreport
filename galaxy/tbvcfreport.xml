@@ -7,10 +7,9 @@
   </requirements>
 
   <command detect_errors="exit_code"><![CDATA[
-    #import os.path
-    #set report_name = os.path.splitext(os.path.basename($input_vcf))[0] + '.html'
-    tbvcfreport generate '$input_vcf' &&
-    mv '$report_name' '$output'
+    ln -s '$input_vcf' data.vcf &&
+    tbvcfreport generate data.vcf &&
+    mv data.html '$output'
     ]]>
   </command>
 
@@ -24,13 +23,13 @@
 
   <tests>
     <test>
-      <param name="input_vcf" value="sample1.vcf" />
-      <output name="output" file="sample1.html" ftype="html" />
+      <param name="input_vcf" value="data.vcf" />
+      <output name="output" compare="diff" lines_diff="2" file="data.html" ftype="html" />
     </test>
   </tests>
 
   <help><![CDATA[
-    Do Something
+    The input to this tool has to be a VCF file compared with
     ]]>
   </help>
 
