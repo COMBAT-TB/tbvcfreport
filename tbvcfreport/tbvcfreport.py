@@ -64,7 +64,7 @@ def generate(vcf_dir):
             vcf_file = VCFProc(vcf_file=vcf_file)
             snp_list = vcf_file.parse()
             report = generate_report(file_name=file_name, data=snp_list)
-            webbrowser.open('file://' + os.path.realpath(report))
+            # webbrowser.open('file://' + os.path.realpath(report))
     else:
         sys.stderr.write("Can't generate report for {}!".format(vcf_dir))
 
