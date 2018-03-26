@@ -1,6 +1,8 @@
 {% set name = "tbvcfreport" %}
 {% set version = "0.0.1" %}
-{% set sha256 = "46dd5e7578bf79b7c4e124a75f92d4468443ed692e038ddf23d4dfd07fee145a" %}
+{% set sha256 = "82c201feb260da7d0c52d7a89e97e054e19d91375ed87b27cdd7238830a350b6" %}
+{% set py2neo = "3.1.2" %}
+{% set pyvcf = "0.6.8" %}
 
 package:
   name: {{ name|lower }}
@@ -21,15 +23,15 @@ requirements:
     - pip
     - click
     - jinja2
-    - py2neo 3.1.2
-    - pyvcf 0.6.8
+    - py2neo {{ py2neo }}
+    - pyvcf {{ pyvcf }}
     - tqdm
   run:
     - python
     - click
     - jinja2
-    - py2neo 3.1.2
-    - pyvcf 0.6.8
+    - py2neo {{ py2neo }}
+    - pyvcf {{ pyvcf }}
     - tqdm
 
 test:
