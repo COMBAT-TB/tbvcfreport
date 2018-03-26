@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<tool id="tbvcfreport" name="M. tuberculosis VCF Report" version="0.0.1" profile="17.01">
+  <description>Annotate SnpEff VCF with links to Combat TB Explorer database</description>
+
+  <requirements>
+    <requirement type="package">tbvcfreport</requirement>
+  </requirements>
+
+  <command detect_errors="exit_code"><![CDATA[
+    #import os.path
+    #set report_name os.path.splitext(os.path.basename($input_vcf))[0] + '.html'
+    tbvcfreport generate '$input_vcf' &&
+    mv '$report_name' $output
+    ]]>
+  </command>
+
+  <inputs>
+    <param name="input_vcf" type="data" format="vcf" label="Input VCF (with SnpEff annotation)" />
+  </inputs>
+
+  <outputs>
+    <data name="output" format="html" />
+  </outputs>
+
+  <tests>
+    <test>
+      <param name="input_vcf" value="sample1.vcf" />
+      <output name="output" file="sample1.html" ftype="html" />
+    </test>
+  </tests>
+
+  <help><![CDATA[
+    Do Something
+    ]]>
+  </help>
+
+  <citations>
+  </citations>
+</tool>
