@@ -6,7 +6,7 @@ import os.path
 from jinja2 import Environment, FileSystemLoader
 
 jinja_env = Environment(loader=FileSystemLoader(
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates"),
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates")),
     trim_blocks=True
 )
 
