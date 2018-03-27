@@ -25,17 +25,25 @@ class VCFProc(object):
                 for record in tqdm(vcf_reader):
                     if record.var_type == 'snp':
                         record.affected_start += 1
-                    affected_region = "..".join([str(record.affected_start), str(record.affected_end)])
-                    annotation = self.get_variant_ann(record=record)
-                    gene_identifier = annotation[4]
-                    rv_tags.append(gene_identifier)
-                    variant_data = self.get_variant_data(
-                        gene_identifier)
-                    annotation.extend(
-                        [record.CHROM, record.POS, record.REF,
-                         record.var_type, affected_region, variant_data]
-                    )
-                    snp_list.append(annotation)
+                    # Affected Region
+                    affected_region = "..".join(
+                        [str(record.affected_start), str(record.affected_end)])
+                    # Usually there is more than one annotation reported in each ANN
+                    # A variant can affect multiple genes
+                    annotations = [
+                        ann.split("|") for ann in self.get_variant_ann(record=record)]
+                    for annotation in annotations:
+
+                        gene_identifier = annotation[4]
+
+                        rv_tags.append(gene_identifier)
+
+                        variant_data = self.get_variant_data(gene_identifier)
+
+                        annotation.extend(
+                            [record.CHROM, record.POS, record.REF, record.var_type, affected_region, variant_data])
+
+                        snp_list.append(annotation)
         else:
             sys.stderr.write("Can't parse {vcf_file}".format(
                 vcf_file=self.vcf_file))
@@ -48,7 +56,7 @@ class VCFProc(object):
         :param record:
         :return:
         """
-        ann = record.INFO['ANN'][0].split('|')
+        ann = record.INFO['ANN']
         return ann
 
     @staticmethod
