@@ -1,19 +1,23 @@
 {% set name = "tbvcfreport" %}
 {% set version = "0.0.3" %}
-{% set sha256 = "d399bddf91709dba357394c6c923b8c76c68cd77634666d68457c6ae0da87ea1" %}
+{% set sha256 = "fbb108d45f7b21d629d5554ffbeff09be22f11e0828fb2d357273ee3d732c9aa" %}
 {% set py2neo = "3.1.2" %}
 {% set pyvcf = "0.6.8" %}
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: {{ environ['VERSION'] or version }}
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/COMBAT-TB/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  sha256: {{ environ['SHA'] or sha256 }}
 
 build:
+  script_env:
+    - SHA
+    - VERSION
+    - CONDA_BLD_PATH
   number: 1
   script: python -m pip install --no-deps --ignore-installed .
 

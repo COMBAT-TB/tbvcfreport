@@ -29,7 +29,8 @@
   </tests>
 
   <help><![CDATA[
-    The input to this tool has to be a VCF file compared with
+    This tool generates an HTML-based VCF report from an input SnpEff VCF file.
+    The input has to be a SnpEff generated VCF file.
     ]]>
   </help>
 
