@@ -1,5 +1,5 @@
 {% set name = "tbvcfreport" %}
-{% set version = "0.0.2" %}
+{% set version = "0.0.3" %}
 {% set sha256 = "d399bddf91709dba357394c6c923b8c76c68cd77634666d68457c6ae0da87ea1" %}
 {% set py2neo = "3.1.2" %}
 {% set pyvcf = "0.6.8" %}
