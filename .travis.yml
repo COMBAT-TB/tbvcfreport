@@ -1,3 +1,5 @@
+os:
+  - linux
 language: python
 python:
   # We don't actually use the Travis Python, but this keeps it organized.
@@ -18,9 +20,12 @@ install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
+  - conda config --get channels
+  - conda config --add channels conda-forge
+  - conda config --add channels bioconda
   # Useful for debugging any issues with conda
   - conda info -a
-  - deps='pip click jinja2 tqdm'
+  - deps='pip click jinja2 tqdm py2neo=3.1.2 pyvcf=0.6.8'
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION $deps
   - source activate test-environment
   - python setup.py install
@@ -28,3 +33,6 @@ install:
 script:
   # Your test script goes here
   - tbvcfreport generate --help
+
+after_success:
+  - conda install conda-build && conda install anaconda-client && bash conda/conda.sh
