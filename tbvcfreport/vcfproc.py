@@ -4,7 +4,11 @@ Interface to handle VCF files
 import sys
 import vcf
 from tqdm import tqdm
-from .dbconn import get_gene_data
+
+try:
+    from .dbconn import get_gene_data
+except (ImportError, ValueError):
+    from dbconn import get_gene_data
 
 
 class VCFProc(object):
@@ -16,7 +20,7 @@ class VCFProc(object):
         self.vcf_file = vcf_file
 
     def parse(self):
-        snp_list, rv_tags = [], []
+        variants, rv_tags = [], []
         if self.vcf_file.endswith(".vcf"):
             sys.stdout.write(
                 "Processing: {}...\n".format(self.vcf_file))
@@ -37,11 +41,11 @@ class VCFProc(object):
                         variant_data = self.get_variant_data(gene_identifier)
                         annotation.extend(
                             [record.CHROM, record.POS, record.REF, record.var_type, affected_region, variant_data])
-                        snp_list.append(annotation)
+                        variants.append(annotation)
         else:
             sys.stderr.write("Can't parse {vcf_file}".format(
                 vcf_file=self.vcf_file))
-        return snp_list
+        return variants
 
     @staticmethod
     def get_variant_ann(record):

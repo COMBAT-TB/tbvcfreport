@@ -24,13 +24,16 @@
     </td>
     <td>{{ item[18] }}</td>
     <td>{{ item[0] }}</td>
+    <td>{{ item[10] }}</td>
     <td>{{ item[2] }}</td>
     <td>
         {% if item[21]['pathway']|length >= 1 %} {% for pathway in item[21]['pathway'] %} {% if pathway['accession'].startswith("mtv")
         %} {% set url = "http://www.genome.jp/dbget-bin/www_bget?" %} {% else %} {% set url = "https://reactome.org/content/detail/"
         %} {% endif %}
         <p>
-            <a href="{{ url }}{{ pathway['accession'] }}" target="_blank">{{ pathway['accession'] }}</a>
+            <small>
+                <a href="{{ url }}{{ pathway['accession'] }}" target="_blank">{{ pathway['name'] }}</a>
+            </small>
         </p>
         {% endfor %} {% else %}
         <p>{{ "NA" }}</p>

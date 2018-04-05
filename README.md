@@ -3,6 +3,8 @@
 A tool to generate an HTML report from SnpEff produced vcf files with links to the
 Combat TB Explorer database.
 
+![VCFReport](./img/tbvcfreport.png)
+
 ## Usage
 
 ```sh
