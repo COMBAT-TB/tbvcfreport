@@ -6,9 +6,12 @@ import sys
 import webbrowser
 
 import click
-
-from .report import generate_report
-from .vcfproc import VCFProc
+try:
+    from .report import generate_report
+    from .vcfproc import VCFProc
+except (ImportError, ValueError):
+    from report import generate_report
+    from vcfproc import VCFProc
 
 
 def check_vcf(vcf_file):
@@ -55,15 +58,15 @@ def generate(vcf_dir):
                 if check_vcf(vcf_file):
                     file_name = vcf_file.split('/')[-1].split('.')[0]
                     vcf_file = VCFProc(vcf_file=vcf_file)
-                    snp_list = vcf_file.parse()
-                    generate_report(file_name=file_name, data=snp_list)
+                    variants = vcf_file.parse()
+                    generate_report(file_name=file_name, data=variants)
     elif os.path.isfile(vcf_dir):
         vcf_file = os.path.abspath(vcf_dir)
         if check_vcf(vcf_file):
             file_name = vcf_file.split('/')[-1].split('.')[0]
             vcf_file = VCFProc(vcf_file=vcf_file)
-            snp_list = vcf_file.parse()
-            report = generate_report(file_name=file_name, data=snp_list)
+            variants = vcf_file.parse()
+            report = generate_report(file_name=file_name, data=variants)
             # webbrowser.open('file://' + os.path.realpath(report))
     else:
         sys.stderr.write("Can't generate report for {}!".format(vcf_dir))

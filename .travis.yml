@@ -1,0 +1,44 @@
+os:
+  - linux
+dist: trusty
+
+language: python
+python:
+  - "2.7"
+  - "3.5"
+  - "3.6"
+
+services:
+  - neo4j
+
+env:
+  - DATABASE_URI=localhost
+
+install:
+  - sudo apt-get update
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
+    else
+      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+    fi
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda config --get channels
+  - conda config --add channels conda-forge
+  - conda config --add channels bioconda
+  - conda info -a
+  - deps='pip click jinja2 tqdm py2neo=3.1.2 pyvcf=0.6.8'
+  - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION $deps
+  - source activate test-environment
+  - python setup.py install
+#  - pip install --user -r requirements.txt
+#  - pip install --user -e .
+
+script:
+  -  tbvcfreport generate --help
+
+after_success:
+ - conda install conda-build && conda install anaconda-client && bash conda/conda.sh
