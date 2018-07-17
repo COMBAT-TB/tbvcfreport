@@ -2,246 +2,1112 @@
 <html>
 
 <head>
-        <title></title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css"> -->
-    </head>
+            <title></title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css"
+              href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"> </head>
 
 <body>
-    <main role="main" class="container">
-        <h1 class="mt-5">
-            sample1 Report
-        </h1>
-        <hr>         <div class="row justify-content-center align-items-center" style="overflow-x:auto;">
-            <table id="example" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">CHR</th>
-                        <th scope="col">GENE</th>
-                        <th scope="col">IDENTIFIER</th>
-                        <th scope="col">FUNCTION</th>
-                        <th scope="col">TYPE</th>
-                        <th scope="col">ANNOTATION</th>
-                        <th scope="col">POS</th>
-                        <th scope="col">REF</th>
-                        <th scope="col">ALT</th>
-                        <th scope="col">IMPACT</th>
-                        <th scope="col">PATHWAY</th>
-                    </tr>
-                </thead>
-                <tbody>
-                         <tr>
-        <td>NC_000962</td>
-        <td>dnaN</td>
-        <td>
-            <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0002">Rv0002</a>
-        </td>
-        <td>
-                            <p class="small">DNA polymerase III (beta chain) DnaN (DNA nucleotidyltransferase)</p>
-                        <!--         <p>Confers DNA tethering and processivity to DNA polymerases and other proteins. Acts as a clamp, forming a ring around DNA (a reaction catalyzed by the clamp-loading complex) which diffuses in an ATP-independent manner freely and bidirectionally along dsDNA. Initially characterized for its ability to contact the catalytic subunit of DNA polymerase III (Pol III), a complex, multichain enzyme responsible for most of the replicative synthesis in bacteria; Pol III exhibits 3'-5' exonuclease proofreading activity. The beta chain is required for initiation of replication as well as for processivity of DNA replication (By similarity). Binds ds-and ssDNA (PubMed:22545130). Binds the antibiotic griselimycin and its derivatives with high affinity (1.0 x 10(-10) to 2.0 x 10(-10) M s(-1)) (PubMed:26045430). Binding occurs in a hydrophobic cleft between domains 2 and 3, which have been shown to be responsible for binding DNA polymerases and other DNA-modifying proteins (PubMed:26045430). {ECO:0000250|UniProtKB:P0A988, ECO:0000269|PubMed:22545130, ECO:0000269|PubMed:26045430}.</p>
+<main role="main" class="container">
+    <h1 class="mt-5">
+        data Report
+    </h1>
+    <hr>     <div class="row justify-content-center align-items-center">
+        <table id="example" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">CHR</th>
+                <th scope="col">GENE</th>
+                <th scope="col">IDENTIFIER</th>
+                <th scope="col">PRODUCT</th>
+                <th scope="col">TYPE</th>
+                <th scope="col">ANNOTATION</th>
+                <th scope="col">POS</th>
+                <th scope="col">REF</th>
+                <th scope="col">ALT</th>
+                <th scope="col">CONSEQUENCE</th>
+                <th scope="col">IMPACT</th>
+                <th scope="col">PATHWAY</th>
+            </tr>
+            </thead>
+            <tbody>
+             <tr>
+    <td>NC_000962</td>
+    <td>dnaN</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0002">Rv0002</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
          -->
-        </td>
-        <td>snp</td>
-        <td>upstream_gene_variant</td>
-        <td>
-            <a target="_blank"
-               href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1849..1849&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1849..1849">1849</a>
-        </td>
-        <td>C</td>
-        <td>A</td>
-        <td>MODIFIER</td>
-        <td>
-                                                                  <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv03440" target="_blank">mtv03440</a>
-                </p>
-                                                                 <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv03430" target="_blank">mtv03430</a>
-                </p>
-                                                                 <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv03030" target="_blank">mtv03030</a>
-                </p>
-                                                                 <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv00240" target="_blank">mtv00240</a>
-                </p>
-                                                                 <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv00230" target="_blank">mtv00230</a>
-                </p>
-                     </td>
-    </tr>
-    <tr>
-        <td>NC_000962</td>
-        <td>dnaN</td>
-        <td>
-            <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0002">Rv0002</a>
-        </td>
-        <td>
-                            <p class="small">DNA polymerase III (beta chain) DnaN (DNA nucleotidyltransferase)</p>
-                        <!--         <p>Confers DNA tethering and processivity to DNA polymerases and other proteins. Acts as a clamp, forming a ring around DNA (a reaction catalyzed by the clamp-loading complex) which diffuses in an ATP-independent manner freely and bidirectionally along dsDNA. Initially characterized for its ability to contact the catalytic subunit of DNA polymerase III (Pol III), a complex, multichain enzyme responsible for most of the replicative synthesis in bacteria; Pol III exhibits 3'-5' exonuclease proofreading activity. The beta chain is required for initiation of replication as well as for processivity of DNA replication (By similarity). Binds ds-and ssDNA (PubMed:22545130). Binds the antibiotic griselimycin and its derivatives with high affinity (1.0 x 10(-10) to 2.0 x 10(-10) M s(-1)) (PubMed:26045430). Binding occurs in a hydrophobic cleft between domains 2 and 3, which have been shown to be responsible for binding DNA polymerases and other DNA-modifying proteins (PubMed:26045430). {ECO:0000250|UniProtKB:P0A988, ECO:0000269|PubMed:22545130, ECO:0000269|PubMed:26045430}.</p>
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1849..1849&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1849..1849">1849</a>
+    </td>
+    <td>C</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>recF</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0003">Rv0003</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
          -->
-        </td>
-        <td>snp</td>
-        <td>upstream_gene_variant</td>
-        <td>
-            <a target="_blank"
-               href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1977..1977&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1977..1977">1977</a>
-        </td>
-        <td>A</td>
-        <td>G</td>
-        <td>MODIFIER</td>
-        <td>
-                                                                  <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv03440" target="_blank">mtv03440</a>
-                </p>
-                                                                 <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv03430" target="_blank">mtv03430</a>
-                </p>
-                                                                 <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv03030" target="_blank">mtv03030</a>
-                </p>
-                                                                 <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv00240" target="_blank">mtv00240</a>
-                </p>
-                                                                 <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv00230" target="_blank">mtv00230</a>
-                </p>
-                     </td>
-    </tr>
-    <tr>
-        <td>NC_000962</td>
-        <td>recF</td>
-        <td>
-            <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0003">Rv0003</a>
-        </td>
-        <td>
-                            <p class="small">DNA replication and repair protein RecF (single-strand DNA binding protein)</p>
-                        <!--         <p>The RecF protein is involved in DNA metabolism; it is required for DNA replication and normal SOS inducibility. RecF binds preferentially to single-stranded, linear DNA. It also seems to bind ATP (By similarity). {ECO:0000250}.</p>
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1849..1849&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1849..1849">1849</a>
+    </td>
+    <td>C</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0004</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0004">Rv0004</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
          -->
-        </td>
-        <td>snp</td>
-        <td>missense_variant</td>
-        <td>
-            <a target="_blank"
-               href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A4013..4013&tracks=DNA%2CGenes&highlight=NC_000962.3%3A4013..4013">4013</a>
-        </td>
-        <td>T</td>
-        <td>C</td>
-        <td>MODERATE</td>
-        <td>
-                                                                  <p>
-                    <a href="http://www.genome.jp/dbget-bin/www_bget?mtv03440" target="_blank">mtv03440</a>
-                </p>
-                     </td>
-    </tr>
-    <tr>
-        <td>NC_000962</td>
-        <td>gyrA</td>
-        <td>
-            <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0006">Rv0006</a>
-        </td>
-        <td>
-                            <p class="small">DNA gyrase (subunit A) GyrA (DNA topoisomerase (ATP-hydrolysing)) (DNA topoisomerase II) (type II DNA topoisomerase)</p>
-                        <!--         <p>A type II topoisomerase that negatively supercoils closed circular double-stranded (ds) DNA in an ATP-dependent manner to maintain chromosomes in an underwound state, while in the absence of ATP it relaxes supercoiled dsDNA (PubMed:15047530, PubMed:16377674, PubMed:16876125, PubMed:17015625, PubMed:18426901, PubMed:19060136, PubMed:22844097, PubMed:20805881). Also catalyzes the interconversion of other topological isomers of dsDNA rings, including catenanes (PubMed:16876125, PubMed:19060136, PubMed:22457352). Gyrase from M.tuberculosis has higher decatenation than supercoiling activity compared to E.coli; as M.tuberculosis only has 1 type II topoisomerase, gyrase has to fulfill the decatenation function of topoisomerase IV as well (PubMed:16876125, PubMed:22457352, PubMed:23869946). At comparable concentrations M.tuberculosis gyrase cannot introduce as many negative supercoils into DNA as the E.coli enzyme, and its ATPase activity is lower, perhaps because it does not couple DNA wrapping and ATP binding as well as E.coli (PubMed:22457352). {ECO:0000269|PubMed:15047530, ECO:0000269|PubMed:16377674, ECO:0000269|PubMed:16876125, ECO:0000269|PubMed:17015625, ECO:0000269|PubMed:18426901, ECO:0000269|PubMed:19060136, ECO:0000269|PubMed:20805881, ECO:0000269|PubMed:22457352, ECO:0000269|PubMed:22844097, ECO:0000269|PubMed:23869946}.; FUNCTION: Negative supercoiling favors strand separation, and DNA replication, transcription, recombination and repair, all of which involve strand separation. Type II topoisomerases break and join 2 DNA strands simultaneously in an ATP-dependent manner.</p>
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1849..1849&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1849..1849">1849</a>
+    </td>
+    <td>C</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrB</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0005">Rv0005</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
          -->
-        </td>
-        <td>snp</td>
-        <td>missense_variant</td>
-        <td>
-            <a target="_blank"
-               href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7362..7362&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7362..7362">7362</a>
-        </td>
-        <td>G</td>
-        <td>C</td>
-        <td>MODERATE</td>
-        <td>
-                            <p>NA</p>
-                    </td>
-    </tr>
-    <tr>
-        <td>NC_000962</td>
-        <td>gyrA</td>
-        <td>
-            <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0006">Rv0006</a>
-        </td>
-        <td>
-                            <p class="small">DNA gyrase (subunit A) GyrA (DNA topoisomerase (ATP-hydrolysing)) (DNA topoisomerase II) (type II DNA topoisomerase)</p>
-                        <!--         <p>A type II topoisomerase that negatively supercoils closed circular double-stranded (ds) DNA in an ATP-dependent manner to maintain chromosomes in an underwound state, while in the absence of ATP it relaxes supercoiled dsDNA (PubMed:15047530, PubMed:16377674, PubMed:16876125, PubMed:17015625, PubMed:18426901, PubMed:19060136, PubMed:22844097, PubMed:20805881). Also catalyzes the interconversion of other topological isomers of dsDNA rings, including catenanes (PubMed:16876125, PubMed:19060136, PubMed:22457352). Gyrase from M.tuberculosis has higher decatenation than supercoiling activity compared to E.coli; as M.tuberculosis only has 1 type II topoisomerase, gyrase has to fulfill the decatenation function of topoisomerase IV as well (PubMed:16876125, PubMed:22457352, PubMed:23869946). At comparable concentrations M.tuberculosis gyrase cannot introduce as many negative supercoils into DNA as the E.coli enzyme, and its ATPase activity is lower, perhaps because it does not couple DNA wrapping and ATP binding as well as E.coli (PubMed:22457352). {ECO:0000269|PubMed:15047530, ECO:0000269|PubMed:16377674, ECO:0000269|PubMed:16876125, ECO:0000269|PubMed:17015625, ECO:0000269|PubMed:18426901, ECO:0000269|PubMed:19060136, ECO:0000269|PubMed:20805881, ECO:0000269|PubMed:22457352, ECO:0000269|PubMed:22844097, ECO:0000269|PubMed:23869946}.; FUNCTION: Negative supercoiling favors strand separation, and DNA replication, transcription, recombination and repair, all of which involve strand separation. Type II topoisomerases break and join 2 DNA strands simultaneously in an ATP-dependent manner.</p>
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1849..1849&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1849..1849">1849</a>
+    </td>
+    <td>C</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>dnaA</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0001">Rv0001</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
          -->
-        </td>
-        <td>snp</td>
-        <td>missense_variant</td>
-        <td>
-            <a target="_blank"
-               href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7585..7585&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7585..7585">7585</a>
-        </td>
-        <td>G</td>
-        <td>C</td>
-        <td>MODERATE</td>
-        <td>
-                            <p>NA</p>
-                    </td>
-    </tr>
-    <tr>
-        <td>NC_000962</td>
-        <td>gyrA</td>
-        <td>
-            <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0006">Rv0006</a>
-        </td>
-        <td>
-                            <p class="small">DNA gyrase (subunit A) GyrA (DNA topoisomerase (ATP-hydrolysing)) (DNA topoisomerase II) (type II DNA topoisomerase)</p>
-                        <!--         <p>A type II topoisomerase that negatively supercoils closed circular double-stranded (ds) DNA in an ATP-dependent manner to maintain chromosomes in an underwound state, while in the absence of ATP it relaxes supercoiled dsDNA (PubMed:15047530, PubMed:16377674, PubMed:16876125, PubMed:17015625, PubMed:18426901, PubMed:19060136, PubMed:22844097, PubMed:20805881). Also catalyzes the interconversion of other topological isomers of dsDNA rings, including catenanes (PubMed:16876125, PubMed:19060136, PubMed:22457352). Gyrase from M.tuberculosis has higher decatenation than supercoiling activity compared to E.coli; as M.tuberculosis only has 1 type II topoisomerase, gyrase has to fulfill the decatenation function of topoisomerase IV as well (PubMed:16876125, PubMed:22457352, PubMed:23869946). At comparable concentrations M.tuberculosis gyrase cannot introduce as many negative supercoils into DNA as the E.coli enzyme, and its ATPase activity is lower, perhaps because it does not couple DNA wrapping and ATP binding as well as E.coli (PubMed:22457352). {ECO:0000269|PubMed:15047530, ECO:0000269|PubMed:16377674, ECO:0000269|PubMed:16876125, ECO:0000269|PubMed:17015625, ECO:0000269|PubMed:18426901, ECO:0000269|PubMed:19060136, ECO:0000269|PubMed:20805881, ECO:0000269|PubMed:22457352, ECO:0000269|PubMed:22844097, ECO:0000269|PubMed:23869946}.; FUNCTION: Negative supercoiling favors strand separation, and DNA replication, transcription, recombination and repair, all of which involve strand separation. Type II topoisomerases break and join 2 DNA strands simultaneously in an ATP-dependent manner.</p>
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1849..1849&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1849..1849">1849</a>
+    </td>
+    <td>C</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>dnaA-dnaN</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0001-Rv0002">Rv0001-Rv0002</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
          -->
-        </td>
-        <td>snp</td>
-        <td>missense_variant</td>
-        <td>
-            <a target="_blank"
-               href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
-        </td>
-        <td>G</td>
-        <td>A</td>
-        <td>MODERATE</td>
-        <td>
-                            <p>NA</p>
-                    </td>
-    </tr>
-                 </tbody>
-                <tfoot class="thead-light">
-                    <tr>
-                        <th scope="col">CHR</th>
-                        <th scope="col">GENE</th>
-                        <th scope="col">IDENTIFIER</th>
-                        <th scope="col">FUNCTION</th>
-                        <th scope="col">TYPE</th>
-                        <th scope="col">ANNOTATION</th>
-                        <th scope="col">POS</th>
-                        <th scope="col">REF</th>
-                        <th scope="col">ALT</th>
-                        <th scope="col">IMPACT</th>
-                        <th scope="col">PATHWAY</th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </main>
-    <div class="mt-5">
+    </td>
+    <td>snp</td>
+    <td>intergenic_region</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1849..1849&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1849..1849">1849</a>
+    </td>
+    <td>C</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>dnaN</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0002">Rv0002</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1977..1977&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1977..1977">1977</a>
+    </td>
+    <td>A</td>
+    <td>G</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>recF</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0003">Rv0003</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1977..1977&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1977..1977">1977</a>
+    </td>
+    <td>A</td>
+    <td>G</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0004</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0004">Rv0004</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1977..1977&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1977..1977">1977</a>
+    </td>
+    <td>A</td>
+    <td>G</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrB</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0005">Rv0005</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1977..1977&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1977..1977">1977</a>
+    </td>
+    <td>A</td>
+    <td>G</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>dnaA</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0001">Rv0001</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1977..1977&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1977..1977">1977</a>
+    </td>
+    <td>A</td>
+    <td>G</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>dnaA-dnaN</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0001-Rv0002">Rv0001-Rv0002</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>intergenic_region</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A1977..1977&tracks=DNA%2CGenes&highlight=NC_000962.3%3A1977..1977">1977</a>
+    </td>
+    <td>A</td>
+    <td>G</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>recF</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0003">Rv0003</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>missense_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A4013..4013&tracks=DNA%2CGenes&highlight=NC_000962.3%3A4013..4013">4013</a>
+    </td>
+    <td>T</td>
+    <td>C</td>
+    <td>p.Ile245Thr</td>
+    <td>MODERATE</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0004</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0004">Rv0004</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A4013..4013&tracks=DNA%2CGenes&highlight=NC_000962.3%3A4013..4013">4013</a>
+    </td>
+    <td>T</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrB</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0005">Rv0005</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A4013..4013&tracks=DNA%2CGenes&highlight=NC_000962.3%3A4013..4013">4013</a>
+    </td>
+    <td>T</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrA</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0006">Rv0006</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A4013..4013&tracks=DNA%2CGenes&highlight=NC_000962.3%3A4013..4013">4013</a>
+    </td>
+    <td>T</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>dnaA</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0001">Rv0001</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A4013..4013&tracks=DNA%2CGenes&highlight=NC_000962.3%3A4013..4013">4013</a>
+    </td>
+    <td>T</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>dnaN</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0002">Rv0002</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A4013..4013&tracks=DNA%2CGenes&highlight=NC_000962.3%3A4013..4013">4013</a>
+    </td>
+    <td>T</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrA</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0006">Rv0006</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>missense_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7362..7362&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7362..7362">7362</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td>p.Glu21Gln</td>
+    <td>MODERATE</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0007</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0007">Rv0007</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7362..7362&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7362..7362">7362</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>dnaN</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0002">Rv0002</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7362..7362&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7362..7362">7362</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>recF</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0003">Rv0003</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7362..7362&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7362..7362">7362</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0004</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0004">Rv0004</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7362..7362&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7362..7362">7362</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrB</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0005">Rv0005</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7362..7362&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7362..7362">7362</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0008c</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0008c">Rv0008c</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7362..7362&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7362..7362">7362</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrA</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0006">Rv0006</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>missense_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7585..7585&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7585..7585">7585</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td>p.Ser95Thr</td>
+    <td>MODERATE</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0007</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0007">Rv0007</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7585..7585&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7585..7585">7585</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>ppiA</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0009">Rv0009</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7585..7585&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7585..7585">7585</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>dnaN</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0002">Rv0002</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7585..7585&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7585..7585">7585</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>recF</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0003">Rv0003</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7585..7585&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7585..7585">7585</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0004</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0004">Rv0004</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7585..7585&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7585..7585">7585</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrB</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0005">Rv0005</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7585..7585&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7585..7585">7585</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0008c</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0008c">Rv0008c</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A7585..7585&tracks=DNA%2CGenes&highlight=NC_000962.3%3A7585..7585">7585</a>
+    </td>
+    <td>G</td>
+    <td>C</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrA</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0006">Rv0006</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>missense_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td>p.Gly668Asp</td>
+    <td>MODERATE</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0007</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0007">Rv0007</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>ppiA</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0009">Rv0009</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0012</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0012">Rv0012</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>upstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>recF</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0003">Rv0003</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0004</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0004">Rv0004</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>gyrB</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0005">Rv0005</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0008c</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0008c">Rv0008c</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0010c</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0010c">Rv0010c</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+<tr>
+    <td>NC_000962</td>
+    <td>Rv0011c</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:Rv0011c">Rv0011c</a>
+    </td>
+    <td>
+                <p>NA</p>
+                <!--         <p>NA</p>
+         -->
+    </td>
+    <td>snp</td>
+    <td>downstream_gene_variant</td>
+    <td>
+        <a target="_blank" href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A9304..9304&tracks=DNA%2CGenes&highlight=NC_000962.3%3A9304..9304">9304</a>
+    </td>
+    <td>G</td>
+    <td>A</td>
+    <td></td>
+    <td>MODIFIER</td>
+    <td>
+                <p>NA</p>
+            </td>
+</tr>
+             </tbody>
+            <tfoot class="thead-light">
+            <tr>
+                <th scope="col">CHR</th>
+                <th scope="col">GENE</th>
+                <th scope="col">IDENTIFIER</th>
+                <th scope="col">PRODUCT</th>
+                <th scope="col">TYPE</th>
+                <th scope="col">ANNOTATION</th>
+                <th scope="col">POS</th>
+                <th scope="col">REF</th>
+                <th scope="col">ALT</th>
+                <th scope="col">CONSEQUENCE</th>
+                <th scope="col">IMPACT</th>
+                <th scope="col">PATHWAY</th>
+            </tr>
+            </tfoot>
+        </table>
     </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+</main>
+<div class="mt-5">
+</div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     <script type="text/javascript" language="javascript" class="init">
         $(document).ready(function () {
             $('#example').DataTable();
         });
     </script>
-    
+
 </body>
 
 </html>

@@ -1,17 +1,17 @@
 {% set name = "tbvcfreport" %}
-{% set version = "0.0.3" %}
-{% set sha256 = "fbb108d45f7b21d629d5554ffbeff09be22f11e0828fb2d357273ee3d732c9aa" %}
+{% set version = "0.0.4" %}
+{% set sha256 = "c3a69e53a7e4809f9e0ef352383fea422a9cdc89ca40d87cbc133faa9fac3afb" %}
 {% set py2neo = "3.1.2" %}
 {% set pyvcf = "0.6.8" %}
 
 package:
   name: {{ name|lower }}
-  version: {{ environ['VERSION'] or version }}
+  version: {{ environ.get('VERSION', None) or version }}
 
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/COMBAT-TB/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: {{ environ['SHA'] or sha256 }}
+  sha256: {{ environ.get('SHA', None) or sha256 }}
 
 build:
   script_env:
