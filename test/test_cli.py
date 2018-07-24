@@ -24,6 +24,7 @@ def test_check_vcf():
     assert check_vcf(TEST_VCF) is True
 
 
+# @pytest.mark.skip(reason="no way of currently testing this")
 def test_generate(cli_runner):
     result = cli_runner.invoke(generate, [TEST_VCF])
     assert result.exit_code == 0
