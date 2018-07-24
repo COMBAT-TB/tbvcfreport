@@ -33,15 +33,16 @@ class VCFProc(object):
                         [str(record.affected_start), str(record.affected_end)])
                     # Usually there is more than one annotation reported in each ANN
                     # A variant can affect multiple genes
-                    annotations = self.get_variant_ann(record=record)
-                    for annotation in annotations:
-                        gene_identifier = annotation[4]
-                        # TODO: It is much faster to issue 1 query
-                        rv_tags.append(gene_identifier)
-                        variant_data = self.get_variant_data(gene_identifier)
-                        annotation.extend(
-                            [record.CHROM, record.POS, record.REF, record.var_type, affected_region, variant_data])
-                        variants.append(annotation)
+                    if record.INFO.get('ANN'):
+                        annotations = self.get_variant_ann(record=record)
+                        for annotation in annotations:
+                            gene_identifier = annotation[4]
+                            # TODO: It is much faster to issue 1 query
+                            rv_tags.append(gene_identifier)
+                            variant_data = self.get_variant_data(gene_identifier)
+                            annotation.extend(
+                                [record.CHROM, record.POS, record.REF, record.var_type, affected_region, variant_data])
+                            variants.append(annotation)
         else:
             sys.stderr.write("Can't parse {vcf_file}".format(
                 vcf_file=self.vcf_file))
@@ -54,7 +55,9 @@ class VCFProc(object):
         :param record:
         :return:
         """
-        annotations = [ann.split("|") for ann in record.INFO['ANN']]
+        annotations = []
+        if record.INFO.get('ANN'):
+            annotations = [ann.split("|") for ann in record.INFO['ANN']]
         return annotations
 
     @staticmethod

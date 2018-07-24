@@ -1,4 +1,5 @@
 # **tbvcfreport**
+[![Build Status](https://travis-ci.org/COMBAT-TB/tbvcfreport.svg?branch=master)](https://travis-ci.org/COMBAT-TB/tbvcfreport)
 
 A tool to generate an HTML report from SnpEff produced vcf files with links to the
 Combat TB Explorer database.
