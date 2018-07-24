@@ -32,7 +32,7 @@ def check_vcf(vcf_file):
 @click.group()
 def cli():
     """
-    tb_vcfreport is a command line tool that generates an HTML-based VCF report.
+    tb-vcf-report is a command line tool that generates an HTML-based VCF report.
     :return:
     """
     pass
