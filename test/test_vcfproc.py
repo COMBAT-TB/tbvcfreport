@@ -10,6 +10,7 @@ def vcf_proc():
     return vcf
 
 
+# @pytest.mark.skip(reason="no way of currently testing this")
 def test_parse(vcf_proc):
     result = vcf_proc.parse()
     assert isinstance(result, list) is True

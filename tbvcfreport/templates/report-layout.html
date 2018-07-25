@@ -3,7 +3,7 @@
         <td>{{ item[16] or "NA" }}</td>
         <td>{{ item[3] or "NA" }}</td>
         <td>
-            <a target="_blank" href="https://combattb.sanbi.ac.za/gene?q=gene:{{ item[4] }}">{{ item[4] }}</a>
+            <a target="_blank" href="http://combattb.sanbi.ac.za/gene?q={{ item[4] }}">{{ item[4] }}</a>
         </td>
         <td>
             {% if item[21]['gene'] %}
@@ -21,7 +21,7 @@
         <td>{{ item[1] or "NA" }}</td>
         <td>
             <a target="_blank"
-               href="https://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[20] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[20] }}">{{ item[17] }}</a>
+               href="http://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[20] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[20] }}">{{ item[17] }}</a>
         </td>
         <td>{{ item[18] or "NA" }}</td>
         <td>{{ item[0] or "NA" }}</td>
