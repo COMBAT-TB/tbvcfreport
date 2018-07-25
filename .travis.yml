@@ -12,10 +12,9 @@ services:
   - docker
 
 env:
-  - DATABASE_URI=0.0.0.0
+  - DATABASE_URI=localhost
 
-
-#install:
+#before_install:
 #  - sudo apt-get update
 #  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
 #      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
@@ -36,16 +35,14 @@ env:
 #  - source activate test-environment
 #  - python setup.py install
 
-before_install:
+before_script:
   - pip install -r requirements.txt
   - pip install -e .
-
-script:
-#  -  tbvcfreport generate --help
   - git clone https://github.com/COMBAT-TB/neo4j_db.git && cd neo4j_db/
   - docker-compose up --build -d && cd ../
-  - docker ps
-  - sleep 10
+  - sleep 20
+
+script:
   - travis_wait 30 pytest -v test/
 
 #after_success:
