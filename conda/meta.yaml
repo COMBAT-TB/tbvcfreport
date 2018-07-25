@@ -1,7 +1,7 @@
 {% set name = "tbvcfreport" %}
-{% set version = "0.0.4" %}
-{% set sha256 = "c3a69e53a7e4809f9e0ef352383fea422a9cdc89ca40d87cbc133faa9fac3afb" %}
-{% set py2neo = "3.1.2" %}
+{% set version = "0.0.5" %}
+{% set sha256 = "6a62748ac8f4f8f4ee2d141ce8cb29f06c7a971aaabaaedcaa8fa5220aaf2410" %}
+{% set py2neo = "4.0.0" %}
 {% set pyvcf = "0.6.8" %}
 
 package:
