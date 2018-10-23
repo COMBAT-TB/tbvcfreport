@@ -6,9 +6,9 @@ import vcf
 from tqdm import tqdm
 
 try:
-    from .dbconn import get_gene_data
+    from .dbconn import get_gene_data, graph
 except (ImportError, ValueError):
-    from dbconn import get_gene_data
+    from dbconn import get_gene_data, graph
 
 
 class VCFProc(object):
@@ -23,6 +23,8 @@ class VCFProc(object):
         variants, rv_tags = [], []
         if self.vcf_file.endswith(".vcf"):
             sys.stdout.write(
+                "Using: {}...\n".format(graph))
+            sys.stdout.write(
                 "Processing: {}...\n".format(self.vcf_file))
             with open(self.vcf_file) as _vcf:
                 vcf_reader = vcf.Reader(_vcf)
@@ -31,17 +33,20 @@ class VCFProc(object):
                         record.affected_start += 1
                     affected_region = "..".join(
                         [str(record.affected_start), str(record.affected_end)])
-                    # Usually there is more than one annotation reported in each ANN
-                    # A variant can affect multiple genes
+                    # Usually there is more than one annotation reported in
+                    # each ANN. A variant can affect multiple genes
                     if record.INFO.get('ANN'):
                         annotations = self.get_variant_ann(record=record)
                         for annotation in annotations:
                             gene_identifier = annotation[4]
                             # TODO: It is much faster to issue 1 query
                             rv_tags.append(gene_identifier)
-                            variant_data = self.get_variant_data(gene_identifier)
+                            variant_data = self.get_variant_data(
+                                gene_identifier)
                             annotation.extend(
-                                [record.CHROM, record.POS, record.REF, record.var_type, affected_region, variant_data])
+                                [record.CHROM, record.POS, record.REF,
+                                 record.var_type, affected_region,
+                                 variant_data])
                             variants.append(annotation)
         else:
             sys.stderr.write("Can't parse {vcf_file}".format(

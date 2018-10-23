@@ -6,9 +6,9 @@ import os
 from py2neo import Graph
 
 
-DBHOST = os.environ.get("DATABASE_URI", "combattb.sanbi.ac.za")
+DB_HOST = os.environ.get("DATABASE_URI", "combattb.sanbi.ac.za")
 
-graph = Graph(host=DBHOST, bolt=True, http_port=7474, password="")
+graph = Graph(host=DB_HOST, bolt=True, http_port=7474, password="")
 
 
 def get_gene_data(q):
