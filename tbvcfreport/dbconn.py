@@ -37,3 +37,27 @@ def get_gene_data(q):
             return {}
     except Exception as e:
         raise e
+
+
+def query_by_gene_list(genes):
+    """
+    Query DB
+    :param genes: list
+    :return:
+    """
+    where_statement = "WHERE gene.uniquename IN {0}".format(genes)
+    try:
+        data = graph.run(
+            "MATCH (gene:Gene) {where_statement} "
+            "OPTIONAL MATCH (protein:Protein)<-[:ENCODES]-(gene) "
+            "OPTIONAL MATCH (pathway:Pathway)<-[:INVOLVED_IN]-(protein) "
+            "RETURN gene, protein, "
+            "collect(distinct(pathway)) as pathway "
+            "order by gene.uniquename asc"
+            .format(where_statement=where_statement)).data()
+        if data:
+            return data[0]
+        else:
+            return {}
+    except Exception as e:
+        raise e

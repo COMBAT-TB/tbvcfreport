@@ -3,8 +3,7 @@ Interface to CLI
 """
 import os
 import sys
-import webbrowser
-
+import logging
 import click
 try:
     from .report import generate_report
@@ -12,6 +11,8 @@ try:
 except (ImportError, ValueError):
     from report import generate_report
     from vcfproc import VCFProc
+
+log = logging.getLogger(__name__)
 
 
 def check_vcf(vcf_file):
@@ -32,7 +33,7 @@ def check_vcf(vcf_file):
 @click.group()
 def cli():
     """
-    tb-vcf-report is a command line tool that generates an HTML-based VCF report.
+    tbvcfreport is a command line tool that generates an HTML-based VCF report.
     :return:
     """
     pass
@@ -49,7 +50,7 @@ def generate(vcf_dir):
     if os.path.isdir(vcf_dir):
         for root, dirs, files in os.walk(vcf_dir):
             if len(os.listdir(vcf_dir)) == 0:
-                sys.stderr.write(
+                log.error(
                     '{vcf_dir} is empty!\n'.format(vcf_dir=vcf_dir))
             for vcf_file in files:
                 vcf_file = '/'.join(
@@ -66,10 +67,10 @@ def generate(vcf_dir):
             file_name = vcf_file.split('/')[-1].split('.')[0]
             vcf_file = VCFProc(vcf_file=vcf_file)
             variants = vcf_file.parse()
-            report = generate_report(file_name=file_name, data=variants)
+            generate_report(file_name=file_name, data=variants)
             # webbrowser.open('file://' + os.path.realpath(report))
     else:
-        sys.stderr.write("Can't generate report for {}!".format(vcf_dir))
+        log.error("Can't generate report for {}!".format(vcf_dir))
 
 
 if __name__ == '__main__':

@@ -41,7 +41,7 @@ before_script:
   - git clone https://github.com/COMBAT-TB/neo4j_db.git && cd neo4j_db/
   - docker-compose up --build -d && cd ../
   - docker ps
-  - sleep 20
+  - sleep 30
 
 script:
   - travis_wait 30 pytest -v test/
