@@ -1,7 +1,7 @@
 {% set name = "tbvcfreport" %}
-{% set version = "0.0.3" %}
-{% set sha256 = "fbb108d45f7b21d629d5554ffbeff09be22f11e0828fb2d357273ee3d732c9aa" %}
-{% set py2neo = "3.1.2" %}
+{% set version = "0.0.5" %}
+{% set sha256 = "6a62748ac8f4f8f4ee2d141ce8cb29f06c7a971aaabaaedcaa8fa5220aaf2410" %}
+{% set py2neo = "4.0.0" %}
 {% set pyvcf = "0.6.8" %}
 
 package:
@@ -49,4 +49,4 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE.txt
-  summary: 'Generate a report on M. tuberculosis variants with links to Combat TB Explorer database'
+  summary: 'Builds an HTML based report on SnpEff generated M. tuberculosis variant file'

@@ -36,7 +36,7 @@ def generate_report(file_name, data):
         }
         html = render_template('report-layout.html', context)
         with open(output, 'w') as f:
-                f.write(html)
+            f.write(html)
         return output
     except Exception as e:
         raise e
