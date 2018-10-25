@@ -49,4 +49,4 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE.txt
-  summary: 'Generate a report on M. tuberculosis variants with links to Combat TB Explorer database'
+  summary: 'Builds an HTML based report on SnpEff generated M. tuberculosis variant file'

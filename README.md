@@ -1,24 +1,26 @@
 # **tbvcfreport**
+
 [![Build Status](https://travis-ci.org/COMBAT-TB/tbvcfreport.svg?branch=master)](https://travis-ci.org/COMBAT-TB/tbvcfreport)
 
 A tool to generate an HTML report from SnpEff produced vcf files with links to the
 Combat TB Explorer database.
 
-
-<!-- ![VCFReport](./img/tbvcfreport.png) -->
+![VCFReport](./img/tbvcfreport.png)
 
 ## Usage
 
-#### Prerequisites:
-* [Docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/overview/) to be installed.
-* An instance of the COMBAT-TB database.
-    * See [this repo](https://github.com/COMBAT-TB/neo4j_db) to get up and running.
-    * `export DATABASE_URI=localhost`, defaults to [combattb.sanbi.ac.za](http://combattb.sanbi.ac.za). :construction: :computer:
+_Prerequisites:_
 
-#### To Run
+- [Docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/overview/) to be installed.
+- An instance of the COMBAT-TB database.
+  - See [this repository](https://github.com/COMBAT-TB/neo4j_db) to get up and running.
+  - `export DATABASE_URI=localhost`, defaults to [combattb.sanbi.ac.za](http://combattb.sanbi.ac.za). :construction: :computer:
+
+### Up and running
 
 ```sh
 $ git clone https://github.com/COMBAT-TB/tbvcfreport.git
+...
 $ cd tbvcfreport
 $ virtualenv envname
 $ source envname/bin/activate
