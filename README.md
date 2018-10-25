@@ -5,12 +5,13 @@
 A tool to generate an HTML report from SnpEff produced vcf files with links to the
 Combat TB Explorer database.
 
-![VCFReport](./img/tbvcfreport.png)
+![test-tbvcfreport](./img/test-report.png)
 
 ## Usage
 
-_Prerequisites:_
+**Prerequisites:**
 
+- [SnpEff](http://snpeff.sourceforge.net/SnpEff_manual.html) generated VCF file(s).
 - [Docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/overview/) to be installed.
 - An instance of the COMBAT-TB database.
   - See [this repository](https://github.com/COMBAT-TB/neo4j_db) to get up and running.
@@ -31,3 +32,11 @@ $ tbvcfreport generate vcf_direcory/
 ```
 
 This will generate a `{vcf-file-name}.html` file in `pwd`.
+
+## In Galaxy
+
+:construction:
+
+We have also incorporated `tbvcfreport` in galaxy (still testing).
+
+![Galaxy-tbvcfreport](./img/tbvcfreport.png)
