@@ -1,9 +1,10 @@
 """
 Interface to handle VCF files
 """
-import sys
-import vcf
 import logging
+import sys
+
+import vcf
 from tqdm import tqdm
 
 try:

@@ -1,0 +1,5 @@
+graft tbvcfreport/templates
+
+recursive-include tbvcfreport/templates *
+
+global-exclude *.pyc

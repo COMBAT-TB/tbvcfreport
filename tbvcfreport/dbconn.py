@@ -5,8 +5,7 @@ import os
 
 from py2neo import Graph
 
-
-DB_HOST = os.environ.get("DATABASE_URI", "combattb.sanbi.ac.za")
+DB_HOST = os.environ.get("DATABASE_URI", "192.168.10.36")
 
 graph = Graph(host=DB_HOST, bolt=True, http_port=7474,
               bolt_port=7687, password="")

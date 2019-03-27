@@ -1,25 +1,20 @@
-{% set name = "tbvcfreport" %}
 {% set version = "0.0.5" %}
 {% set sha256 = "6a62748ac8f4f8f4ee2d141ce8cb29f06c7a971aaabaaedcaa8fa5220aaf2410" %}
-{% set py2neo = "4.0.0" %}
+{% set py2neo = "3.1.2" %}
 {% set pyvcf = "0.6.8" %}
 
 package:
-  name: {{ name|lower }}
-  version: {{ environ.get('VERSION', None) or version }}
+  name: tbvcfreport
+  version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://github.com/COMBAT-TB/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: {{ environ.get('SHA', None) or sha256 }}
+  url: https://github.com/COMBAT-TB/tbvcfreport/archive/{{ version }}.tar.gz
+  sha256: {{ sha256 }}
 
 build:
-  script_env:
-    - SHA
-    - VERSION
-    - CONDA_BLD_PATH
-  number: 1
   script: python -m pip install --no-deps --ignore-installed .
+  number: 0
+
 
 requirements:
   build:
@@ -45,8 +40,7 @@ test:
     - tbvcfreport generate --help 2>&1 |grep VCF_DIR >/dev/null
 
 about:
-  home: https://github.com/COMBAT-TB/{{ name }}
-  license: MIT
-  license_family: MIT
-  license_file: LICENSE.txt
+  home: https://github.com/COMBAT-TB/tbvcfreport
+  license_file: LICENSE
   summary: 'Builds an HTML based report on SnpEff generated M. tuberculosis variant file'
+  dev_url: https://github.com/COMBAT-TB/tbvcfreport

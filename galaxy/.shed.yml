@@ -2,7 +2,7 @@ categories:
   - Variant Analysis
 description: Annotate M. tuberculosis VCF files with information from Combat TB Explorer
 long_description: |
-   Annotate M. tuberculosis VCF files from SnpEff with information from Combat TB Explorer
+  Annotate M. tuberculosis VCF files from SnpEff with information from Combat TB Explorer
 name: tbvcfreport
 owner: sanbi-uwc
 remote_repository_url: https://github.com/COMBAT-TB/tbvcfreport/tree/master/galaxy

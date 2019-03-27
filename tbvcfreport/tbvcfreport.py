@@ -1,10 +1,12 @@
 """
 Interface to CLI
 """
+import logging
 import os
 import sys
-import logging
+
 import click
+
 try:
     from .report import generate_report
     from .vcfproc import VCFProc
