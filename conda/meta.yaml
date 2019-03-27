@@ -1,6 +1,6 @@
-{% set version = "0.0.5" %}
-{% set sha256 = "6a62748ac8f4f8f4ee2d141ce8cb29f06c7a971aaabaaedcaa8fa5220aaf2410" %}
-{% set py2neo = "3.1.2" %}
+{% set version = "0.0.6" %}
+{% set sha256 = "06fe33fef173af5292171606105f112409446137df2519770d6c8d0370b76023" %}
+{% set py2neo = "4.2.0" %}
 {% set pyvcf = "0.6.8" %}
 
 package:
