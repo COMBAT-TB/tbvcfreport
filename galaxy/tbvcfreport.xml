@@ -1,43 +1,46 @@
 <?xml version="1.0"?>
-<tool id="tbvcfreport" name="M. tuberculosis VCF Report" version="@TOOL_VERSION@+galaxy0" profile="17.01">
+<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy0" profile="17.01">
   <description>Annotate SnpEff VCF with links to Combat TB Explorer database</description>
-
   <macros>
-    <token name="@TOOL_VERSION@">0.0.5</token>
+    <token name="@TOOL_VERSION@">0.0.6</token>
   </macros>
-
   <requirements>
     <requirement type="package" version="@TOOL_VERSION@">tbvcfreport</requirement>
   </requirements>
-
-  <command detect_errors="exit_code"><![CDATA[
+  <command detect_errors="exit_code">
+    <![CDATA[
     ln -s '$input_vcf' data.vcf &&
     tbvcfreport generate data.vcf &&
     mv data.html '$output'
     ]]>
   </command>
-
   <inputs>
     <param name="input_vcf" type="data" format="vcf" label="Input VCF (with SnpEff annotation)" />
   </inputs>
-
   <outputs>
-    <data name="output" format="html" label="M. tuberculosis VCF report on ${on_string}" />
+    <data name="output" format="html" label="${tool.name} on ${on_string}" />
   </outputs>
-
   <tests>
     <test>
       <param name="input_vcf" value="sample1.vcf" />
       <output name="output" compare="diff" lines_diff="2" file="sample1.html" ftype="html" />
     </test>
   </tests>
-
-  <help><![CDATA[
+  <help>
+    <![CDATA[
     This tool generates an HTML-based VCF report from an input SnpEff VCF file.
     The input has to be a SnpEff generated VCF file.
     ]]>
   </help>
-
   <citations>
+    <citation type="bibtex">
+@misc{githubtbvcfreport,
+  author = {SANBI-SA},
+  year = {2019},
+  title = {tbvcfreport},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  url = {https://github.com/COMBAT-TB/tbvcfreport},
+}</citation>
   </citations>
 </tool>
