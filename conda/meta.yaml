@@ -1,5 +1,5 @@
-{% set version = "0.0.6" %}
-{% set sha256 = "06fe33fef173af5292171606105f112409446137df2519770d6c8d0370b76023" %}
+{% set version = "0.0.7" %}
+{% set sha256 = "da89f94346b07001923905df39f24d8aee0bc3d7f391fcdd76efdb76c5212864" %}
 {% set py2neo = "4.2.0" %}
 {% set pyvcf = "0.6.8" %}
 
@@ -17,7 +17,7 @@ build:
 
 
 requirements:
-  build:
+  host:
     - python
     - pip
     - click
@@ -32,6 +32,7 @@ requirements:
     - py2neo {{ py2neo }}
     - pyvcf {{ pyvcf }}
     - tqdm
+    - mtb-snp-it
 
 test:
   imports:
