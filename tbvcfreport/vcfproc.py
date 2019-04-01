@@ -8,10 +8,7 @@ import sys
 import vcf
 from tqdm import tqdm
 
-try:
-    from .dbconn import get_gene_data, query_by_gene_list
-except (ImportError, ValueError):
-    from dbconn import get_gene_data, query_by_gene_list
+from .dbconn import get_gene_data, query_by_gene_list
 
 log = logging.getLogger(__name__)
 

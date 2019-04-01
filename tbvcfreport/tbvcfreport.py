@@ -9,12 +9,8 @@ import sys
 import click
 from snpit import snpit
 
-try:
-    from .report import generate_report, generate_drug_resistance_report
-    from .vcfproc import VCFProc
-except (ImportError, ValueError):
-    from report import generate_report, generate_drug_resistance_report
-    from vcfproc import VCFProc
+from .report import generate_report, generate_drug_resistance_report
+from .vcfproc import VCFProc
 
 log = logging.getLogger(__name__)
 
