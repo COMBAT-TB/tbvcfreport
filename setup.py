@@ -18,11 +18,11 @@ setup(
         'tbvcfreport': ['templates/*.html'],
     },
     install_requires=[
-        'click',
-        'py2neo',
-        'Jinja2',
-        'tqdm',
-        'PyVCF',
+        # 'click',
+        # 'py2neo',
+        # 'jinja2',
+        # 'tqdm',
+        # 'pyvcf',
     ],
     entry_points={
         'console_scripts': ['tbvcfreport=tbvcfreport.tbvcfreport:cli']

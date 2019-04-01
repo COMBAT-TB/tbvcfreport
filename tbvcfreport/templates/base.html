@@ -19,7 +19,13 @@
             <h1 class="mt-5">
                 {{ file_name }} Report
             </h1>
-            <hr> {% block content %} {% endblock %}
+            <hr>
+            {% if 'lineage' in data and data['lineage']['lineage'] %}
+                <span class="lineage_info">Species: {{  data['lineage']['species'] }} Lineage: {{  data['lineage']['lineage'] }}
+                    {% if data['lineage']['sublineage'] %}{{ data['lineage']['sublineage'] }}{% endif %}
+                    Agreement with SNPs from this lineage: {{ data['lineage']['percent_agreement'] }}%
+                    {% endif %}</span>
+            {% block content %} {% endblock %}
             <div class="row justify-content-center align-items-center">
                 <table id="vcfreport" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">
                     <thead class="thead-light">

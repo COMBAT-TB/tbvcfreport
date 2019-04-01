@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %}{% endblock %} {% block tr %} {% for item in data %}
+{% extends "base.html" %} {% block content %}{% endblock %} {% block tr %} {% for item in data['variants'] %}
 <tr>
     <td>{{ item[16] or "NA" }}</td>
     <td>{{ item[3] or "NA" }}</td>
@@ -27,7 +27,7 @@
     <td>{{ item[10] or "NA" }}</td>
     <td>{{ item[2] or "NA" }}</td>
     <td>
-        {% if item[21]['pathway']|length >= 1 %} {% for pathway in item[21]['pathway'] %}
+        {% if item[21]['pathway'] and item[21]['pathway']|length >= 1 %} {% for pathway in item[21]['pathway'] %}
         {% if pathway['accession'].startswith("mtv") %}
         {% set url = "http://www.genome.jp/dbget-bin/www_bget?" %} {% else %}
         {% set url = "https://reactome.org/content/detail/" %} {% endif %}

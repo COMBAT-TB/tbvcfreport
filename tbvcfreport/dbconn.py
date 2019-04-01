@@ -55,7 +55,7 @@ def query_by_gene_list(genes):
             "order by gene.uniquename asc"
             .format(where_statement=where_statement)).data()
         if data:
-            return data[0]
+            return data
         else:
             return {}
     except Exception as e:

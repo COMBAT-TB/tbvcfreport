@@ -6,6 +6,7 @@ import os
 import sys
 
 import click
+from snpit import snpit
 
 try:
     from .report import generate_report
@@ -60,9 +61,18 @@ def generate(vcf_dir):
                 )
                 if check_vcf(vcf_file):
                     file_name = vcf_file.split('/')[-1].split('.')[0]
+                    lineage_parser = snpit(input_file=vcf_file)
+                    (species, lineage, sublineage, percent_agreement) = lineage_parser.determine_lineage()
+                    percent_agreement = round(percent_agreement)
                     vcf_file = VCFProc(vcf_file=vcf_file)
                     variants = vcf_file.parse()
-                    generate_report(file_name=file_name, data=variants)
+                    generate_report(file_name=file_name, data={'variants': variants,
+                                                               'lineage': {
+                                                                    'species': species,
+                                                                    'lineage': lineage,
+                                                                    'sublineage': sublineage,
+                                                                    'percent_agreement': percent_agreement
+                                                               }})
     elif os.path.isfile(vcf_dir):
         vcf_file = os.path.abspath(vcf_dir)
         if check_vcf(vcf_file):
