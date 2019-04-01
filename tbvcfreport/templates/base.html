@@ -19,49 +19,13 @@
             <h1 class="mt-5">
                 {{ file_name }} Report
             </h1>
-            <hr> {% block content %} {% endblock %}
-            <div class="row justify-content-center align-items-center">
-                <table id="vcfreport" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">CHR</th>
-                            <th scope="col">GENE</th>
-                            <th scope="col">IDENTIFIER</th>
-                            <th scope="col">PRODUCT</th>
-                            <th scope="col">TYPE</th>
-                            <th scope="col">ANNOTATION</th>
-                            <th scope="col">POS</th>
-                            <th scope="col">REF</th>
-                            <th scope="col">ALT</th>
-                            <th scope="col">CONSEQUENCE</th>
-                            <th scope="col">IMPACT</th>
-                            <th scope="col">PATHWAY</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% block tr %} {% endblock %}
-                    </tbody>
-                    <tfoot class="thead-light">
-                        <tr>
-                            <th scope="col">CHR</th>
-                            <th scope="col">GENE</th>
-                            <th scope="col">IDENTIFIER</th>
-                            <th scope="col">PRODUCT</th>
-                            <th scope="col">TYPE</th>
-                            <th scope="col">ANNOTATION</th>
-                            <th scope="col">POS</th>
-                            <th scope="col">REF</th>
-                            <th scope="col">ALT</th>
-                            <th scope="col">CONSEQUENCE</th>
-                            <th scope="col">IMPACT</th>
-                            <th scope="col">PATHWAY</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </main>
-        <div class="mt-5">
-        </div>
+            <hr>
+            {% if 'lineage' in data and data['lineage']['lineage'] %}
+                <span class="lineage_info">Species: {{  data['lineage']['species'] }} Lineage: {{  data['lineage']['lineage'] }}
+                    {% if data['lineage']['sublineage'] %}{{ data['lineage']['sublineage'] }}{% endif %}
+                    Agreement with SNPs from this lineage: {{ data['lineage']['percent_agreement'] }}%
+                    {% endif %}</span>  {% if 'mixed_infection' in data and data['mixed_infection'] %}<span>Suspected mixed infection</span>{% endif %}
+            {% block content %} {% endblock %}
         {% block footer %}
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
