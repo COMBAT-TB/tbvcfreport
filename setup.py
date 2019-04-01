@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 setup(
     name='tbvcfreport',
-    version='0.0.6',
+    version='0.0.7',
     url='https://github.com/COMBAT-TB/tbvcfreport',
     bugtrack_url='https://github.com/COMBAT-TB/tbvcfreport/issues',
     description="Parses SnpEff generated VCF and generates an HTML report.",
@@ -18,15 +18,16 @@ setup(
         'tbvcfreport': ['templates/*.html'],
     },
     install_requires=[
-        # 'click',
-        # 'py2neo',
-        # 'jinja2',
-        # 'tqdm',
-        # 'pyvcf',
+        'click',
+        'py2neo',
+        'jinja2',
+        'tqdm',
+        'pyvcf',
     ],
     entry_points={
         'console_scripts': ['tbvcfreport=tbvcfreport.tbvcfreport:cli']
     },
+    dependency_links=['git+https://github.com/samlipworth/snpit.git@V1.1#egg=snpit'],
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Lavnguage :: Python',

@@ -1,4 +1,25 @@
-{% extends "base.html" %} {% block content %}{% endblock %} {% block tr %} {% for item in data['variants'] %}
+{% extends "base.html" %} {% block content %}
+            <div class="row justify-content-center align-items-center">
+                <table id="vcfreport" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">CHR</th>
+                            <th scope="col">GENE</th>
+                            <th scope="col">IDENTIFIER</th>
+                            <th scope="col">PRODUCT</th>
+                            <th scope="col">TYPE</th>
+                            <th scope="col">ANNOTATION</th>
+                            <th scope="col">POS</th>
+                            <th scope="col">REF</th>
+                            <th scope="col">ALT</th>
+                            <th scope="col">CONSEQUENCE</th>
+                            <th scope="col">IMPACT</th>
+                            <th scope="col">PATHWAY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+    {% for item in data['variants'] %}
 <tr>
     <td>{{ item[16] or "NA" }}</td>
     <td>{{ item[3] or "NA" }}</td>
@@ -41,4 +62,28 @@
         {% endif %}
     </td>
 </tr>
-{% endfor %} {% endblock %}
+{% endfor %}
+                                    </tbody>
+                    <tfoot class="thead-light">
+                        <tr>
+                            <th scope="col">CHR</th>
+                            <th scope="col">GENE</th>
+                            <th scope="col">IDENTIFIER</th>
+                            <th scope="col">PRODUCT</th>
+                            <th scope="col">TYPE</th>
+                            <th scope="col">ANNOTATION</th>
+                            <th scope="col">POS</th>
+                            <th scope="col">REF</th>
+                            <th scope="col">ALT</th>
+                            <th scope="col">CONSEQUENCE</th>
+                            <th scope="col">IMPACT</th>
+                            <th scope="col">PATHWAY</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </main>
+        <div class="mt-5">
+        </div>
+
+{% endblock %}

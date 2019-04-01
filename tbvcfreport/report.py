@@ -41,3 +41,24 @@ def generate_report(file_name, data):
         return output
     except Exception as e:
         raise e
+
+def generate_drug_resistance_report(file_name, data):
+    """
+    Write and render HTML report
+    :param file_name:
+    :param data:
+    :return:
+    """
+    try:
+
+        output = '{file_name}_drug_resistance.html'.format(file_name=file_name)
+        context = {
+            'file_name': file_name,
+            'data': data,
+        }
+        html = render_template('drug_resistance_report.html', context)
+        with open(output, 'w') as f:
+            f.write(html)
+        return output
+    except Exception as e:
+        raise e

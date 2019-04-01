@@ -42,6 +42,7 @@ class VCFProc(object):
                     if record.INFO.get('ANN'):
                         annotations = self.get_variant_ann(record=record)
                         for annotation in annotations:
+                            # TODO: make this kind of filtering optional
                             if annotation[1] in ('upstream_gene_variant', 'downstream_gene_variant', 'intergenic_region'):
                                 continue
                             gene_identifier = annotation[4]
@@ -60,6 +61,7 @@ class VCFProc(object):
                         # Usually there is more than one annotation reported in
                         # each ANN. A variant can affect multiple genes
                         for annotation in annotations:
+                            # TODO: make this kind of filtering optional
                             if annotation[1] in ('upstream_gene_variant', 'downstream_gene_variant'):
                                 continue
                             gene_identifier = annotation[4]
