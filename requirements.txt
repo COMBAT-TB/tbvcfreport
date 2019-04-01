@@ -11,3 +11,5 @@ pyflakes==1.6.0
 pyvcf==0.6.8
 tqdm==4.19.6
 pytest==3.4.0
+-e git+https://github.com/samlipworth/snpit.git@fcaa2909ba2c244084382e3cf13f4d1678653271#egg=snpit
+
