@@ -24,7 +24,27 @@
                 <span class="lineage_info">Species: {{  data['lineage']['species'] }} Lineage: {{  data['lineage']['lineage'] }}
                     {% if data['lineage']['sublineage'] %}{{ data['lineage']['sublineage'] }}{% endif %}
                     Agreement with SNPs from this lineage: {{ data['lineage']['percent_agreement'] }}%
-                    {% endif %}</span>
+                    {% endif %}</span>  {% if 'mixed_infection' in data and data['mixed_infection'] %}<span>Suspected mixed infection</span>{% endif %}
+            {%  if 'dr_data' in data and data['dr_data'] %}
+                <div class="row">
+                    <table id="drug_resistance" class="table table-bordered table-striped table-sm" cellspacing="0">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Drug</th>
+                            <th scope="col">Resistance</th>
+                            <th scope="col">Supporting Mutations</th>
+                        </tr>
+                        </thead>
+                        {%  for entry in data['dr_data'] %}
+                        <tr>
+                            <td>{{ entry['drug_human_name'] }}</td>
+                            <td>{% if entry['resistant'] %}R{% else %}S{% endif %}</td>
+                            <td>{% for mutation in entry['variants'] %}{{ mutation[0] }} ({{ mutation[2] }} {{ mutation[1] }}) {% endfor %}</td>
+                        </tr>
+                        {%  endfor %}
+                    </table>
+                </div>
+            {%  endif %}
             {% block content %} {% endblock %}
             <div class="row justify-content-center align-items-center">
                 <table id="vcfreport" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">

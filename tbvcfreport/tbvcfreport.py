@@ -1,6 +1,7 @@
 """
 Interface to CLI
 """
+import json
 import logging
 import os
 import sys
@@ -56,23 +57,90 @@ def generate(vcf_dir):
                 log.error(
                     '{vcf_dir} is empty!\n'.format(vcf_dir=vcf_dir))
             for vcf_file in files:
-                vcf_file = '/'.join(
-                    [os.path.abspath(vcf_dir), vcf_file]
-                )
-                if check_vcf(vcf_file):
-                    file_name = vcf_file.split('/')[-1].split('.')[0]
-                    lineage_parser = snpit(input_file=vcf_file)
-                    (species, lineage, sublineage, percent_agreement) = lineage_parser.determine_lineage()
-                    percent_agreement = round(percent_agreement)
-                    vcf_file = VCFProc(vcf_file=vcf_file)
-                    variants = vcf_file.parse()
+                (base, ext) = os.path.splitext(vcf_file)
+                print(vcf_file)
+                if ext == '.vcf':
+                    vcf_file = os.path.join(os.path.abspath(vcf_dir), vcf_file)
+                    if check_vcf(vcf_file):
+                        file_name = vcf_file.split('/')[-1].split('.')[0]
+                        lineage_parser = snpit(input_file=vcf_file)
+                        (species, lineage, sublineage, percent_agreement) = lineage_parser.determine_lineage()
+                        percent_agreement = round(percent_agreement)
+                        vcf_file = VCFProc(vcf_file=vcf_file)
+                        variants = vcf_file.parse()
+                        rrs_start = 1471846
+                        rrs_end = 1473382
+                        call_positions = set()
+                        rrs_variant_count = 0
+                        for variant_record in variants:
+                            POS = int(variant_record[17])
+                            print(POS, variant_record)
+                            if POS >= rrs_start and POS <= rrs_end:
+                                rrs_variant_count += 1
+                            call_positions.add(POS)
+                elif ext == '.json':
+                    json_file = os.path.join(os.path.abspath(vcf_dir), vcf_file)
+                    tbprofiler_data = json.load(open(json_file))
+                    dr_data = tbprofiler_data['dr_variants']
+
+                    drug_list = ['isoniazid', 'rifampicin', 'ethambutol', 'pyrazinamide', 'streptomycin',
+                                 'ethionamide', 'fluoroquinolones', 'amikacin', 'capreomycin', 'kanamycin',
+                                 'para-aminosalicylic_acid', 'cycloserine', 'delaminid',
+                                 'linezolid', 'clofazimine', 'bedaquiline']
+                    drug_names = {
+                        'isoniazid': 'Isoniazid',
+                        'rifampicin': 'Rifampicin',
+                        'ethambutol': 'Ethambutol',
+                        'pyrazinamide': 'Pyrazinamide',
+                        'streptomycin': 'Streptomycin',
+                        'ethionamide': 'Ethionamide',
+                        'fluoroquinolones': 'Fluoroquinolones',
+                        'amikacin': 'Amikacin',
+                        'capreomycin': 'Capreomycin',
+                        'kanamycin': 'Kanamycin',
+                        'para-aminosalicylic_acid': 'Para-aminosalicylic acid',
+                        'linezolid': 'Linezolid',
+                        'cycloserine': 'Cycloserine',
+                        'delaminid': 'Delaminid',
+                        'clofazimine': 'Clofazimine',
+                        'bedaquiline': 'Bedaquiline'
+                    }
+                    drug_resistance = {}
+                    dr_calls_seen = set()
+                    for record in dr_data:
+                        drug_name = record['drug']
+                        if record['genome_pos'] in dr_calls_seen:
+                            continue
+                        dr_calls_seen.add(record['genome_pos'])
+                        if drug_name not in drug_list:
+                            print("Encountered unknown drug", drug_name, file=sys.stderr)
+                            continue
+                        dr_record = drug_resistance.get(drug_name, {'drug': drug_name,
+                                                                    'drug_human_name': drug_names[drug_name],
+                                                                    'resistant': True,
+                                                                    'snippy_agreement': True, 'variants': []})
+                        if record['genome_pos'] not in call_positions:
+                            dr_record['snippy_agreement'] = False
+                        dr_record['variants'].append((record['gene'], record['change'], round(record['freq'], 2)))
+                        drug_resistance[drug_name] = dr_record
+                    drug_resistance_list = []
+                    for drug_name in drug_names:
+                        if drug_name in drug_resistance:
+                            drug_resistance_list.append(drug_resistance[drug_name])
+                        else:
+                            drug_resistance_list.append({'drug_name': drug_name,
+                                                         'drug_human_name': drug_names[drug_name],
+                                                         'resistant': False})
+
                     generate_report(file_name=file_name, data={'variants': variants,
                                                                'lineage': {
                                                                     'species': species,
                                                                     'lineage': lineage,
                                                                     'sublineage': sublineage,
                                                                     'percent_agreement': percent_agreement
-                                                               }})
+                                                               },
+                                                               'dr_data': drug_resistance_list,
+                                                               'mixed_infection': rrs_variant_count > 1})
     elif os.path.isfile(vcf_dir):
         vcf_file = os.path.abspath(vcf_dir)
         if check_vcf(vcf_file):
