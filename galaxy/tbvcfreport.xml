@@ -14,11 +14,11 @@
     #if str($tbprofiler.use_tbp) == "yes"
         --tbprofiler_report '$tbprofiler_json'
     #end if
-    '$input_json' data.vcf &&
+    data.vcf &&
     mv data.html '$output'
     #if str($tbprofiler.use_tbp) == "yes"
-        mv data_drug_resistance.html '$drug_resistance_report'
-    #endif
+        && mv data_drug_resistance.html '$drug_resistance_report'
+    #end if
     ]]>
   </command>
   <inputs>
@@ -36,8 +36,8 @@
   </inputs>
   <outputs>
     <data name="output" format="html" label="${tool.name} on ${on_string}" />
-    <data name="drug_resistance_report" format="html" label="${tool.name} on ${on_string}">
-        <filter></filter>
+    <data name="drug_resistance_report" format="html" label="${tool.name} drug resistance report on ${on_string}">
+        <filter>tbprofiler['use_tbp'] == "yes"</filter>
     </data>
 
   </outputs>
