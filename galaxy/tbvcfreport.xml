@@ -43,8 +43,16 @@
   </outputs>
   <tests>
     <test>
-      <param name="input_vcf" value="sample1.vcf" />
-      <output name="output" compare="diff" lines_diff="2" file="sample1.html" ftype="html" />
+      <param name="input_vcf" value="rif_resistant.vcf" ftype="vcf" />
+        <param name="use_tbp" value="no" />
+      <output name="output" compare="diff" lines_diff="2" file="rif_resistant_output.html" ftype="html" />
+    </test>
+      <test>
+      <param name="input_vcf" value="rif_resistant.vcf" ftype="vcf"/>
+      <param name="use_tbp" value="yes" />
+      <param name="tbprofiler_json" value="rif_resistant.results.json" ftype="json" />
+      <output name="output" compare="diff" lines_diff="2" file="rif_resistant_output.html" ftype="html" />
+      <output name="drug_resistance_report" file="rif_resistant_dr_report.html" lines_diff="2" ftype="html" />
     </test>
   </tests>
   <help>
