@@ -23,11 +23,16 @@ setup(
         'jinja2',
         'tqdm',
         'pyvcf',
+        'weasyprint',
+        'cairocffi==0.9',
+        'snpit',
+    ],
+    dependency_links=[
+        'git+https://github.com/samlipworth/snpit.git@V1.1#egg=snpit',
     ],
     entry_points={
         'console_scripts': ['tbvcfreport=tbvcfreport.tbvcfreport:cli']
     },
-    dependency_links=['git+https://github.com/samlipworth/snpit.git@V1.1#egg=snpit'],
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Lavnguage :: Python',

@@ -15,44 +15,52 @@
         --tbprofiler_report '$tbprofiler_json'
     #end if
     data.vcf &&
-    mv data.html '$output'
+    mv data.html '$output' &&
+    mv data.pdf '$pdf_output'
     #if str($tbprofiler.use_tbp) == "yes"
         && mv data_drug_resistance.html '$drug_resistance_report'
+        && mv data_drug_resistance_pdf.pdf '$drug_resistance_report_pdf'
     #end if
     ]]>
   </command>
   <inputs>
     <param name="input_vcf" type="data" format="vcf" label="Input VCF (with SnpEff annotation)" />
     <conditional name="tbprofiler">
-        <param name="use_tbp" type="select" label="Use TBProfiler drug resistance report">
-            <option value="yes" selected="true">Yes</option>
-            <option value="no">No</option>
-        </param>
-        <when value="no"></when>
-        <when value="yes">
-            <param name="tbprofiler_json" type="data" format="json" label="TBProfiler (JSON) resistance report"/>
-        </when>
+      <param name="use_tbp" type="select" label="Use TBProfiler drug resistance report">
+        <option value="yes" selected="true">Yes</option>
+        <option value="no">No</option>
+      </param>
+      <when value="no"></when>
+      <when value="yes">
+        <param name="tbprofiler_json" type="data" format="json" label="TBProfiler (JSON) resistance report" />
+      </when>
     </conditional>
   </inputs>
   <outputs>
     <data name="output" format="html" label="${tool.name} on ${on_string}" />
+    <data name="pdf_output" format="pdf" label="${tool.name} on ${on_string}" />
     <data name="drug_resistance_report" format="html" label="${tool.name} drug resistance report on ${on_string}">
-        <filter>tbprofiler['use_tbp'] == "yes"</filter>
+      <filter>tbprofiler['use_tbp'] == "yes"</filter>
     </data>
-
+    <data name="drug_resistance_report_pdf" format="pdf" label="${tool.name} drug resistance report on ${on_string}">
+      <filter>tbprofiler['use_tbp'] == "yes"</filter>
+    </data>
   </outputs>
   <tests>
     <test>
       <param name="input_vcf" value="rif_resistant.vcf" ftype="vcf" />
-        <param name="use_tbp" value="no" />
+      <param name="use_tbp" value="no" />
       <output name="output" compare="diff" lines_diff="2" file="rif_resistant_output.html" ftype="html" />
+      <output name="pdf_output" compare="diff" lines_diff="2" file="rif_resistant.pdf" ftype="pdf" />
     </test>
-      <test>
-      <param name="input_vcf" value="rif_resistant.vcf" ftype="vcf"/>
+    <test>
+      <param name="input_vcf" value="rif_resistant.vcf" ftype="vcf" />
       <param name="use_tbp" value="yes" />
       <param name="tbprofiler_json" value="rif_resistant.results.json" ftype="json" />
       <output name="output" compare="diff" lines_diff="2" file="rif_resistant_output.html" ftype="html" />
       <output name="drug_resistance_report" file="rif_resistant_dr_report.html" lines_diff="2" ftype="html" />
+      <output name="pdf_output" compare="diff" lines_diff="2" file="rif_resistant.pdf" ftype="pdf" />
+      <output name="drug_resistance_report_pdf" compare="diff" lines_diff="2" file="rif_resistant_drug_resistance.pdf" ftype="pdf" />
     </test>
   </tests>
   <help>
