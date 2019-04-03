@@ -25,7 +25,7 @@ setup(
         'pyvcf',
         'weasyprint',
         'cairocffi==0.9',
-        'snpit @ git+https://github.com/samlipworth/snpit.git@master',
+        'snpit @ git+https://github.com/samlipworth/snpit.git@V1.1#egg=snpit',
     ],
     # dependency_links=[
     #     'git+https://github.com/samlipworth/snpit.git@V1.1#egg=snpit',
