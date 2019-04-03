@@ -25,11 +25,11 @@ setup(
         'pyvcf',
         'weasyprint',
         'cairocffi==0.9',
-        'snpit',
+        'snpit @ git+https://github.com/samlipworth/snpit.git@master',
     ],
-    dependency_links=[
-        'git+https://github.com/samlipworth/snpit.git@V1.1#egg=snpit',
-    ],
+    # dependency_links=[
+    #     'git+https://github.com/samlipworth/snpit.git@V1.1#egg=snpit',
+    # ],
     entry_points={
         'console_scripts': ['tbvcfreport=tbvcfreport.tbvcfreport:cli']
     },
