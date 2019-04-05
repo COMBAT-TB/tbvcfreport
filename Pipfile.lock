@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3da2937dbc8aeca08b54e4cc9498097ecc0324e0d4f9b46290c1081e3c5c6fcf"
+            "sha256": "dd07c16febfb2ed8cdf637a359da4f4180248bc585619bacd6a716f15b97a2a0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -72,10 +72,10 @@
         },
         "cairocffi": {
             "hashes": [
-                "sha256:01ac51ae12c4324ca5809ce270f9dd1b67f5166fe63bd3e497e9ea3ca91946ff"
+                "sha256:15386c3a9e08823d6826c4491eaccc7b7254b1dc587a3b9ce60c350c3f990337"
             ],
             "index": "pypi",
-            "version": "==1.0.2"
+            "version": "==0.9.0"
         },
         "cairosvg": {
             "hashes": [
@@ -405,6 +405,40 @@
             "index": "pypi",
             "version": "==0.6.8"
         },
+        "reportlab": {
+            "hashes": [
+                "sha256:063a4b9b269883e1ad69f17319a13bce29eb64b4ea83be0ca72f3c7e16eb82c5",
+                "sha256:083d545873ee1d42f2489ad7a28de68ac1cd8b347f2909b58bf52e0b47c1db78",
+                "sha256:11f7a4f42078ed7a1555ee4ec4ce9f1ee0c693c81cbec141ed9472efeac39d72",
+                "sha256:2815d86bfcf113b357cae00886d94ceb84503d076d4840acdf20eb7bb18239e5",
+                "sha256:28d2df4e6c82eda1decc9fd5ac8a92f11e3b589466aa0dfb5eecf2a6b37cc8b1",
+                "sha256:348d8940ebcb3d387553a7d671621c5e191ddba54f52003d8f4762d599b8d1f1",
+                "sha256:35a9ef0f962fa6cf0220bcb1784e803920ca133d1ca085f34bdf61c36a537ea0",
+                "sha256:37c0678254aca7f9e18b8b3c60d6da19349b3149927026ce9578752b2bf831ac",
+                "sha256:52c0e367ee6273499f1aa29a830e2a3abceae44446398f935774cfbce0fe0b6b",
+                "sha256:534827c3dd5844340eb4ec61a754471a0fef3fd2e1f342ad9452b034529ce340",
+                "sha256:577281844053e312cb90b29ea440ec6543416b3361833773a7eaadc361a25376",
+                "sha256:58e4af53c64ec3b9c226d6c4e0bac5ec89a556fefc58eb058c9a5429385e4c84",
+                "sha256:61c89741b03b6e5f434b41d8659d1a7df38b635bf09269abae1b00ee5cc77e24",
+                "sha256:78f2ac8dc47c0cfbc3824aa3fc83ab8aa1e1f3a11803123f7a08170374c68b17",
+                "sha256:7c66fbd111fb83b760a88d1b1bef9afb77d4c940c79e1c1e119f202be75e2d99",
+                "sha256:8659c9fd61a042b47714dc3f637dfb3bff59396890386ae7a1c383ae3b76b206",
+                "sha256:92113dcb7d98aa838782510a4f5654c7f6596e3560a0a4cf8f3eff141126e95a",
+                "sha256:99d74fffc201a3bd4b603cc27901917c283e6deed1c8bf7c65d14ac1fb78f5e3",
+                "sha256:9b9bdb2a9f7e35e8ad98fb06e7609616b7cfcdd510f55dcaf0335092ecdcb2ac",
+                "sha256:9e6fc073ff383ef09ca67f0cc7028dfe96bd022d6117ff7d2586ea8ca7cd7a30",
+                "sha256:a06e5c6873b420fe644cc813c660a64fbf4237be62b01576f32a305226bccfef",
+                "sha256:a51c683366d4d46ae713d1395c5bc4d53f20943aa77e3590f7bbc3b374a3ff91",
+                "sha256:a9b8f13783a83c82b33c3d7d175ff5b06c8b61e59bc0cd63965bc12d5328fbb8",
+                "sha256:cdc4de4cd6041eda1624247949c689a17459394004572ff1fe14aa4ba7ad0b6a",
+                "sha256:cf046304bea0e8b4574f3d500e15b119149d469dd3b17fec1b8005bdb0d6b8e6",
+                "sha256:dc0cab2145fef216d3cf0577eca8780928fad7f021123eaa9ca2287f436754cc",
+                "sha256:fad3a0fe7e616b064ddf5ad9f248eeb25e17f65cde204869f8d9a8c45ef17027",
+                "sha256:fe276cd644e1e669613dc73fe6f7501c26e671d009d2329f774df578adc8000e"
+            ],
+            "index": "pypi",
+            "version": "==3.5.18"
+        },
         "six": {
             "hashes": [
                 "sha256:3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c",
@@ -416,10 +450,6 @@
             "editable": true,
             "git": "https://github.com/samlipworth/snpit.git",
             "ref": "fcaa2909ba2c244084382e3cf13f4d1678653271"
-        },
-        "tbvcfreport": {
-            "editable": true,
-            "path": "."
         },
         "tinycss2": {
             "hashes": [

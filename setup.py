@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 setup(
     name='tbvcfreport',
-    version='0.0.7',
+    version='0.0.8',
     url='https://github.com/COMBAT-TB/tbvcfreport',
     bugtrack_url='https://github.com/COMBAT-TB/tbvcfreport/issues',
     description="Parses SnpEff generated VCF and generates an HTML report.",

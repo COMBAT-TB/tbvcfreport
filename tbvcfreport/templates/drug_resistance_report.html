@@ -1,29 +1,30 @@
 {% extends "base.html" %} {% block content %}
-            {%  if 'dr_data' in data and data['dr_data'] %}
-                <div class="row">
-                    <h5>TBProfiler drug resistance report<sup><a href="#tbprofiler">1</a></sup></h5>
-                </div>
-                <div class="row">
-                    <table id="drug_resistance" class="table table-bordered table-striped table-sm" cellspacing="0">
-                        <thead class="thead-light">
-                        <tr>
-                            <th scope="col">Drug</th>
-                            <th scope="col">Resistance</th>
-                            <th scope="col">Supporting Mutations</th>
-                        </tr>
-                        </thead>
-                        {%  for entry in data['dr_data'] %}
-                        <tr>
-                            <td>{{ entry['drug_human_name'] }}</td>
-                            <td>{% if entry['resistant'] %}R{% else %}S{% endif %}</td>
-                            <td>{% for mutation in entry['variants'] %}{{ mutation[0] }} ({{ mutation[2] }} {{ mutation[1] }}) {% endfor %}</td>
-                        </tr>
-                        {%  endfor %}
-                    </table>
-                </div>
-                <div class="row">
-                    <span><a name="tbprofiler">1.</a> Drug resistance predictions are for research purposes only
-                    and are produced by the <a href="https://github.com/jodyphelan/TBProfiler">TBProfiler</a> software.</span>
-                </div>
-            {%  endif %}
-        {% endblock %}
+{%  if 'dr_data' in data and data['dr_data'] %}
+<div class="row">
+    <h5>TBProfiler drug resistance report<sup><a href="#tbprofiler">1</a></sup></h5>
+</div>
+<div class="row">
+    <table id="drug_resistance" class="table table-bordered table-striped table-sm" cellspacing="0">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Drug</th>
+                <th scope="col">Resistance</th>
+                <th scope="col">Supporting Mutations</th>
+            </tr>
+        </thead>
+        {%  for entry in data['dr_data'] %}
+        <tr>
+            <td>{{ entry['drug_human_name'] }}</td>
+            <td>{% if entry['resistant'] %}R{% else %}S{% endif %}</td>
+            <td>{% for mutation in entry['variants'] %}{{ mutation[0] }} ({{ mutation[2] }} {{ mutation[1] }})
+                {% endfor %}</td>
+        </tr>
+        {%  endfor %}
+    </table>
+</div>
+<div class="row">
+    <span><a name="tbprofiler">1.</a> Drug resistance predictions are for research purposes only
+        and are produced by the <a href="https://github.com/jodyphelan/TBProfiler">TBProfiler</a> software.</span>
+</div>
+{%  endif %}
+{% endblock %}

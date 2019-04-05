@@ -4,7 +4,6 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-tbvcfreport = {path = ".",editable = true}
 
 [packages]
 autopep8 = "==1.3.4"
@@ -23,7 +22,7 @@ MarkupSafe = "==1.0"
 PyVCF = "==0.6.8"
 weasyprint = "*"
 cairocffi = "==0.9"
-tbvcfreport = {path = ".",editable = true}
+reportlab = "*"
 
 [requires]
 python_version = "3.7"

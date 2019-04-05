@@ -2,10 +2,10 @@
 <tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy0">
   <description>Annotate SnpEff VCF with links to Combat TB Explorer database</description>
   <macros>
-    <token name="@TOOL_VERSION@">0.0.7</token>
+    <token name="@TOOL_VERSION@">0.0.8</token>
   </macros>
   <requirements>
-    <requirement type="package" version="@TOOL_VERSION@">tbvcfreport</requirement>
+    <!-- <requirement type="package" version="@TOOL_VERSION@">tbvcfreport</requirement> -->
   </requirements>
   <command detect_errors="exit_code">
     <![CDATA[
@@ -15,11 +15,12 @@
         --tbprofiler_report '$tbprofiler_json'
     #end if
     data.vcf &&
-    mv data.html '$output' &&
-    mv data.pdf '$pdf_output'
+    mv data_variants_report.html '$output' &&
+    mv data_variants_report.txt '$txt_output'
     #if str($tbprofiler.use_tbp) == "yes"
-        && mv data_drug_resistance.html '$drug_resistance_report'
-        && mv data_drug_resistance_pdf.pdf '$drug_resistance_report_pdf'
+        && mv data_drug_resistance_report.html '$drug_resistance_report'
+        && mv data_drug_resistance_report.txt '$drug_resistance_report_txt'
+        && mv data_drug_resistance_report.pdf '$drug_resistance_report_pdf'
     #end if
     ]]>
   </command>
@@ -38,8 +39,11 @@
   </inputs>
   <outputs>
     <data name="output" format="html" label="${tool.name} on ${on_string}" />
-    <data name="pdf_output" format="pdf" label="${tool.name} on ${on_string}" />
+    <data name="txt_output" format="txt" label="${tool.name} on ${on_string}" />
     <data name="drug_resistance_report" format="html" label="${tool.name} drug resistance report on ${on_string}">
+      <filter>tbprofiler['use_tbp'] == "yes"</filter>
+    </data>
+    <data name="drug_resistance_report_txt" format="txt" label="${tool.name} drug resistance report on ${on_string}">
       <filter>tbprofiler['use_tbp'] == "yes"</filter>
     </data>
     <data name="drug_resistance_report_pdf" format="pdf" label="${tool.name} drug resistance report on ${on_string}">
@@ -50,17 +54,18 @@
     <test>
       <param name="input_vcf" value="rif_resistant.vcf" ftype="vcf" />
       <param name="use_tbp" value="no" />
-      <output name="output" compare="diff" lines_diff="2" file="rif_resistant_output.html" ftype="html" />
-      <output name="pdf_output" compare="diff" lines_diff="2" file="rif_resistant.pdf" ftype="pdf" />
+      <output name="output" compare="diff" lines_diff="2" file="rif_resistant_variants_report.html" ftype="html" />
+      <output name="txt_output" compare="diff" lines_diff="2" file="rif_resistant_variants_report.txt" ftype="txt" />
     </test>
     <test>
       <param name="input_vcf" value="rif_resistant.vcf" ftype="vcf" />
       <param name="use_tbp" value="yes" />
       <param name="tbprofiler_json" value="rif_resistant.results.json" ftype="json" />
-      <output name="output" compare="diff" lines_diff="2" file="rif_resistant_output.html" ftype="html" />
-      <output name="drug_resistance_report" file="rif_resistant_dr_report.html" lines_diff="2" ftype="html" />
-      <output name="pdf_output" compare="diff" lines_diff="2" file="rif_resistant.pdf" ftype="pdf" />
-      <output name="drug_resistance_report_pdf" compare="diff" lines_diff="2" file="rif_resistant_drug_resistance.pdf" ftype="pdf" />
+      <output name="output" compare="diff" lines_diff="2" file="rif_resistant_variants_report.html" ftype="html" />
+      <output name="txt_output" compare="diff" lines_diff="2" file="rif_resistant_variants_report.txt" ftype="txt" />
+      <output name="drug_resistance_report" file="rif_resistant_drug_resistance_report.html" lines_diff="2" ftype="html" />
+      <output name="drug_resistance_report_txt" compare="diff" lines_diff="2" file="rif_resistant_drug_resistance_report.txt" ftype="txt" />
+      <output name="drug_resistance_report_pdf" compare="diff" lines_diff="2" file="rif_resistant_drug_resistance_report.pdf" ftype="pdf" />
     </test>
   </tests>
   <help>
