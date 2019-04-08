@@ -9,8 +9,12 @@ import sys
 import click
 from snpit import snpit
 
-from .report import generate_drug_resistance_report, generate_report
-from .vcfproc import VCFProc
+try:
+    from .report import generate_report
+    from .vcfproc import VCFProc
+except ImportError:
+    from report import generate_report
+    from vcfproc import VCFProc
 
 log = logging.getLogger(__name__)
 
@@ -166,14 +170,6 @@ def generate(vcf_dir, tbprofiler_report=None):
             drug_resistance_list = []
         generate_report(file_name=file_name, data={
             'variants': variants,
-            'lineage': {
-                'species': species,
-                'lineage': lineage,
-                'sublineage': sublineage,
-                'percent_agreement': percent_agreement
-            },
-            'mixed_infection': rrs_variant_count > 1})
-        generate_drug_resistance_report(file_name=file_name, data={
             'lineage': {
                 'species': species,
                 'lineage': lineage,

@@ -7,7 +7,10 @@ from collections import namedtuple
 
 import vcf
 
-from .dbconn import query_by_gene_list
+try:
+    from .dbconn import query_by_gene_list
+except ImportError:
+    from dbconn import query_by_gene_list
 
 log = logging.getLogger(__name__)
 

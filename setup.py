@@ -23,8 +23,6 @@ setup(
         'jinja2',
         'tqdm',
         'pyvcf',
-        'weasyprint',
-        'cairocffi==0.9',
         'snpit',
     ],
     dependency_links=[

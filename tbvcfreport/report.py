@@ -4,7 +4,6 @@ Interface to Jinja
 import os
 
 from jinja2 import Environment, FileSystemLoader
-from weasyprint import HTML
 
 jinja_env = Environment(loader=FileSystemLoader(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates")),
@@ -32,50 +31,56 @@ def generate_report(file_name, data):
     try:
         generate_txt_report(file_name, data)
         output = '{file_name}_variants_report.html'.format(file_name=file_name)
+        dr_output = '{file_name}_drug_resistance_report.html'.format(
+            file_name=file_name)
         context = {
             'file_name': file_name,
             'data': data,
         }
         html = render_template('report-layout.html', context)
-        with open(output, 'w') as f:
-            f.write(html)
-        return output
+        dr_html = render_template('drug_resistance_report.html', context)
+        with open(output, 'w') as v_report, open(dr_output, 'w') as dr_output:
+            # variants report
+            v_report.write(html)
+            # drug_resistance_report
+            dr_output.write(dr_html)
     except Exception as e:
         raise e
 
 
-def generate_drug_resistance_report(file_name, data):
-    """
-    Write and render HTML report
-    :param file_name:
-    :param data:
-    :return:
-    """
-    try:
-        generate_dr_txt_report(file_name, data)
-        output = '{file_name}_drug_resistance_report.html'.format(
-            file_name=file_name)
-        context = {
-            'file_name': file_name,
-            'data': data,
-        }
-        html = render_template('drug_resistance_report.html', context)
-        with open(output, 'w') as f:
-            f.write(html)
+# def generate_drug_resistance_report(file_name, data):
+#     """
+#     Write and render HTML report
+#     :param file_name:
+#     :param data:
+#     :return:
+#     """
+#     try:
+#         dr_output = '{file_name}_drug_resistance_report.html'.format(
+#             file_name=file_name)
+#         context = {
+#             'file_name': file_name,
+#             'data': data,
+#         }
+#         html = render_template('drug_resistance_report.html', context)
+#         with open(dr_output, 'w') as f:
+#             f.write(html)
 
-        # PDF output
-        pdf_output = '{file_name}_drug_resistance_report.pdf'.format(
-            file_name=file_name)
-        HTML(string=html).write_pdf(pdf_output)
+#         # PDF output
+#         pdf_output = '{file_name}_drug_resistance_report.pdf'.format(
+#             file_name=file_name)
+#         HTML(string=html).write_pdf(pdf_output)
 
-        return output
-    except Exception as e:
-        raise e
+#         return dr_output
+#     except Exception as e:
+#         raise e
 
 
 def generate_txt_report(file_name, data):
 
     txt_output = '{file_name}_variants_report.txt'.format(file_name=file_name)
+    dr_txt_output = '{file_name}_drug_resistance_report.txt'.format(
+        file_name=file_name)
 
     agreement = "{}%".format(data['lineage'].get('percent_agreement', ''))
     lineage_header = ['Species', 'Lineage', 'Sub-lineage', 'Agreement']
@@ -98,39 +103,29 @@ def generate_txt_report(file_name, data):
                 for s in snp_data]
     # pdf tables required nested lists
     # variants.insert(0, variants_header)
-    with open(txt_output, 'w') as f:
-        f.write("#{} Report\n".format(file_name))
-        f.write("#{}\n".format('\t'.join(lineage_header)))
-        for data in lineage_data:
-            f.write("{}\n".format('\t'.join(data)))
-        f.write("\n#{}\n".format('\t'.join(variants_header)))
-        for data in variants:
-            f.write("{}\n".format('\t'.join(data)))
-    return True
+    with open(txt_output, 'w') as _variants_report, \
+            open(dr_txt_output, 'w') as dr_report:
+        _variants_report.write("#{} Report\n".format(file_name))
+        dr_report.write("#{} Report\n".format(file_name))
+        _variants_report.write("#{}\n".format('\t'.join(lineage_header)))
+        dr_report.write("#{}\n".format('\t'.join(lineage_header)))
+        for l_data in lineage_data:
+            _variants_report.write("{}\n".format('\t'.join(l_data)))
+            dr_report.write("{}\n".format('\t'.join(l_data)))
 
+        _variants_report.write("\n#{}\n".format('\t'.join(variants_header)))
+        for variant in variants:
+            _variants_report.write("{}\n".format('\t'.join(variant)))
 
-def generate_dr_txt_report(file_name, data):
-    txt_output = '{file_name}_drug_resistance_report.txt'.format(
-        file_name=file_name)
-    agreement = "{}%".format(data['lineage'].get('percent_agreement', ''))
-    lineage_data = [['Species', 'Lineage', 'Sub-lineage', 'Agreement'],
-                    [data['lineage'].get('species', ''),
-                     data['lineage'].get('lineage', ''),
-                     data['lineage'].get('sublineage', ''), agreement]
-                    ]
-    with open(txt_output, 'w') as f:
-        f.write("#{} Report\n".format(file_name))
-        f.write("#{}\n".format('\t'.join(lineage_data[0])))
-        for entry in lineage_data[1:]:
-            f.write("{}\n".format('\t'.join(entry)))
-        f.write("\n#TBProfiler Drug Resistance Report\n")
-        f.write("\n#{}\n".format(
+        dr_report.write("\n#TBProfiler Drug Resistance Report\n")
+        dr_report.write("\n#{}\n".format(
             '\t'.join(['Drug', 'Resistance', 'Supporting Mutations'])))
         for entry in data['dr_data']:
             resistant = "R" if entry['resistant'] else "S"
             drug = entry['drug_human_name']
             mutations = ["{}({}-{})".format(mutation[0], str(mutation[2]), mutation[1])
                          for mutation in entry['variants']] if entry.get('variants') else ""
-            f.write("{}\n".format(
+            dr_report.write("{}\n".format(
                 '\t'.join([drug, resistant, ','.join(mutations)])))
-        f.write("\n#Drug resistance predictions are for research purposes only and are produced by the TBProfiler software.\n")
+        dr_report.write(
+            "\n#Drug resistance predictions are for research purposes only and are produced by the TBProfiler software.\n")
