@@ -1,89 +1,92 @@
 {% extends "base.html" %} {% block content %}
-            <div class="row justify-content-center align-items-center">
-                <table id="vcfreport" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">CHR</th>
-                            <th scope="col">GENE</th>
-                            <th scope="col">IDENTIFIER</th>
-                            <th scope="col">PRODUCT</th>
-                            <th scope="col">TYPE</th>
-                            <th scope="col">ANNOTATION</th>
-                            <th scope="col">POS</th>
-                            <th scope="col">REF</th>
-                            <th scope="col">ALT</th>
-                            <th scope="col">CONSEQUENCE</th>
-                            <th scope="col">IMPACT</th>
-                            <th scope="col">PATHWAY</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+<div class="row justify-content-center align-items-center">
+    <table id="vcfreport" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">CHR</th>
+                <th scope="col">GENE</th>
+                <th scope="col">IDENTIFIER</th>
+                <th scope="col">PRODUCT</th>
+                <th scope="col">TYPE</th>
+                <th scope="col">ANNOTATION</th>
+                <th scope="col">POS</th>
+                <th scope="col">REF</th>
+                <th scope="col">ALT</th>
+                <th scope="col">CONSEQUENCE</th>
+                <th scope="col">IMPACT</th>
+                <th scope="col">PATHWAY</th>
+            </tr>
+        </thead>
+        <tbody>
 
-    {% for item in data['variants'] %}
-<tr>
-    <td>{{ item[16] or "NA" }}</td>
-    <td>{{ item[3] or "NA" }}</td>
-    <td>
-        <a target="_blank" href="http://combattb.sanbi.ac.za/gene?q={{ item[4] }}">{{ item[4] }}</a>
-    </td>
-    <td>
-        {% if item[21]['protein'] %}
-        <a target="_blank" href="http://combattb.sanbi.ac.za/search?q={{ item[21]['protein']['uniquename'] }}">{{
+            {% for item in data['variants'] %}
+            <tr>
+                <td>{{ item[16] or "NA" }}</td>
+                <td>{{ item[3] or "NA" }}</td>
+                <td>
+                    <a target="_blank" href="http://combattb.sanbi.ac.za/gene?q={{ item[4] }}">{{ item[4] }}</a>
+                </td>
+                <td>
+                    {% if item[21]['protein'] %}
+                    <a target="_blank"
+                        href="http://combattb.sanbi.ac.za/search?q={{ item[21]['protein']['uniquename'] }}">{{
             item[21]['protein']['uniquename'] }}</a>
 
-        <!-- <p class="small">{{ item[21]['protein']['uniquename'] }}</p> -->
-        <!-- http://combattb.sanbi.ac.za/search?&q=P9WNU1 -->
-        {% else %}
-        <p>{{ "NA" }}</p>
-        {% endif %}
-    </td>
-    <td>{{ item[19] or "NA" }}</td>
-    <td>{{ item[1] or "NA" }}</td>
-    <td>
-        <a target="_blank" href="http://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[20] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[20] }}">{{
+                    <!-- <p class="small">{{ item[21]['protein']['uniquename'] }}</p> -->
+                    <!-- http://combattb.sanbi.ac.za/search?&q=P9WNU1 -->
+                    {% else %}
+                    <p>{{ "NA" }}</p>
+                    {% endif %}
+                </td>
+                <td>{{ item[19] or "NA" }}</td>
+                <td>{{ item[1] or "NA" }}</td>
+                <td>
+                    <a target="_blank"
+                        href="http://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[20] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[20] }}">{{
             item[17] }}</a>
-    </td>
-    <td>{{ item[18] or "NA" }}</td>
-    <td>{{ item[0] or "NA" }}</td>
-    <td>{{ item[10] or "NA" }}</td>
-    <td>{{ item[2] or "NA" }}</td>
-    <td>
-        {% if item[21]['pathway'] and item[21]['pathway']|length >= 1 %} {% for pathway in item[21]['pathway'] %}
-        {% if pathway['accession'].startswith("mtv") %}
-        {% set url = "http://www.genome.jp/dbget-bin/www_bget?" %} {% else %}
-        {% set url = "https://reactome.org/content/detail/" %} {% endif %}
-        <p>
-            <small>
-                <a href="{{ url }}{{ pathway['accession'] }}" target="_blank">{{ pathway['name'] }}</a>
-            </small>
-        </p>
-        {% endfor %} {% else %}
-        <p>{{ "NA" }}</p>
-        {% endif %}
-    </td>
-</tr>
-{% endfor %}
-                                    </tbody>
-                    <tfoot class="thead-light">
-                        <tr>
-                            <th scope="col">CHR</th>
-                            <th scope="col">GENE</th>
-                            <th scope="col">IDENTIFIER</th>
-                            <th scope="col">PRODUCT</th>
-                            <th scope="col">TYPE</th>
-                            <th scope="col">ANNOTATION</th>
-                            <th scope="col">POS</th>
-                            <th scope="col">REF</th>
-                            <th scope="col">ALT</th>
-                            <th scope="col">CONSEQUENCE</th>
-                            <th scope="col">IMPACT</th>
-                            <th scope="col">PATHWAY</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </main>
-        <div class="mt-5">
-        </div>
+                </td>
+                <td>{{ item[18] or "NA" }}</td>
+                <td>{{ item[0] or "NA" }}</td>
+                <td>{{ item[10] or "NA" }}</td>
+                <td>{{ item[2] or "NA" }}</td>
+                <td>
+                    {% if item[21]['pathway'] and item[21]['pathway']|length >= 1 %}
+                    {% for pathway in item[21]['pathway'] %}
+                    {% if pathway['accession'].startswith("mtv") %}
+                    {% set url = "http://www.genome.jp/dbget-bin/www_bget?" %} {% else %}
+                    {% set url = "https://reactome.org/content/detail/" %} {% endif %}
+                    <p>
+                        <small>
+                            <a href="{{ url }}{{ pathway['accession'] }}" target="_blank">{{ pathway['name'] }}</a>
+                        </small>
+                    </p>
+                    {% endfor %} {% else %}
+                    <p>{{ "NA" }}</p>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot class="thead-light">
+            <tr>
+                <th scope="col">CHR</th>
+                <th scope="col">GENE</th>
+                <th scope="col">IDENTIFIER</th>
+                <th scope="col">PRODUCT</th>
+                <th scope="col">TYPE</th>
+                <th scope="col">ANNOTATION</th>
+                <th scope="col">POS</th>
+                <th scope="col">REF</th>
+                <th scope="col">ALT</th>
+                <th scope="col">CONSEQUENCE</th>
+                <th scope="col">IMPACT</th>
+                <th scope="col">PATHWAY</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+</main>
+<div class="mt-5">
+</div>
 
 {% endblock %}

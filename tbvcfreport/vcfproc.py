@@ -1,14 +1,16 @@
 """
 Interface to handle VCF files
 """
-from collections import namedtuple
 import logging
 import sys
+from collections import namedtuple
 
 import vcf
-from tqdm import tqdm
 
-from .dbconn import get_gene_data, query_by_gene_list
+try:
+    from .dbconn import query_by_gene_list
+except ImportError:
+    from dbconn import query_by_gene_list
 
 log = logging.getLogger(__name__)
 
@@ -19,13 +21,14 @@ class VCFProc(object):
     """
     class LineRecord(object):
         CHROM = POS = REF = var_type = affected_region = variant_data = None
+
         def __init__(self):
             pass
 
     class VariantInfo(object):
         gene = protein = pathway = None
-    variant_info = namedtuple('variant_info', ['gene',
-                              'protein', 'pathway'])
+    variant_info = namedtuple('variant_info', ['gene', 'protein', 'pathway'])
+
     def __init__(self, vcf_file):
         self.vcf_file = vcf_file
 
@@ -45,7 +48,8 @@ class VCFProc(object):
                             gene_identifier = annotation[4]
                             rv_tags.append(gene_identifier)
             rv_tags = list(set(rv_tags))
-            gene_info = self.gene_info_to_dict(query_by_gene_list(list(set(rv_tags))))
+            gene_info = self.gene_info_to_dict(
+                query_by_gene_list(list(set(rv_tags))))
             with open(self.vcf_file) as _vcf:
                 vcf_reader = vcf.Reader(_vcf)
                 for i, record in enumerate(vcf_reader):
@@ -66,9 +70,10 @@ class VCFProc(object):
                                                          {'gene': None,
                                                           'protein': None,
                                                           'pathway': None})
-                            annotation.extend([record.CHROM, record.POS, record.REF,
-                                               record.var_type, affected_region,
-                                               variant_data])
+                            annotation.extend([
+                                record.CHROM, record.POS, record.REF,
+                                record.var_type, affected_region,
+                                variant_data])
                             variants.append(annotation)
         else:
             sys.stderr.write("Can't parse {vcf_file}".format(
@@ -81,7 +86,8 @@ class VCFProc(object):
         # each dictionary having keys 'gene', 'protein' and 'pathway'
         info_dict = {}
         for info in gene_info:
-            assert all([key in info for key in ('gene', 'protein', 'pathway')]), "missing key in info, keys are {}".format(info.keys())
+            assert all([key in info for key in ('gene', 'protein', 'pathway')]
+                       ), "missing key in info, keys are {}".format(info.keys())
             uniquename = info['gene']['uniquename']
             info_dict[uniquename] = info
         return info_dict
