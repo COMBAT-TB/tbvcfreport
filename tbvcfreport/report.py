@@ -48,34 +48,6 @@ def generate_report(file_name, data):
         raise e
 
 
-# def generate_drug_resistance_report(file_name, data):
-#     """
-#     Write and render HTML report
-#     :param file_name:
-#     :param data:
-#     :return:
-#     """
-#     try:
-#         dr_output = '{file_name}_drug_resistance_report.html'.format(
-#             file_name=file_name)
-#         context = {
-#             'file_name': file_name,
-#             'data': data,
-#         }
-#         html = render_template('drug_resistance_report.html', context)
-#         with open(dr_output, 'w') as f:
-#             f.write(html)
-
-#         # PDF output
-#         pdf_output = '{file_name}_drug_resistance_report.pdf'.format(
-#             file_name=file_name)
-#         HTML(string=html).write_pdf(pdf_output)
-
-#         return dr_output
-#     except Exception as e:
-#         raise e
-
-
 def generate_txt_report(file_name, data):
 
     txt_output = '{file_name}_variants_report.txt'.format(file_name=file_name)
@@ -94,17 +66,21 @@ def generate_txt_report(file_name, data):
                        'ANNOTATION', 'POS', 'REF', 'ALT', 'CONSEQUENCE',
                        'IMPACT', 'PATHAWAY']
     snp_data = data.get('variants')
-    variants = [[s[16], s[3], s[4],
-                 s[21]['protein']['uniquename'] if s[21]['protein'] else '',
-                 s[19], s[1], str(s[17]), s[18], s[0], s[10], s[2],
-                 ','.join([p['name'] for p in s[21]['pathway']]
-                          ) if s[21]['pathway'] and len(s[21]['pathway']) >= 1 else ''
-                 ]
-                for s in snp_data]
+    variants = [
+        [
+            s[16], s[3], s[4],
+            s[21]['protein']['uniquename'] if s[21]['protein'] else '',
+            s[19], s[1], str(s[17]), s[18], s[0], s[10], s[2],
+            ','.join([p['name'] for p in s[21]['pathway']])
+            if s[21]['pathway'] and len(s[21]['pathway']) >= 1 else ''
+        ]
+        for s in snp_data
+    ]
     # pdf tables required nested lists
     # variants.insert(0, variants_header)
     with open(txt_output, 'w') as _variants_report, \
             open(dr_txt_output, 'w') as dr_report:
+
         _variants_report.write("#{} Report\n".format(file_name))
         dr_report.write("#{} Report\n".format(file_name))
         _variants_report.write("#{}\n".format('\t'.join(lineage_header)))
@@ -123,8 +99,10 @@ def generate_txt_report(file_name, data):
         for entry in data['dr_data']:
             resistant = "R" if entry['resistant'] else "S"
             drug = entry['drug_human_name']
-            mutations = ["{}({}-{})".format(mutation[0], str(mutation[2]), mutation[1])
-                         for mutation in entry['variants']] if entry.get('variants') else ""
+            mutations = [
+                "{}({}-{})".format(mutation[0], str(mutation[2]), mutation[1])
+                for mutation in entry['variants']
+            ] if entry.get('variants') else ""
             dr_report.write("{}\n".format(
                 '\t'.join([drug, resistant, ','.join(mutations)])))
         dr_report.write(
