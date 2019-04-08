@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy1">
+<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy2">
   <description>Annotate SnpEff VCF with links to Combat TB Explorer database</description>
   <macros>
     <token name="@TOOL_VERSION@">0.0.8</token>
@@ -20,7 +20,6 @@
     #if str($tbprofiler.use_tbp) == "yes"
         && mv data_drug_resistance_report.html '$drug_resistance_report'
         && mv data_drug_resistance_report.txt '$drug_resistance_report_txt'
-        && mv data_drug_resistance_report.pdf '$drug_resistance_report_pdf'
     #end if
     ]]>
   </command>
@@ -38,15 +37,12 @@
     </conditional>
   </inputs>
   <outputs>
-    <data name="output" format="html" label="${tool.name} on ${on_string}" />
-    <data name="txt_output" format="txt" label="${tool.name} on ${on_string}" />
+    <data name="output" format="html" label="${tool.name} variants report on ${on_string}" />
+    <data name="txt_output" format="txt" label="${tool.name} variants report on ${on_string}" />
     <data name="drug_resistance_report" format="html" label="${tool.name} drug resistance report on ${on_string}">
       <filter>tbprofiler['use_tbp'] == "yes"</filter>
     </data>
     <data name="drug_resistance_report_txt" format="txt" label="${tool.name} drug resistance report on ${on_string}">
-      <filter>tbprofiler['use_tbp'] == "yes"</filter>
-    </data>
-    <data name="drug_resistance_report_pdf" format="pdf" label="${tool.name} drug resistance report on ${on_string}">
       <filter>tbprofiler['use_tbp'] == "yes"</filter>
     </data>
   </outputs>
@@ -65,7 +61,6 @@
       <output name="txt_output" compare="diff" lines_diff="2" file="rif_resistant_variants_report.txt" ftype="txt" />
       <output name="drug_resistance_report" file="rif_resistant_drug_resistance_report.html" lines_diff="2" ftype="html" />
       <output name="drug_resistance_report_txt" compare="diff" lines_diff="2" file="rif_resistant_drug_resistance_report.txt" ftype="txt" />
-      <output name="drug_resistance_report_pdf" compare="diff" lines_diff="2" file="rif_resistant_drug_resistance_report.pdf" ftype="pdf" />
     </test>
   </tests>
   <help>
