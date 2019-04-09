@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy2">
+<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy0">
   <description>Annotate SnpEff VCF with links to Combat TB Explorer database</description>
   <macros>
-    <token name="@TOOL_VERSION@">0.0.8</token>
+    <token name="@TOOL_VERSION@">0.0.9</token>
   </macros>
   <requirements>
     <requirement type="package" version="@TOOL_VERSION@">tbvcfreport</requirement>
