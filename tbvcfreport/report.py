@@ -30,28 +30,32 @@ def generate_report(file_name, data):
     """
     try:
         generate_txt_report(file_name, data)
-        output = '{file_name}_variants_report.html'.format(file_name=file_name)
-        dr_output = '{file_name}_drug_resistance_report.html'.format(
-            file_name=file_name)
+
         context = {
             'file_name': file_name,
             'data': data,
         }
+
+        # variants report
+        output = '{file_name}_variants_report.html'.format(file_name=file_name)
         html = render_template('report-layout.html', context)
-        dr_html = render_template('drug_resistance_report.html', context)
-        with open(output, 'w') as v_report, open(dr_output, 'w') as dr_output:
-            # variants report
+        with open(output, 'w') as v_report:
             v_report.write(html)
-            # drug_resistance_report
-            dr_output.write(dr_html)
+
+        # drug_resistance_report
+        if len(data['dr_data']) > 0:
+            dr_output = '{file_name}_drug_resistance_report.html'.format(
+                file_name=file_name)
+            dr_html = render_template('drug_resistance_report.html', context)
+            with open(dr_output, 'w') as dr_output:
+                dr_output.write(dr_html)
     except Exception as e:
         raise e
 
 
 def generate_txt_report(file_name, data):
 
-    txt_output = '{file_name}_variants_report.txt'.format(file_name=file_name)
-    dr_txt_output = '{file_name}_drug_resistance_report.txt'.format(
+    v_txt_output = '{file_name}_variants_report.txt'.format(
         file_name=file_name)
 
     agreement = "{}%".format(data['lineage'].get('percent_agreement', ''))
@@ -78,32 +82,39 @@ def generate_txt_report(file_name, data):
     ]
     # pdf tables required nested lists
     # variants.insert(0, variants_header)
-    with open(txt_output, 'w') as _variants_report, \
-            open(dr_txt_output, 'w') as dr_report:
-
+    with open(v_txt_output, 'w') as _variants_report:
         _variants_report.write("#{} Report\n".format(file_name))
-        dr_report.write("#{} Report\n".format(file_name))
+
         _variants_report.write("#{}\n".format('\t'.join(lineage_header)))
-        dr_report.write("#{}\n".format('\t'.join(lineage_header)))
         for l_data in lineage_data:
             _variants_report.write("{}\n".format('\t'.join(l_data)))
-            dr_report.write("{}\n".format('\t'.join(l_data)))
 
         _variants_report.write("\n#{}\n".format('\t'.join(variants_header)))
         for variant in variants:
             _variants_report.write("{}\n".format('\t'.join(variant)))
 
-        dr_report.write("\n#TBProfiler Drug Resistance Report\n")
-        dr_report.write("\n#{}\n".format(
-            '\t'.join(['Drug', 'Resistance', 'Supporting Mutations'])))
-        for entry in data['dr_data']:
-            resistant = "R" if entry['resistant'] else "S"
-            drug = entry['drug_human_name']
-            mutations = [
-                "{}({}-{})".format(mutation[0], str(mutation[2]), mutation[1])
-                for mutation in entry['variants']
-            ] if entry.get('variants') else ""
-            dr_report.write("{}\n".format(
-                '\t'.join([drug, resistant, ','.join(mutations)])))
-        dr_report.write(
-            "\n#Drug resistance predictions are for research purposes only and are produced by the TBProfiler software.\n")
+    if len(data['dr_data']) > 0:
+        dr_txt_output = '{file_name}_drug_resistance_report.txt'.format(
+            file_name=file_name)
+        with open(dr_txt_output, 'w') as dr_report:
+            dr_report.write("#{} Report\n".format(file_name))
+
+            dr_report.write("#{}\n".format('\t'.join(lineage_header)))
+            for l_data in lineage_data:
+                dr_report.write("{}\n".format('\t'.join(l_data)))
+
+            dr_report.write("\n#TBProfiler Drug Resistance Report\n")
+            dr_report.write("\n#{}\n".format(
+                '\t'.join(['Drug', 'Resistance', 'Supporting Mutations'])))
+            for entry in data['dr_data']:
+                resistant = "R" if entry['resistant'] else "S"
+                drug = entry['drug_human_name']
+                mutations = [
+                    "{}({}-{})".format(mutation[0],
+                                       str(mutation[2]), mutation[1])
+                    for mutation in entry['variants']
+                ] if entry.get('variants') else ""
+                dr_report.write("{}\n".format(
+                    '\t'.join([drug, resistant, ','.join(mutations)])))
+            dr_report.write(
+                "\n#Drug resistance predictions are for research purposes only and are produced by the TBProfiler software.\n")
