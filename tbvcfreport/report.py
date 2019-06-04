@@ -70,13 +70,14 @@ def generate_txt_report(file_name, data):
                        'ANNOTATION', 'POS', 'REF', 'ALT', 'CONSEQUENCE',
                        'IMPACT', 'PATHAWAY']
     snp_data = data.get('variants')
+    print(snp_data)
     variants = [
         [
             s[16], s[3], s[4],
             s[21]['protein']['uniquename'] if s[21]['protein'] else '',
             s[19], s[1], str(s[17]), s[18], s[0], s[10], s[2],
-            ','.join([p['name'] for p in s[21]['pathway']])
-            if s[21]['pathway'] and len(s[21]['pathway']) >= 1 else ''
+            ','.join(map(str, [p['accession'] for p in s[21]['pathway']]))
+            if s[21].get('pathway') and len(s[21]['pathway']) >= 1 else ''
         ]
         for s in snp_data
     ]
