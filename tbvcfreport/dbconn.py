@@ -5,10 +5,11 @@ import os
 
 from py2neo import Graph
 
-DB_HOST = os.environ.get("DATABASE_URI", "192.168.10.36")
+DB_HOST = os.environ.get("DATABASE_URI", "neodb.sanbi.ac.za")
+SECURE = True if DB_HOST == "neodb.sanbi.ac.za" else os.environ.get(
+    "SECURE", False)
 
-graph = Graph(host=DB_HOST, bolt=True, http_port=7474,
-              bolt_port=7687, password="")
+graph = Graph(host=DB_HOST, password="", secure=SECURE)
 
 
 def get_gene_data(q):
