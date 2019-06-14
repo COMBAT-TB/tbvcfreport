@@ -2,9 +2,10 @@ from setuptools import find_packages, setup
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
+
 setup(
     name='tbvcfreport',
-    version='0.1.0',
+    version='0.1.2',
     url='https://github.com/COMBAT-TB/tbvcfreport',
     bugtrack_url='https://github.com/COMBAT-TB/tbvcfreport/issues',
     description="Parses SnpEff generated VCF and generates an HTML report.",
@@ -17,6 +18,7 @@ setup(
     package_data={
         'tbvcfreport': ['templates/*.html'],
     },
+    python_requires='~=3.6',
     install_requires=[
         'click',
         'py2neo',
@@ -33,7 +35,7 @@ setup(
     },
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Programming Lavnguage :: Python',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
 )

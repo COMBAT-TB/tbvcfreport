@@ -35,7 +35,7 @@ class VCFProc(object):
     def parse(self):
         variants, rv_tags = [], []
         if self.vcf_file.endswith(".vcf"):
-            log.info("Processing: {}...\n".format(self.vcf_file))
+            log.info(f"Processing: {self.vcf_file}...\n")
             with open(self.vcf_file) as _vcf:
                 vcf_reader = vcf.Reader(_vcf)
                 for i, record in enumerate(vcf_reader):
@@ -76,8 +76,7 @@ class VCFProc(object):
                                 variant_data])
                             variants.append(annotation)
         else:
-            sys.stderr.write("Can't parse {vcf_file}".format(
-                vcf_file=self.vcf_file))
+            sys.stderr.write(f"Can't parse {vcf_file}")
         return variants
 
     @staticmethod

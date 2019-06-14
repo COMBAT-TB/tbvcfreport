@@ -43,7 +43,7 @@ def generate_report(file_name, data):
             v_report.write(html)
 
         # drug_resistance_report
-        if len(data['dr_data']) > 0:
+        if data.get('dr_data') and len(data['dr_data']) > 0:
             dr_output = '{file_name}_drug_resistance_report.html'.format(
                 file_name=file_name)
             dr_html = render_template('drug_resistance_report.html', context)
@@ -94,7 +94,7 @@ def generate_txt_report(file_name, data):
         for variant in variants:
             _variants_report.write("{}\n".format('\t'.join(variant)))
 
-    if len(data['dr_data']) > 0:
+    if data.get('dr_data') and len(data['dr_data']) > 0:
         dr_txt_output = '{file_name}_drug_resistance_report.txt'.format(
             file_name=file_name)
         with open(dr_txt_output, 'w') as dr_report:

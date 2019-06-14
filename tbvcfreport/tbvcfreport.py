@@ -29,16 +29,14 @@ def check_vcf(vcf_file):
     if os.stat(vcf_file).st_size > 0:
         _file = True
     else:
-        sys.stderr.write(
-            '{vcf_file} is empty!\n'.format(vcf_file=vcf_file))
+        sys.stderr.write(f"{vcf_file} is empty!\n")
     return _file
 
 
 @click.group()
 def cli():
     """
-    tbvcfreport is a command line tool that generates an HTML-based VCF report.
-    :return:
+    tbvcfreport is a command line tool that generates an HTML-based VCF report from SnpEff annotated VCF file(s).
     """
     pass
 
@@ -48,7 +46,7 @@ def cli():
 @click.argument('vcf_dir', type=click.Path(exists=True))
 def generate(vcf_dir, tbprofiler_report=None):
     """
-    Generate report from VCF files in VCF_DIR.
+    Generate report from VCF file(s) in VCF_DIR.
     :param vcf_dir:
     :param tbprofiler_report:
     :return:
@@ -56,8 +54,7 @@ def generate(vcf_dir, tbprofiler_report=None):
     if os.path.isdir(vcf_dir):
         for root, dirs, files in os.walk(vcf_dir):
             if len(os.listdir(vcf_dir)) == 0:
-                log.error(
-                    '{vcf_dir} is empty!\n'.format(vcf_dir=vcf_dir))
+                log.error(f'{vcf_dir} is empty!\n')
             for vcf_file in files:
                 (base, ext) = os.path.splitext(vcf_file)
                 vcf_file = os.path.join(os.path.abspath(vcf_dir), vcf_file)
@@ -179,7 +176,7 @@ def generate(vcf_dir, tbprofiler_report=None):
             'dr_data': drug_resistance_list,
             'mixed_infection': rrs_variant_count > 1})
     else:
-        log.error("Can't generate report for {}!".format(vcf_dir))
+        log.error(f"Can't generate report for {vcf_dir}!")
 
 
 if __name__ == '__main__':
