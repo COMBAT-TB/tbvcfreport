@@ -1,5 +1,5 @@
-{% set version = "0.0.9" %}
-{% set sha256 = "23ca5bdf1eb2d51a673a5affcb0b540b406e9c523cccf128e33917c6c24f5530" %}
+{% set version = "0.1.2" %}
+{% set sha256 = "96bc5ff2946c2c8c2395b680317d0a2edb22a4ea7670ca42a7f2c5143f7ef93f" %}
 {% set py2neo = "4.2.0" %}
 {% set pyvcf = "0.6.8" %}
 
