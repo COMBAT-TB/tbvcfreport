@@ -1,8 +1,8 @@
 categories:
   - Variant Analysis
-description: Annotate M. tuberculosis VCF files with information from Combat TB Explorer
+description: Annotate M.tuberculosis VCF file(s) with information from Combat-TB-NeoDB
 long_description: |
-  Annotate M. tuberculosis VCF files from SnpEff with information from Combat TB Explorer
+  Annotate SnpEff generated M.tuberculosis VCF file(s) with information from Combat-TB-NeoDB
 name: tbvcfreport
 owner: sanbi-uwc
 remote_repository_url: https://github.com/COMBAT-TB/tbvcfreport/tree/master/galaxy
