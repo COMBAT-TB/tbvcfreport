@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy0">
+<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy1">
   <description>Annotate SnpEff VCF with links to Combat TB Explorer database</description>
   <macros>
     <token name="@TOOL_VERSION@">0.1.2</token>
@@ -9,22 +9,39 @@
   </requirements>
   <command detect_errors="exit_code">
     <![CDATA[
-    ln -s '$input_vcf' data.vcf &&
+    #if str($database.use_neodb) == "no"
+        export DATABASE_URI="${database.database_uri}" &&
+    #end if
+        
+    ln -s "${input_vcf}" "${input_vcf.element_identifier}" &&
+    
+    #set vcf_name = os.path.splitext(os.path.basename($input_vcf.element_identifier))[0]
+    
     tbvcfreport generate
     #if str($tbprofiler.use_tbp) == "yes"
-        --tbprofiler_report '$tbprofiler_json'
+        --tbprofiler_report "${tbprofiler_json}"
     #end if
-    data.vcf &&
-    mv data_variants_report.html '$output' &&
-    mv data_variants_report.txt '$txt_output'
+    "${input_vcf.element_identifier}" &&
+
+    #set variants_report = str(vcf_name) + "_variants_report"
+    #set html_variants_report = variants_report + ".html"
+    #set txt_variants_report = variants_report + ".txt"
+
+    mv "${html_variants_report}" "$variants_report_html" &&
+    mv "${txt_variants_report}" "$variants_report_txt"
+
     #if str($tbprofiler.use_tbp) == "yes"
-        && mv data_drug_resistance_report.html '$drug_resistance_report'
-        && mv data_drug_resistance_report.txt '$drug_resistance_report_txt'
+        #set drug_resistance_report = str(vcf_name) + "_drug_resistance_report"
+        #set html_drug_resistance_report = drug_resistance_report + ".html"
+        #set txt_drug_resistance_report = drug_resistance_report + ".txt"
+        
+        && mv ${html_drug_resistance_report} "$drug_resistance_report_html"
+        && mv ${txt_drug_resistance_report} "$drug_resistance_report_txt"
     #end if
     ]]>
   </command>
   <inputs>
-    <param name="input_vcf" type="data" format="vcf" label="Input VCF (with SnpEff annotation)" />
+    <param name="input_vcf" type="data" format="vcf" label="Input SnpEff annotated VCF" />
     <conditional name="tbprofiler">
       <param name="use_tbp" type="select" label="Use TBProfiler drug resistance report">
         <option value="yes" selected="true">Yes</option>
@@ -35,11 +52,21 @@
         <param name="tbprofiler_json" type="data" format="json" label="TBProfiler (JSON) resistance report" />
       </when>
     </conditional>
+    <conditional name="database">
+      <param name="use_neodb" type="select" label="Use default Combat-TB-NeoDB database">
+        <option value="yes" selected="true">Yes</option>
+        <option value="no">No</option>
+      </param>
+      <when value="yes"></when>
+      <when value="no">
+        <param name="database_uri" type="text" value="localhost" label="Specify database URI" />
+      </when>
+    </conditional>
   </inputs>
   <outputs>
-    <data name="output" format="html" label="${tool.name} variants report on ${on_string}" />
-    <data name="txt_output" format="txt" label="${tool.name} variants report on ${on_string}" />
-    <data name="drug_resistance_report" format="html" label="${tool.name} drug resistance report on ${on_string}">
+    <data name="variants_report_html" format="html" label="${tool.name} variants report on ${on_string}" />
+    <data name="variants_report_txt" format="txt" label="${tool.name} variants report on ${on_string}" />
+    <data name="drug_resistance_report_html" format="html" label="${tool.name} drug resistance report on ${on_string}">
       <filter>tbprofiler['use_tbp'] == "yes"</filter>
     </data>
     <data name="drug_resistance_report_txt" format="txt" label="${tool.name} drug resistance report on ${on_string}">
@@ -50,23 +77,22 @@
     <test>
       <param name="input_vcf" value="rif_resistant.vcf" ftype="vcf" />
       <param name="use_tbp" value="no" />
-      <output name="output" compare="diff" lines_diff="2" file="rif_resistant_variants_report.html" ftype="html" />
-      <output name="txt_output" compare="diff" lines_diff="2" file="rif_resistant_variants_report.txt" ftype="txt" />
+      <output name="variants_report_html" compare="diff" lines_diff="2" file="rif_resistant_variants_report.html" ftype="html" />
+      <output name="variants_report_txt" compare="diff" lines_diff="2" file="rif_resistant_variants_report.txt" ftype="txt" />
     </test>
     <test>
       <param name="input_vcf" value="rif_resistant.vcf" ftype="vcf" />
       <param name="use_tbp" value="yes" />
       <param name="tbprofiler_json" value="rif_resistant.results.json" ftype="json" />
-      <output name="output" compare="diff" lines_diff="2" file="rif_resistant_variants_report.html" ftype="html" />
-      <output name="txt_output" compare="diff" lines_diff="2" file="rif_resistant_variants_report.txt" ftype="txt" />
-      <output name="drug_resistance_report" file="rif_resistant_drug_resistance_report.html" lines_diff="2" ftype="html" />
+      <output name="variants_report_html" compare="diff" lines_diff="2" file="rif_resistant_variants_report.html" ftype="html" />
+      <output name="variants_report_txt" compare="diff" lines_diff="2" file="rif_resistant_variants_report.txt" ftype="txt" />
+      <output name="drug_resistance_report_html" file="rif_resistant_drug_resistance_report.html" lines_diff="2" ftype="html" />
       <output name="drug_resistance_report_txt" compare="diff" lines_diff="2" file="rif_resistant_drug_resistance_report.txt" ftype="txt" />
     </test>
   </tests>
   <help>
     <![CDATA[
-    This tool generates an HTML-based VCF report from an input SnpEff VCF file.
-    The input has to be a SnpEff generated VCF file.
+    This tool generates an interactive HTML-based VCF report from a SnpEff annotated VCF file.
     ]]>
   </help>
   <citations>
