@@ -3,8 +3,7 @@
 [![Build Status](https://travis-ci.org/COMBAT-TB/tbvcfreport.svg?branch=master)](https://travis-ci.org/COMBAT-TB/tbvcfreport)
 [![Anaconda-Server Badge](https://anaconda.org/thoba/tbvcfreport/badges/version.svg)](https://anaconda.org/thoba/tbvcfreport)
 
-A tool to generate an HTML report from SnpEff produced vcf files with links to the
-Combat TB Explorer database.
+A tool to generate an interactive HTML-based report from SnpEff annotated VCF file(s) with links to the Combat-TB-Explorer.
 
 ![test-report-img](https://raw.githubusercontent.com/COMBAT-TB/tbvcfreport/master/img/test-report.png)
 
@@ -51,6 +50,8 @@ This will generate a `{vcf-file-name}.html` file in the current working director
 
 :construction:
 
-We have also incorporated `tbvcfreport` in [galaxy](https://github.com/galaxyproject) (testtoolshed).
+We have also added `tbvcfreport` to the [Galaxy](https://github.com/galaxyproject) [Test Tool Shed](https://testtoolshed.g2.bx.psu.edu/repository?repository_id=0f42e4f01e64b182).
+
+Kindly see [`this repository`](https://testtoolshed.g2.bx.psu.edu/repository?repository_id=0f42e4f01e64b182) for the latest revision.
 
 ![Galaxy-tbvcfreport](https://raw.githubusercontent.com/COMBAT-TB/tbvcfreport/master/img/tbvcfreport.png)
