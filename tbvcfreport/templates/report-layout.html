@@ -24,16 +24,16 @@
                 <td>{{ item[16] or "NA" }}</td>
                 <td>{{ item[3] or "NA" }}</td>
                 <td>
-                    <a target="_blank" href="http://combattb.sanbi.ac.za/gene?q={{ item[4] }}">{{ item[4] }}</a>
+                    <a target="_blank" href="https://explorer.sanbi.ac.za/gene?q={{ item[4] }}">{{ item[4] }}</a>
                 </td>
                 <td>
                     {% if item[21]['protein'] %}
                     <a target="_blank"
-                        href="http://combattb.sanbi.ac.za/search?q={{ item[21]['protein']['uniquename'] }}">{{
+                        href="https://explorer.sanbi.ac.za/search?q={{ item[21]['protein']['uniquename'] }}">{{
             item[21]['protein']['uniquename'] }}</a>
 
                     <!-- <p class="small">{{ item[21]['protein']['uniquename'] }}</p> -->
-                    <!-- http://combattb.sanbi.ac.za/search?&q=P9WNU1 -->
+                    <!-- https://explorer.sanbi.ac.za/search?&q=P9WNU1 -->
                     {% else %}
                     <p>{{ "NA" }}</p>
                     {% endif %}
@@ -42,7 +42,7 @@
                 <td>{{ item[1] or "NA" }}</td>
                 <td>
                     <a target="_blank"
-                        href="http://combattb.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[20] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[20] }}">{{
+                        href="https://explorer.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[20] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[20] }}">{{
             item[17] }}</a>
                 </td>
                 <td>{{ item[18] or "NA" }}</td>
