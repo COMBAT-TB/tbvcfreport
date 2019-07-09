@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy1">
-  <description>Annotate SnpEff VCF with links to Combat TB Explorer database</description>
+<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy2">
+  <description>- annotate SnpEff VCF(s) with links to Combat-TB eXplorer</description>
   <macros>
     <token name="@TOOL_VERSION@">0.1.3</token>
   </macros>
@@ -12,16 +12,17 @@
     #if str($database.use_neodb) == "no"
         export DATABASE_URI="${database.database_uri}" &&
     #end if
-        
-    ln -s "${input_vcf}" "${input_vcf.element_identifier}" &&
     
-    #set vcf_name = os.path.splitext(os.path.basename($input_vcf.element_identifier))[0]
+    #set $input_vcf_filename = "data.vcf"
+    ln -s "${input_vcf}" "${input_vcf_filename}" &&
+    
+    #set vcf_name = os.path.splitext(os.path.basename($input_vcf_filename))[0]
     
     tbvcfreport generate
     #if str($tbprofiler.use_tbp) == "yes"
         --tbprofiler_report "${tbprofiler_json}"
     #end if
-    "${input_vcf.element_identifier}" &&
+    "${input_vcf_filename}" &&
 
     #set variants_report = str(vcf_name) + "_variants_report"
     #set html_variants_report = variants_report + ".html"
@@ -53,7 +54,7 @@
       </when>
     </conditional>
     <conditional name="database">
-      <param name="use_neodb" type="select" label="Use default Combat-TB-NeoDB database">
+      <param name="use_neodb" type="select" label="Use default Combat-TB-NeoDB database (https://neodb.sanbi.ac.za)">
         <option value="yes" selected="true">Yes</option>
         <option value="no">No</option>
       </param>
@@ -64,12 +65,12 @@
     </conditional>
   </inputs>
   <outputs>
-    <data name="variants_report_html" format="html" label="${tool.name} variants report on ${on_string}" />
-    <data name="variants_report_txt" format="txt" label="${tool.name} variants report on ${on_string}" />
-    <data name="drug_resistance_report_html" format="html" label="${tool.name} drug resistance report on ${on_string}">
+    <data name="variants_report_html" format="html" label="${tool.name} variants report (html) on ${on_string}" />
+    <data name="variants_report_txt" format="txt" label="${tool.name} variants report (text) on ${on_string}" />
+    <data name="drug_resistance_report_html" format="html" label="${tool.name} drug resistance report (html) on ${on_string}">
       <filter>tbprofiler['use_tbp'] == "yes"</filter>
     </data>
-    <data name="drug_resistance_report_txt" format="txt" label="${tool.name} drug resistance report on ${on_string}">
+    <data name="drug_resistance_report_txt" format="txt" label="${tool.name} drug resistance report (text) on ${on_string}">
       <filter>tbprofiler['use_tbp'] == "yes"</filter>
     </data>
   </outputs>
