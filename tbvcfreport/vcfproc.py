@@ -81,6 +81,7 @@ class VCFProc(object):
 
     @staticmethod
     def gene_info_to_dict(gene_info):
+        """Gene info to dictionary"""
         # gene_info is a list of dictionaries, with
         # each dictionary having keys 'gene', 'protein' and 'pathway'
         info_dict = {}
