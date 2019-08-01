@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% block content %}
+{% if data['variants'] %}
 <div class="row justify-content-center align-items-center">
     <table id="vcfreport" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">
         <thead class="thead-light">
@@ -24,16 +25,17 @@
                 <td>{{ item[16] or "NA" }}</td>
                 <td>{{ item[3] or "NA" }}</td>
                 <td>
-                    <a target="_blank" href="https://explorer.sanbi.ac.za/gene?q={{ item[4] }}">{{ item[4] }}</a>
+                    {% if 'intergenic' in item[1] %}
+                    <p>{{ item[4] }}</p>
+                    {%else%}
+                    <a href="https://explorer.sanbi.ac.za/gene?q={{ item[4] }}" target="_blank"
+                        rel="noreferrer noopener">{{ item[4] }}</a>
+                    {% endif %}
                 </td>
                 <td>
                     {% if item[21]['protein'] %}
-                    <a target="_blank"
-                        href="https://explorer.sanbi.ac.za/search?q={{ item[21]['protein']['uniquename'] }}">{{
-            item[21]['protein']['uniquename'] }}</a>
-
-                    <!-- <p class="small">{{ item[21]['protein']['uniquename'] }}</p> -->
-                    <!-- https://explorer.sanbi.ac.za/search?&q=P9WNU1 -->
+                    <a href="https://explorer.sanbi.ac.za/search?q={{ item[21]['protein']['uniquename'] }}"
+                        target="_blank" rel="noreferrer noopener">{{ item[21]['protein']['uniquename'] }}</a>
                     {% else %}
                     <p>{{ "NA" }}</p>
                     {% endif %}
@@ -41,9 +43,8 @@
                 <td>{{ item[19] or "NA" }}</td>
                 <td>{{ item[1] or "NA" }}</td>
                 <td>
-                    <a target="_blank"
-                        href="https://explorer.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[20] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[20] }}">{{
-            item[17] }}</a>
+                    <a href="https://explorer.sanbi.ac.za/jbrowse/?loc=NC_000962.3%3A{{ item[20] }}&tracks=DNA%2CGenes&highlight=NC_000962.3%3A{{ item[20] }}"
+                        target="_blank" rel="noreferrer noopener">{{ item[17] }}</a>
                 </td>
                 <td>{{ item[18] or "NA" }}</td>
                 <td>{{ item[0] or "NA" }}</td>
@@ -57,7 +58,8 @@
                     {% set url = "https://reactome.org/content/detail/" %} {% endif %}
                     <p>
                         <small>
-                            <a href="{{ url }}{{ pathway['accession'] }}" target="_blank">{{ pathway['name'] }}</a>
+                            <a href="{{ url }}{{ pathway['accession'] }}" target="_blank"
+                                rel="noreferrer noopener">{{ pathway['name'] }}</a>
                         </small>
                     </p>
                     {% endfor %} {% else %}
@@ -88,5 +90,11 @@
 </main>
 <div class="mt-5">
 </div>
-
+{% else %}
+<div>
+    <p>No variant data was found for this VCF file. Is it a <a href="http://snpeff.sourceforge.net/SnpEff_manual.html"
+            target="_blank" rel="noreferrer noopener">SnpEff</a> annotated VCF file?</p>
+    <p>Kindly check if the '<strong>ANN</strong>' field is present.</p>
+</div>
+{% endif %}
 {% endblock %}

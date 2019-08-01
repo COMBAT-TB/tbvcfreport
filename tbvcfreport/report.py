@@ -1,6 +1,4 @@
-"""
-Interface to Jinja
-"""
+"""Interface to Jinja."""
 import os
 
 from jinja2 import Environment, FileSystemLoader
@@ -12,8 +10,8 @@ jinja_env = Environment(loader=FileSystemLoader(
 
 
 def render_template(template, data):
-    """
-    Render HTML template
+    """Render HTML template.
+
     :param template:
     :param data:
     :return:
@@ -22,8 +20,8 @@ def render_template(template, data):
 
 
 def generate_report(file_name, data):
-    """
-    Write and render HTML report
+    """Write and render HTML report.
+
     :param file_name:
     :param data:
     :return:
@@ -35,7 +33,6 @@ def generate_report(file_name, data):
             'file_name': file_name,
             'data': data,
         }
-
         # variants report
         output = '{file_name}_variants_report.html'.format(file_name=file_name)
         html = render_template('report-layout.html', context)
@@ -54,7 +51,12 @@ def generate_report(file_name, data):
 
 
 def generate_txt_report(file_name, data):
+    """Generate text reports.
 
+    :param file_name:
+    :param data:
+    :return:
+    """
     v_txt_output = '{file_name}_variants_report.txt'.format(
         file_name=file_name)
 
@@ -70,7 +72,6 @@ def generate_txt_report(file_name, data):
                        'ANNOTATION', 'POS', 'REF', 'ALT', 'CONSEQUENCE',
                        'IMPACT', 'PATHAWAY']
     snp_data = data.get('variants')
-    print(snp_data)
     variants = [
         [
             s[16], s[3], s[4],

@@ -1,8 +1,6 @@
-"""
-Interface to CLI
-"""
+"""Interface to CLI."""
+
 import json
-import logging
 import os
 import sys
 
@@ -16,17 +14,18 @@ except ImportError:
     from report import generate_report
     from vcfproc import VCFProc
 
-log = logging.getLogger(__name__)
-
 
 def check_vcf(vcf_file):
-    """
-    Check vcf file for emptiness
+    """Check vcf file for emptiness.
+
     :param vcf_file:
     :return:
     """
     _file = False
-    if os.stat(vcf_file).st_size > 0:
+    if not vcf_file.endswith(".vcf"):
+        click.echo(click.style(
+            f"{vcf_file} is not a VCF file!\n", fg='red', bold=True))
+    elif os.stat(vcf_file).st_size > 0 and vcf_file.endswith(".vcf"):
         _file = True
     else:
         sys.stderr.write(f"{vcf_file} is empty!\n")
@@ -35,9 +34,7 @@ def check_vcf(vcf_file):
 
 @click.group()
 def cli():
-    """
-    tbvcfreport is a command line tool that generates an HTML-based VCF report from SnpEff annotated VCF file(s).
-    """
+    """Generate an HTML-based VCF report from SnpEff annotated VCF file(s)."""
     pass
 
 
@@ -45,20 +42,18 @@ def cli():
 @click.option('--tbprofiler_report', type=click.File())
 @click.argument('vcf_dir', type=click.Path(exists=True))
 def generate(vcf_dir, tbprofiler_report=None):
-    """
-    Generate report from VCF file(s) in VCF_DIR.
-    :param vcf_dir:
-    :param tbprofiler_report:
-    :return:
-    """
+    """Generate an interactive HTML-based report."""
     if os.path.isdir(vcf_dir):
         for root, dirs, files in os.walk(vcf_dir):
             if len(os.listdir(vcf_dir)) == 0:
-                log.error(f'{vcf_dir} is empty!\n')
+                click.echo(click.style(
+                    f"{vcf_dir} is empty!\n", fg='red', bold=True))
             for vcf_file in files:
                 (base, ext) = os.path.splitext(vcf_file)
                 vcf_file = os.path.join(os.path.abspath(vcf_dir), vcf_file)
                 if check_vcf(vcf_file):
+                    click.echo(click.style(
+                        f"Processing {vcf_file}...\n", fg='green', bold=True))
                     file_name = vcf_file.split('/')[-1].split('.')[0]
                     # TODO: refactor to remove this code duplication
                     lineage_parser = snpit(input_file=vcf_file)
@@ -76,16 +71,16 @@ def generate(vcf_dir, tbprofiler_report=None):
                         if POS >= rrs_start and POS <= rrs_end:
                             rrs_variant_count += 1
                         call_positions.add(POS)
-                generate_report(file_name=file_name, data={
-                    'variants': variants,
-                    'lineage': {
-                        'species': species,
-                        'lineage': lineage,
-                        'sublineage': sublineage,
-                        'percent_agreement': percent_agreement
-                    },
-                    'mixed_infection': False})
-                # TODO: support generating drug resistance reports for "directory mode"
+                    generate_report(file_name=file_name, data={
+                        'variants': variants,
+                        'lineage': {
+                            'species': species,
+                            'lineage': lineage,
+                            'sublineage': sublineage,
+                            'percent_agreement': percent_agreement
+                        },
+                        'mixed_infection': False})
+                # TODO: support generating DR reports for "directory mode"
 
     elif os.path.isfile(vcf_dir):
         vcf_file = os.path.abspath(vcf_dir)
@@ -111,10 +106,13 @@ def generate(vcf_dir, tbprofiler_report=None):
             tbprofiler_data = json.load(tbprofiler_report)
             dr_data = tbprofiler_data['dr_variants']
 
-            drug_list = ['isoniazid', 'rifampicin', 'ethambutol', 'pyrazinamide', 'streptomycin',
-                         'ethionamide', 'fluoroquinolones', 'amikacin', 'capreomycin', 'kanamycin',
-                         'para-aminosalicylic_acid', 'cycloserine', 'delaminid',
-                         'linezolid', 'clofazimine', 'bedaquiline']
+            drug_list = ['isoniazid', 'rifampicin', 'ethambutol',
+                         'pyrazinamide', 'streptomycin', 'ethionamide',
+                         'fluoroquinolones', 'amikacin', 'capreomycin',
+                         'kanamycin', 'para-aminosalicylic_acid',
+                         'cycloserine', 'delaminid', 'linezolid',
+                         'clofazimine', 'bedaquiline'
+                         ]
             drug_names = {
                 'isoniazid': 'Isoniazid',
                 'rifampicin': 'Rifampicin',
@@ -151,8 +149,9 @@ def generate(vcf_dir, tbprofiler_report=None):
                     'snippy_agreement': True, 'variants': []})
                 if record['genome_pos'] not in call_positions:
                     dr_record['snippy_agreement'] = False
-                dr_record['variants'].append(
-                    (record['gene'], record['change'], round(record['freq'], 2)))
+                dr_record['variants'].append((
+                    record['gene'], record['change'], round(record['freq'], 2)
+                ))
                 drug_resistance[drug_name] = dr_record
             drug_resistance_list = []
             for drug_name in drug_names:
@@ -176,7 +175,8 @@ def generate(vcf_dir, tbprofiler_report=None):
             'dr_data': drug_resistance_list,
             'mixed_infection': rrs_variant_count > 1})
     else:
-        log.error(f"Can't generate report for {vcf_dir}!")
+        click.echo(click.style(
+            f"Can't generate report for {vcf_dir}!\n", fg='red', bold=True))
 
 
 if __name__ == '__main__':

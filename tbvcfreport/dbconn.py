@@ -1,6 +1,4 @@
-"""
-Interface to Graph Database
-"""
+"""Interface to Graph Database."""
 import os
 
 from py2neo import Graph
@@ -13,14 +11,11 @@ graph = Graph(host=DB_HOST, password="", secure=SECURE)
 
 
 def get_gene_data(q):
-    """
-    Query DB
+    """Query DB.
+
     :param q:
     :return:
     """
-    # WHERE g.uniquename IN {q}
-    # where_statement = "WHERE gene.name =~'(?i){0}.*' \
-    # OR gene.uniquename=~'gene:(?i){0}.*'".format(q)
     where_statement = "WHERE gene.uniquename='{0}'".format(q)
     try:
         data = graph.run(
@@ -40,8 +35,8 @@ def get_gene_data(q):
 
 
 def query_by_gene_list(genes):
-    """
-    Query DB
+    """Query DB.
+
     :param genes: list
     :return:
     """

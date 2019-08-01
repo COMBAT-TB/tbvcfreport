@@ -1,10 +1,16 @@
 {% extends "base.html" %} {% block content %}
 {%  if 'dr_data' in data and data['dr_data'] %}
 <div class="row">
-    <h5>TBProfiler drug resistance report<sup><a href="#tbprofiler">1</a></sup></h5>
+    <h5><a href="https://github.com/jodyphelan/TBProfiler" target="_blank" rel="noreferrer noopener">TBProfiler</a>
+        Drug Resistance Report
+    </h5>
 </div>
 <div class="row">
-    <table id="drug_resistance" class="table table-bordered table-striped table-sm" cellspacing="0">
+    <table id="drug_resistance" class="table table-hover table-bordered table-striped table-sm" cellspacing="0">
+        <caption>
+            Drug resistance predictions are for research purposes only and are produced by
+            <a href="https://github.com/jodyphelan/TBProfiler" target="_blank" rel="noreferrer noopener">TBProfiler</a>.
+        </caption>
         <thead class="thead-light">
             <tr>
                 <th scope="col">Drug</th>
@@ -16,15 +22,14 @@
         <tr>
             <td>{{ entry['drug_human_name'] }}</td>
             <td>{% if entry['resistant'] %}R{% else %}S{% endif %}</td>
-            <td>{% for mutation in entry['variants'] %}{{ mutation[0] }} ({{ mutation[2] }} {{ mutation[1] }})
+            <td>{% for mutation in entry['variants'] %}
+                <a target="_blank" href="https://explorer.sanbi.ac.za/gene?q={{ mutation[0] }}"
+                    rel="noreferrer noopener">{{ mutation[0] }}</a>
+                ({{ mutation[2] }} {{ mutation[1] }})
                 {% endfor %}</td>
         </tr>
         {%  endfor %}
     </table>
-</div>
-<div class="row">
-    <span><a name="tbprofiler">1.</a> Drug resistance predictions are for research purposes only
-        and are produced by the <a href="https://github.com/jodyphelan/TBProfiler">TBProfiler</a> software.</span>
 </div>
 {%  endif %}
 {% endblock %}
