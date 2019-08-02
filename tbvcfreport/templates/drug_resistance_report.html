@@ -1,15 +1,19 @@
 {% extends "base.html" %} {% block content %}
 {%  if 'dr_data' in data and data['dr_data'] %}
 <div class="row">
-    <h5><a href="https://github.com/jodyphelan/TBProfiler" target="_blank" rel="noreferrer noopener">TBProfiler</a>
+    <h3 class="mb-2">
+        <a class="text-body" href="https://github.com/jodyphelan/TBProfiler" target="_blank"
+            rel="noreferrer noopener">TBProfiler</a>
         Drug Resistance Report
-    </h5>
+    </h3>
 </div>
 <div class="row">
     <table id="drug_resistance" class="table table-hover table-bordered table-striped table-sm" cellspacing="0">
-        <caption>
-            Drug resistance predictions are for research purposes only and are produced by
-            <a href="https://github.com/jodyphelan/TBProfiler" target="_blank" rel="noreferrer noopener">TBProfiler</a>.
+        <caption class="mb-3 text-info">
+            <strong>Disclaimer</strong>:
+            Drug resistance predictions are for <strong>Research Purposes Only</strong> and are produced by
+            <a class="text-info" href="https://github.com/jodyphelan/TBProfiler" target="_blank"
+                rel="noreferrer noopener">TBProfiler</a>.
         </caption>
         <thead class="thead-light">
             <tr>

@@ -1,7 +1,6 @@
 {% set version = "0.1.4" %}
 {% set sha256 = "66af28b34732d21637f607014ba480eb5b337156d41d5c5c0eaafaec6baee0b2" %}
 {% set py2neo = "4.2.0" %}
-{% set pyvcf = "0.6.8" %}
 
 package:
   name: tbvcfreport
@@ -23,14 +22,14 @@ requirements:
     - click
     - jinja2
     - py2neo {{ py2neo }}
-    - pyvcf {{ pyvcf }}
+    - pyvcf
     - tqdm
   run:
     - python
     - click
     - jinja2
     - py2neo {{ py2neo }}
-    - pyvcf {{ pyvcf }}
+    - pyvcf
     - tqdm
     - mtb-snp-it
 

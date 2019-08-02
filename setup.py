@@ -28,7 +28,7 @@ setup(
         'snpit',
     ],
     dependency_links=[
-        'git+https://github.com/samlipworth/snpit.git@V1.1#egg=snpit',
+        'git+https://github.com/samlipworth/snpit.git@c531cb1eec640dfb5e66b6940a95284e5b900936#egg=snpit',
     ],
     entry_points={
         'console_scripts': ['tbvcfreport=tbvcfreport.tbvcfreport:cli']
