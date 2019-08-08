@@ -2,7 +2,7 @@
 <tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy0">
   <description>- annotate SnpEff VCF(s) with links to Combat-TB eXplorer</description>
   <macros>
-    <token name="@TOOL_VERSION@">0.1.4</token>
+    <token name="@TOOL_VERSION@">0.1.5</token>
   </macros>
   <requirements>
     <requirement type="package" version="@TOOL_VERSION@">tbvcfreport</requirement>
