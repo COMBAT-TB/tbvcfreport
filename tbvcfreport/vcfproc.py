@@ -29,8 +29,7 @@ class VCFProc(object):
                         gene_identifier = annotation[4]
                         rv_tags.append(gene_identifier)
         rv_tags = list(set(rv_tags))
-        gene_info = self.gene_info_to_dict(
-            query_by_gene_list(list(set(rv_tags))))
+        gene_info = self.gene_info_to_dict(query_by_gene_list(rv_tags))
         with open(self.vcf_file) as _vcf:
             vcf_reader = vcf.Reader(_vcf)
             for i, record in enumerate(vcf_reader):
