@@ -11,7 +11,7 @@ except ImportError:
 class VCFProc(object):
     """Process VCF File."""
 
-    def __init__(self, vcf_file, filter_udi):
+    def __init__(self, vcf_file, filter_udi=None):
         self.vcf_file = vcf_file
         self.filter_udi = filter_udi
 
