@@ -1,5 +1,5 @@
-{% set version = "0.1.5" %}
-{% set sha256 = "0517db5c37e9a110491626623f36c7d03a004818339deeb79df1049bd133d26a" %}
+{% set version = "0.1.6" %}
+{% set sha256 = "40ed1408b8851f160fdd7514116bcf3368dc91913cb39c2f95332557686ed5eb" %}
 {% set py2neo = "4.2.0" %}
 
 package:
@@ -42,5 +42,5 @@ test:
 about:
   home: https://github.com/COMBAT-TB/tbvcfreport
   license_file: LICENSE
-  summary: 'Builds an HTML based report on SnpEff generated M. tuberculosis variant file'
+  summary: 'Generates an interactive HTML report on SnpEff annotated M.tb VCF(s)'
   dev_url: https://github.com/COMBAT-TB/tbvcfreport
