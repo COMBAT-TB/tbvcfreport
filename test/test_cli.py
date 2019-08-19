@@ -18,10 +18,7 @@ def cli_runner():
 
 
 def test_check_vcf():
-    """
-    Test check_vcf
-    :return:
-    """
+    """Test check_vcf."""
     assert check_vcf(TEST_VCF) is True
 
 
@@ -34,7 +31,7 @@ def test_generate(cli_runner):
 def test_generate_dr_report(cli_runner):
     result = cli_runner.invoke(
         generate,
-        ["--tbprofiler_report",
+        ["--tbprofiler-report",
          os.path.join(GALAXY_TEST_DATA, "rif_resistant.results.json"),
          os.path.join(GALAXY_TEST_DATA, "rif_resistant.vcf")
          ]

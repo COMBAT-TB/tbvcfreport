@@ -14,3 +14,8 @@ def vcf_proc():
 def test_parse(vcf_proc):
     result = vcf_proc.parse()
     assert isinstance(result, list) is True
+
+
+def test_lineage(vcf_proc):
+    result = vcf_proc.find_lineage()
+    assert isinstance(result, tuple) is True

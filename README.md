@@ -5,7 +5,7 @@
 
 A tool to generate an interactive HTML-based report from SnpEff annotated VCF file(s) with links to the Combat-TB-Explorer.
 
-![test-report-img](https://raw.githubusercontent.com/COMBAT-TB/tbvcfreport/master/img/test-report.png)
+![test-report-img](img/test-report.png)
 
 ## Usage
 
@@ -18,12 +18,14 @@ A tool to generate an interactive HTML-based report from SnpEff annotated VCF fi
 
 ### Installation
 
+#### Using `pip`
+
 ```sh
 $ pip install -i https://test.pypi.org/simple/ tbvcfreport
 ...
 ```
 
-**OR**
+#### From source
 
 ```sh
 $ git clone https://github.com/COMBAT-TB/tbvcfreport.git
@@ -41,7 +43,35 @@ $ pip install -e .
 $ tbvcfreport --help
 Usage: tbvcfreport [OPTIONS] COMMAND [ARGS]...
 
-$ tbvcfreport generate VCF/DIR/
+  Generate an HTML-based VCF report from SnpEff annotated VCF file(s).
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  generate  Generate an interactive HTML-based VCF report.
+
+```
+
+```sh
+$ tbvcfreport generate --help
+Usage: tbvcfreport generate [OPTIONS] VCF_DIR
+
+  Generate an interactive HTML-based VCF report.
+
+Options:
+  -t, --tbprofiler-report FILENAME
+                                  TBProfiler json report.
+  -f, --filter-udi / -nf, --no-filter-udi
+                                  Filter upstream, downstream and intergenic
+                                  variants.  [default: True]
+  --help                          Show this message and exit.
+
+```
+
+```sh
+$ tbvcfreport generate VCF_DIR/
+Processing...
 ```
 
 This will generate a `{vcf-file-name}.html` file in the current working directory (`pwd`).
@@ -54,4 +84,4 @@ We have also added `tbvcfreport` to the [Galaxy](https://github.com/galaxyprojec
 
 Kindly see [`this repository`](https://testtoolshed.g2.bx.psu.edu/repository?repository_id=0f42e4f01e64b182) for the latest revision.
 
-![Galaxy-tbvcfreport](https://raw.githubusercontent.com/COMBAT-TB/tbvcfreport/master/img/tbvcfreport.png)
+![Galaxy-tbvcfreport](img/tbvcfreport.png)
