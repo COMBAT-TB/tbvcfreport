@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<tool id="tbvcfreport" name="M.tb VCF Report" version="@TOOL_VERSION@+galaxy0">
-  <description>- annotate SnpEff VCF(s) with links to Combat-TB eXplorer</description>
+<tool id="tbvcfreport" name="TB VCF Report" version="@TOOL_VERSION@+galaxy0">
+  <description>- generate interactive HTML report from M.tb SnpEff VCF(s)</description>
   <macros>
-    <token name="@TOOL_VERSION@">0.1.5</token>
+    <token name="@TOOL_VERSION@">0.1.6</token>
   </macros>
   <requirements>
     <requirement type="package" version="@TOOL_VERSION@">tbvcfreport</requirement>
@@ -19,8 +19,11 @@
     #set vcf_name = os.path.splitext(os.path.basename($input_vcf_filename))[0]
     
     tbvcfreport generate
+    #if str($variants.filter_udi) == "no"
+        --no-filter-udi
+    #end if
     #if str($tbprofiler.use_tbp) == "yes"
-        --tbprofiler_report "${tbprofiler_json}"
+        --tbprofiler-report "${tbprofiler_json}"
     #end if
     "${input_vcf_filename}" &&
 
@@ -45,13 +48,21 @@
     <param name="input_vcf" type="data" format="vcf" label="Input SnpEff annotated VCF" />
     <conditional name="tbprofiler">
       <param name="use_tbp" type="select" label="Use TBProfiler drug resistance report">
-        <option value="yes" selected="true">Yes</option>
-        <option value="no">No</option>
+        <option value="yes">Yes</option>
+        <option value="no" selected="true">No</option>
       </param>
       <when value="no"></when>
       <when value="yes">
         <param name="tbprofiler_json" type="data" format="json" label="TBProfiler (JSON) resistance report" />
       </when>
+    </conditional>
+    <conditional name="variants">
+      <param name="filter_udi" type="select" label="Filter upstream, downstream and intergenic variants">
+        <option value="yes" selected="true">Yes</option>
+        <option value="no">No</option>
+      </param>
+      <when value="yes"></when>
+      <when value="no"></when>
     </conditional>
     <conditional name="database">
       <param name="use_neodb" type="select" label="Use default Combat-TB-NeoDB database (https://neodb.sanbi.ac.za)">

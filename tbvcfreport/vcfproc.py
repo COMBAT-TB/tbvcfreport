@@ -1,5 +1,6 @@
 """Interface to handle VCF files."""
 import vcf
+from snpit import snpit
 
 try:
     from .dbconn import query_by_gene_list
@@ -10,10 +11,21 @@ except ImportError:
 class VCFProc(object):
     """Process VCF File."""
 
-    def __init__(self, vcf_file):
+    def __init__(self, vcf_file, filter_udi):
         self.vcf_file = vcf_file
+        self.filter_udi = filter_udi
+
+    def find_lineage(self):
+        """Find lineage."""
+        lineage_parser = snpit(input_file=self.vcf_file)
+        (species, lineage, sublineage,
+         percent_agreement) = lineage_parser.determine_lineage()
+        percent_agreement = round(percent_agreement)
+
+        return (species, lineage, sublineage, percent_agreement)
 
     def parse(self):
+        """Parse VCF."""
         variants, rv_tags = [], []
         with open(self.vcf_file) as _vcf:
             vcf_reader = vcf.Reader(_vcf)
@@ -22,9 +34,8 @@ class VCFProc(object):
                     annotations = self.get_variant_ann(record=record)
                     for annotation in annotations:
                         # TODO: make this kind of filtering optional
-                        if annotation[1] in ('upstream_gene_variant',
-                                             'downstream_gene_variant',
-                                             'intergenic_region'):
+                        effect = annotation[1]
+                        if self.filter_udi and self.filter_variants(effect):
                             continue
                         gene_identifier = annotation[4]
                         rv_tags.append(gene_identifier)
@@ -43,8 +54,8 @@ class VCFProc(object):
                     # each ANN. A variant can affect multiple genes
                     for annotation in annotations:
                         # TODO: make this kind of filtering optional
-                        if annotation[1] in ('upstream_gene_variant',
-                                             'downstream_gene_variant'):
+                        effect = annotation[1]
+                        if self.filter_udi and self.filter_variants(effect):
                             continue
                         gene_identifier = annotation[4]
                         variant_data = gene_info.get(gene_identifier,
@@ -57,6 +68,14 @@ class VCFProc(object):
                             variant_data])
                         variants.append(annotation)
         return variants
+
+    @staticmethod
+    def filter_variants(effect):
+        """Filter variants."""
+        _filter = True if effect in ('upstream_gene_variant',
+                                     'downstream_gene_variant',
+                                     'intergenic_region') else False
+        return _filter
 
     @staticmethod
     def gene_info_to_dict(gene_info):
@@ -73,10 +92,6 @@ class VCFProc(object):
 
     @staticmethod
     def get_variant_ann(record):
-        """Get Annotation from ANN.
-
-        :param record:
-        :return:
-        """
+        """Get Annotation from ANN."""
         annotations = [ann.split("|") for ann in record.INFO['ANN']]
         return annotations

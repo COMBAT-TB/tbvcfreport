@@ -53,7 +53,7 @@
                 <td>
                     {% if item[21]['pathway'] and item[21]['pathway']|length >= 1 %}
                     {% for pathway in item[21]['pathway'] %}
-                    {% if pathway['accession'].startswith("mtv") %}
+                    {% if pathway['accession'].startswith("mtu")%}
                     {% set url = "http://www.genome.jp/dbget-bin/www_bget?" %} {% else %}
                     {% set url = "https://reactome.org/content/detail/" %} {% endif %}
                     <p>
