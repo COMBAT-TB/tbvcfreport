@@ -1,14 +1,13 @@
 """Interface to handle VCF files."""
 import vcf
 from snpit import snpit
-
 try:
     from .dbconn import query_by_gene_list
 except ImportError:
     from dbconn import query_by_gene_list
 
 
-class VCFProc(object):
+class VCFProc:
     """Process VCF File."""
 
     def __init__(self, vcf_file, filter_udi=None):
@@ -72,10 +71,11 @@ class VCFProc(object):
     @staticmethod
     def filter_variants(effect):
         """Filter variants."""
-        _filter = True if effect in ('upstream_gene_variant',
-                                     'downstream_gene_variant',
-                                     'intergenic_region') else False
-        return _filter
+        if effect in ('upstream_gene_variant',
+                      'downstream_gene_variant',
+                      'intergenic_region'):
+            return True
+        return False
 
     @staticmethod
     def gene_info_to_dict(gene_info):

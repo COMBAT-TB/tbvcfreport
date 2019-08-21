@@ -20,15 +20,15 @@ def check_vcf(vcf_file):
     :param vcf_file:
     :return:
     """
-    _file = False
     file_name = vcf_file.split('/')[-1]
-    if not vcf_file.endswith(".vcf"):
-        click.secho(f"{file_name} is not a VCF file!\n", fg='red')
-    elif os.stat(vcf_file).st_size > 0 and vcf_file.endswith(".vcf"):
-        _file = True
+    if os.stat(vcf_file).st_size > 0 and vcf_file.endswith(".vcf"):
+        return True
     else:
-        click.secho(f"{file_name} is empty!\n", fg='red')
-    return _file
+        if not vcf_file.endswith(".vcf"):
+            raise TypeError(f"Only VCF files are allowed. Found {file_name}!")
+        else:
+            raise OSError(f"VCF file: {file_name} is empty!")
+    return False
 
 
 def parse_and_generate_report(vcf_file, tbprofiler_report, filter_udi):
@@ -79,7 +79,6 @@ def generate(vcf_dir, tbprofiler_report, filter_udi):
             if len(os.listdir(vcf_dir)) == 0:
                 click.secho(f"{vcf_dir} is empty!\n", fg='red')
             for vcf_file in files:
-                (base, ext) = os.path.splitext(vcf_file)
                 vcf_file = os.path.join(os.path.abspath(vcf_dir), vcf_file)
                 if check_vcf(vcf_file):
                     parse_and_generate_report(vcf_file, tbprofiler_report,
