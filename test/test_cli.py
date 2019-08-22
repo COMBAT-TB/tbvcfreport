@@ -6,9 +6,9 @@ from click.testing import CliRunner
 from tbvcfreport.tbvcfreport import check_vcf, generate
 
 CURR_DIR = os.path.dirname(os.path.abspath(__file__))
-TEST_VCF_DIR = os.path.join(CURR_DIR, "test_data/")
-TEST_VCF = os.path.join(CURR_DIR, "test_data/test.vcf")
-EMPTY_VCF = os.path.join(CURR_DIR, "test_data/empty.vcf")
+TEST_DATA_DIR = os.path.join(CURR_DIR, "test_data/")
+TEST_VCF = os.path.join(TEST_DATA_DIR, "test.vcf")
+EMPTY_VCF = os.path.join(TEST_DATA_DIR, "empty.vcf")
 GALAXY_TEST_DATA = os.path.join(os.path.dirname(CURR_DIR), "galaxy/test-data/")
 OUT_DIR = os.path.dirname(CURR_DIR)
 OUT_TXT_FILE = os.path.join(OUT_DIR, "test_variants_report.txt")
@@ -63,3 +63,8 @@ def test_generate_dr_report(cli_runner):
          ]
     )
     assert result.exit_code == 0
+
+
+def test_output():
+    assert 'p.Ile245Thr' in open(OUT_TXT_FILE).read()
+    assert 'p.Ile245Thr' in open(OUT_HTML_FILE).read()

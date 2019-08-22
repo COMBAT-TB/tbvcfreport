@@ -66,8 +66,6 @@ def generate_txt_report(file_name, data):
                      data['lineage'].get('lineage', ''),
                      data['lineage'].get('sublineage', ''), agreement]
                     ]
-    # pdf tables required nested lists
-    # lineage_data.insert(0, lineage_header)
     variants_header = ['CHR', 'GENE', 'IDENTIFIER', 'PRODUCT', 'TYPE',
                        'ANNOTATION', 'POS', 'REF', 'ALT', 'CONSEQUENCE',
                        'IMPACT', 'PATHAWAY']
@@ -82,10 +80,8 @@ def generate_txt_report(file_name, data):
         ]
         for s in snp_data
     ]
-    # pdf tables required nested lists
-    # variants.insert(0, variants_header)
     with open(v_txt_output, 'w') as _variants_report:
-        _variants_report.write("#{} Report\n".format(file_name))
+        _variants_report.write("#{} Report\n".format(file_name.capitalize()))
 
         _variants_report.write("#{}\n".format('\t'.join(lineage_header)))
         for l_data in lineage_data:
@@ -99,7 +95,7 @@ def generate_txt_report(file_name, data):
         dr_txt_output = '{file_name}_drug_resistance_report.txt'.format(
             file_name=file_name)
         with open(dr_txt_output, 'w') as dr_report:
-            dr_report.write("#{} Report\n".format(file_name))
+            dr_report.write("#{} Report\n".format(file_name.capitalize()))
 
             dr_report.write("#{}\n".format('\t'.join(lineage_header)))
             for l_data in lineage_data:

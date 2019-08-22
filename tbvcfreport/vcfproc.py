@@ -11,6 +11,7 @@ class VCFProc:
     """Process VCF File."""
 
     def __init__(self, vcf_file, filter_udi=None):
+        """initializer."""
         self.vcf_file = vcf_file
         self.filter_udi = filter_udi
 
@@ -21,7 +22,14 @@ class VCFProc:
          percent_agreement) = lineage_parser.determine_lineage()
         percent_agreement = round(percent_agreement)
 
-        return (species, lineage, sublineage, percent_agreement)
+        lineage_dict = {
+            'species': species,
+            'lineage': lineage,
+            'sublineage': sublineage,
+            'percent_agreement': percent_agreement
+        }
+
+        return lineage_dict
 
     def parse(self):
         """Parse VCF."""
@@ -32,7 +40,6 @@ class VCFProc:
                 if record.INFO.get('ANN'):
                     annotations = self.get_variant_ann(record=record)
                     for annotation in annotations:
-                        # TODO: make this kind of filtering optional
                         effect = annotation[1]
                         if self.filter_udi and self.filter_variants(effect):
                             continue
@@ -52,7 +59,6 @@ class VCFProc:
                     # Usually there is more than one annotation reported in
                     # each ANN. A variant can affect multiple genes
                     for annotation in annotations:
-                        # TODO: make this kind of filtering optional
                         effect = annotation[1]
                         if self.filter_udi and self.filter_variants(effect):
                             continue
