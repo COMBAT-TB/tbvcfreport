@@ -45,5 +45,12 @@ before_script:
 
 script:
   - travis_wait 30 pytest -v test/
+
 after_success:
   - test $TRAVIS_BRANCH = "master" && bash conda/conda_upload.sh
+
+deploy:
+  provider: pypi
+  user: __token__
+  password: $PYPI_UPLOAD_TOKEN
+  skip_existing: true

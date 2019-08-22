@@ -6,13 +6,15 @@
             <tr>
                 <th scope="col">CHR</th>
                 <th scope="col">GENE</th>
-                <th scope="col">IDENTIFIER</th>
+                <th scope="col">LOCUS</th>
                 <th scope="col">PRODUCT</th>
                 <th scope="col">TYPE</th>
-                <th scope="col">ANNOTATION</th>
+                <th scope="col">EFFECT</th>
                 <th scope="col">POS</th>
                 <th scope="col">REF</th>
                 <th scope="col">ALT</th>
+                <th scope="col">BIOTYPE</th>
+                <th scope="col">NUCLEOTIDE</th>
                 <th scope="col">CONSEQUENCE</th>
                 <th scope="col">IMPACT</th>
                 <th scope="col">PATHWAY</th>
@@ -48,6 +50,8 @@
                 </td>
                 <td>{{ item[18] or "NA" }}</td>
                 <td>{{ item[0] or "NA" }}</td>
+                <td>{{ item[7] or "NA" }}</td>
+                <td>{{ item[9] or "NA" }}</td>
                 <td>{{ item[10] or "NA" }}</td>
                 <td>{{ item[2] or "NA" }}</td>
                 <td>
@@ -73,13 +77,15 @@
             <tr>
                 <th scope="col">CHR</th>
                 <th scope="col">GENE</th>
-                <th scope="col">IDENTIFIER</th>
+                <th scope="col">LOCUS</th>
                 <th scope="col">PRODUCT</th>
                 <th scope="col">TYPE</th>
-                <th scope="col">ANNOTATION</th>
+                <th scope="col">EFFECT</th>
                 <th scope="col">POS</th>
                 <th scope="col">REF</th>
                 <th scope="col">ALT</th>
+                <th scope="col">BIOTYPE</th>
+                <th scope="col">NUCLEOTIDE</th>
                 <th scope="col">CONSEQUENCE</th>
                 <th scope="col">IMPACT</th>
                 <th scope="col">PATHWAY</th>

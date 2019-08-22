@@ -7,11 +7,11 @@ import click
 try:
     from .report import generate_report
     from .vcfproc import VCFProc
-    from .tbprofiler import get_tb_profiler_data
+    from .tbprofiler import TBProfilerReport
 except ImportError:
     from report import generate_report
     from vcfproc import VCFProc
-    from tbprofiler import get_tb_profiler_data
+    from tbprofiler import TBProfilerReport
 
 
 def check_vcf(vcf_file):
@@ -20,43 +20,47 @@ def check_vcf(vcf_file):
     :param vcf_file:
     :return:
     """
-    _file = False
-    file_name = vcf_file.split('/')[-1]
-    if not vcf_file.endswith(".vcf"):
-        click.secho(f"{file_name} is not a VCF file!\n", fg='red')
-    elif os.stat(vcf_file).st_size > 0 and vcf_file.endswith(".vcf"):
-        _file = True
+    base_name = os.path.basename(vcf_file)
+    (name, ext) = os.path.splitext(base_name)
+    if os.stat(vcf_file).st_size > 0 and ext == ".vcf":
+        return True
     else:
-        click.secho(f"{file_name} is empty!\n", fg='red')
-    return _file
+        if ext != ".vcf":
+            raise TypeError(f"Expected a VCF file. Found {base_name}!")
+        else:
+            raise OSError(f"VCF file: {base_name} is empty!")
+    return False
 
 
-def parse_and_generate_report(vcf_file, tbprofiler_report, filter_udi):
+def parse_and_generate_report(vcf_file, filter_udi, json_report=None):
     """Parse VCF file and generate report."""
     drug_resistance_list, rrs_variant_count = [], 0
-    file_name = vcf_file.split('/')[-1].split('.')[0]
-    click.secho(f"Processing {file_name}...\n", fg='green')
+    vcf_base_name = os.path.basename(vcf_file)
+    (vcf_file_name, ext) = os.path.splitext(vcf_base_name)
+    click.secho(f"Processing {vcf_base_name}...\n", fg='green')
 
     vcf_proc = VCFProc(vcf_file=vcf_file, filter_udi=filter_udi)
-    (species, lineage, sublineage,
-        percent_agreement) = vcf_proc.find_lineage()
+    lineage = vcf_proc.find_lineage()
     variants = vcf_proc.parse()
 
-    if tbprofiler_report:
-        (drug_resistance_list,
-            rrs_variant_count) = get_tb_profiler_data(
-            tbprofiler_report, variants)
+    if json_report:
+        json_base_name = os.path.basename(
+            os.path.abspath(json_report.name))
+        (_, ext) = os.path.splitext(json_base_name)
+        if ext != ".json":
+            raise TypeError(f"Expected a json file. Found {json_base_name}!")
 
-    generate_report(file_name=file_name, data={
+        tbprofiler = TBProfilerReport(json_report, variants)
+        (drug_resistance_list, rrs_variant_count) = tbprofiler.get_data()
+
+    data = {
         'variants': variants,
-        'lineage': {
-            'species': species,
-            'lineage': lineage,
-            'sublineage': sublineage,
-            'percent_agreement': percent_agreement
-        },
+        'lineage': lineage,
         'dr_data': drug_resistance_list,
-        'mixed_infection': rrs_variant_count > 1})
+        'mixed_infection': rrs_variant_count > 1
+    }
+
+    generate_report(file_name=vcf_file_name, data=data)
 
 
 @click.group()
@@ -77,17 +81,16 @@ def generate(vcf_dir, tbprofiler_report, filter_udi):
     if os.path.isdir(vcf_dir):
         for root, dirs, files in os.walk(vcf_dir):
             if len(os.listdir(vcf_dir)) == 0:
-                click.secho(f"{vcf_dir} is empty!\n", fg='red')
+                raise OSError(f"Directory: {vcf_dir} is empty!")
             for vcf_file in files:
-                (base, ext) = os.path.splitext(vcf_file)
                 vcf_file = os.path.join(os.path.abspath(vcf_dir), vcf_file)
                 if check_vcf(vcf_file):
-                    parse_and_generate_report(vcf_file, tbprofiler_report,
-                                              filter_udi)
+                    # TODO: support generating DR reports for "directory mode"
+                    parse_and_generate_report(vcf_file, filter_udi)
     elif os.path.isfile(vcf_dir):
         vcf_file = os.path.abspath(vcf_dir)
         if check_vcf(vcf_file):
-            parse_and_generate_report(vcf_file, tbprofiler_report, filter_udi)
+            parse_and_generate_report(vcf_file, filter_udi, tbprofiler_report)
     else:
         click.secho(f"Can't generate report for {vcf_dir}!\n", fg='red')
 

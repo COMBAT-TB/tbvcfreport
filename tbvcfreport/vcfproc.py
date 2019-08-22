@@ -1,17 +1,17 @@
 """Interface to handle VCF files."""
 import vcf
 from snpit import snpit
-
 try:
     from .dbconn import query_by_gene_list
 except ImportError:
     from dbconn import query_by_gene_list
 
 
-class VCFProc(object):
+class VCFProc:
     """Process VCF File."""
 
     def __init__(self, vcf_file, filter_udi=None):
+        """initializer."""
         self.vcf_file = vcf_file
         self.filter_udi = filter_udi
 
@@ -22,7 +22,14 @@ class VCFProc(object):
          percent_agreement) = lineage_parser.determine_lineage()
         percent_agreement = round(percent_agreement)
 
-        return (species, lineage, sublineage, percent_agreement)
+        lineage_dict = {
+            'species': species,
+            'lineage': lineage,
+            'sublineage': sublineage,
+            'percent_agreement': percent_agreement
+        }
+
+        return lineage_dict
 
     def parse(self):
         """Parse VCF."""
@@ -33,7 +40,6 @@ class VCFProc(object):
                 if record.INFO.get('ANN'):
                     annotations = self.get_variant_ann(record=record)
                     for annotation in annotations:
-                        # TODO: make this kind of filtering optional
                         effect = annotation[1]
                         if self.filter_udi and self.filter_variants(effect):
                             continue
@@ -53,7 +59,6 @@ class VCFProc(object):
                     # Usually there is more than one annotation reported in
                     # each ANN. A variant can affect multiple genes
                     for annotation in annotations:
-                        # TODO: make this kind of filtering optional
                         effect = annotation[1]
                         if self.filter_udi and self.filter_variants(effect):
                             continue
@@ -72,10 +77,11 @@ class VCFProc(object):
     @staticmethod
     def filter_variants(effect):
         """Filter variants."""
-        _filter = True if effect in ('upstream_gene_variant',
-                                     'downstream_gene_variant',
-                                     'intergenic_region') else False
-        return _filter
+        if effect in ('upstream_gene_variant',
+                      'downstream_gene_variant',
+                      'intergenic_region'):
+            return True
+        return False
 
     @staticmethod
     def gene_info_to_dict(gene_info):
