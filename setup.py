@@ -7,7 +7,8 @@ setup(
     name='tbvcfreport',
     version='0.1.7',
     url='https://github.com/COMBAT-TB/tbvcfreport',
-    bugtrack_url='https://github.com/COMBAT-TB/tbvcfreport/issues',
+    author='SANBI',
+    author_email='help@sanbi.ac.za',
     description="Parses SnpEff generated VCF and generates an HTML report.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -33,8 +34,14 @@ setup(
     entry_points={
         'console_scripts': ['tbvcfreport=tbvcfreport.tbvcfreport:cli']
     },
+    project_urls={
+        'Project': 'https://combattb.org',
+        'Source': 'https://github.com/COMBAT-TB/tbvcfreport',
+        'Tracker': 'https://github.com/COMBAT-TB/tbvcfreport/issues',
+    },
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Intended Audience :: Science/Research',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],

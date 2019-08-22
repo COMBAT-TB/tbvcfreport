@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<tool id="tbvcfreport" name="TB Variant Report" version="@TOOL_VERSION@+galaxy0">
+<tool id="tbvcfreport" name="TB Variant Report" version="@TOOL_VERSION@+galaxy3">
   <description>- generate interactive HTML report from M.tb SnpEff VCF(s)</description>
   <macros>
     <token name="@TOOL_VERSION@">0.1.7</token>
@@ -13,18 +13,34 @@
         export DATABASE_URI="${database.database_uri}" &&
     #end if
     
-    #set $input_vcf_filename = $input_vcf.element_identifier
+    #if not ".vcf" in str($input_vcf.element_identifier)
+        #set $input_vcf_filename = str($input_vcf.element_identifier).replace(' ', '') + ".vcf"
+    #else
+        #set $input_vcf_filename = str($input_vcf.element_identifier).replace(' ', '')
+    #end if
+
     ln -s "${input_vcf}" $input_vcf_filename &&
     
     #set vcf_name = os.path.splitext(os.path.basename($input_vcf_filename))[0]
     
+    #if str($tbprofiler.use_tbp) == "yes"
+        #if not ".json" in str($tbprofiler_json.element_identifier)
+          #set $tbprofiler_report = str($tbprofiler_json.element_identifier).replace(' ', '') + ".json"
+        #else
+            #set $tbprofiler_report = str($tbprofiler_json.element_identifier).replace(' ', '')
+        #end if
+        ln -s "${tbprofiler_json}" $tbprofiler_report &&
+    #end if
+
     tbvcfreport generate
+
     #if str($variants.filter_udi) == "no"
         --no-filter-udi
     #end if
     #if str($tbprofiler.use_tbp) == "yes"
-        --tbprofiler-report "${tbprofiler_json}"
+        --tbprofiler-report $tbprofiler_report
     #end if
+    
     $input_vcf_filename &&
 
     #set variants_report = str(vcf_name) + "_variants_report"

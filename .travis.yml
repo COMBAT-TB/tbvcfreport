@@ -2,11 +2,13 @@ os:
   - linux
 dist: xenial
 sudo: required
+
 language: python
-cache:
-  directories:
-    - "$HOME/.cache/pip"
+
+cache: pip
+
 python:
+  - "3.6"
   - "3.7"
 
 services:
@@ -38,8 +40,8 @@ before_script:
   - conda install pip conda-build anaconda-client
   - pip install -r requirements.txt
   - pip install -e .
-  - git clone https://github.com/COMBAT-TB/neo4j_db.git && cd neo4j_db/
-  - docker-compose up --build -d && cd ..
+  - git clone https://github.com/COMBAT-TB/combat-tb-neodb.git && cd combat-tb-neodb/
+  - docker-compose up --build -d db && cd ..
   - docker ps
   - sleep 30
 
@@ -54,4 +56,9 @@ deploy:
   user: __token__
   password: $PYPI_UPLOAD_TOKEN
   server: https://test.pypi.org/legacy/
+  # distributions: "sdist bdist_wheel"
+  distributions: "sdist release"
   skip_existing: true
+  on:
+    branch: master
+    condition: $TRAVIS_PYTHON_VERSION = "3.7"

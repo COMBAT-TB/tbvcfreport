@@ -93,3 +93,4 @@ ENV/
 data/
 .vscode/
 .envrc
+galaxy/tool_test_output.*
