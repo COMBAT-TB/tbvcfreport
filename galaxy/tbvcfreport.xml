@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<tool id="tbvcfreport" name="TB VCF Report" version="@TOOL_VERSION@+galaxy0">
+<tool id="tbvcfreport" name="TB Variant Report" version="@TOOL_VERSION@+galaxy0">
   <description>- generate interactive HTML report from M.tb SnpEff VCF(s)</description>
   <macros>
-    <token name="@TOOL_VERSION@">0.1.6</token>
+    <token name="@TOOL_VERSION@">0.1.7</token>
   </macros>
   <requirements>
     <requirement type="package" version="@TOOL_VERSION@">tbvcfreport</requirement>
@@ -13,8 +13,8 @@
         export DATABASE_URI="${database.database_uri}" &&
     #end if
     
-    #set $input_vcf_filename = "data.vcf"
-    ln -s "${input_vcf}" "${input_vcf_filename}" &&
+    #set $input_vcf_filename = $input_vcf.element_identifier
+    ln -s "${input_vcf}" $input_vcf_filename &&
     
     #set vcf_name = os.path.splitext(os.path.basename($input_vcf_filename))[0]
     
@@ -25,7 +25,7 @@
     #if str($tbprofiler.use_tbp) == "yes"
         --tbprofiler-report "${tbprofiler_json}"
     #end if
-    "${input_vcf_filename}" &&
+    $input_vcf_filename &&
 
     #set variants_report = str(vcf_name) + "_variants_report"
     #set html_variants_report = variants_report + ".html"
@@ -47,7 +47,7 @@
   <inputs>
     <param name="input_vcf" type="data" format="vcf" label="Input SnpEff annotated VCF" />
     <conditional name="tbprofiler">
-      <param name="use_tbp" type="select" label="Use TBProfiler drug resistance report">
+      <param name="use_tbp" type="select" label="Use TBProfiler Drug Resistance Report">
         <option value="yes">Yes</option>
         <option value="no" selected="true">No</option>
       </param>
@@ -57,7 +57,7 @@
       </when>
     </conditional>
     <conditional name="variants">
-      <param name="filter_udi" type="select" label="Filter upstream, downstream and intergenic variants">
+      <param name="filter_udi" type="select" label="Filter UPSTREAM, DOWNSTREAM and INTERGENIC variants">
         <option value="yes" selected="true">Yes</option>
         <option value="no">No</option>
       </param>
@@ -65,7 +65,7 @@
       <when value="no"></when>
     </conditional>
     <conditional name="database">
-      <param name="use_neodb" type="select" label="Use default Combat-TB-NeoDB database (https://neodb.sanbi.ac.za)">
+      <param name="use_neodb" type="select" label="Use default COMBAT-TB-NeoDB Database (https://neodb.sanbi.ac.za)">
         <option value="yes" selected="true">Yes</option>
         <option value="no">No</option>
       </param>
