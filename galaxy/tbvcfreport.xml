@@ -19,7 +19,7 @@
         #set $input_vcf_filename = str($input_vcf.element_identifier).replace(' ', '')
     #end if
 
-    ln -s "${input_vcf}" $input_vcf_filename &&
+    ln -s "${input_vcf}" "${input_vcf_filename}" &&
     
     #set vcf_name = os.path.splitext(os.path.basename($input_vcf_filename))[0]
     
@@ -29,7 +29,7 @@
         #else
             #set $tbprofiler_report = str($tbprofiler_json.element_identifier).replace(' ', '')
         #end if
-        ln -s "${tbprofiler_json}" $tbprofiler_report &&
+        ln -s "${tbprofiler_json}" "${tbprofiler_report}" &&
     #end if
 
     tbvcfreport generate
@@ -38,25 +38,25 @@
         --no-filter-udi
     #end if
     #if str($tbprofiler.use_tbp) == "yes"
-        --tbprofiler-report $tbprofiler_report
+        --tbprofiler-report "${tbprofiler_report}"
     #end if
     
-    $input_vcf_filename &&
+    "${input_vcf_filename}" &&
 
     #set variants_report = str(vcf_name) + "_variants_report"
     #set html_variants_report = variants_report + ".html"
     #set txt_variants_report = variants_report + ".txt"
 
-    mv "${html_variants_report}" "$variants_report_html" &&
-    mv "${txt_variants_report}" "$variants_report_txt"
+    mv "${html_variants_report}" $variants_report_html &&
+    mv "${txt_variants_report}" $variants_report_txt
 
     #if str($tbprofiler.use_tbp) == "yes"
         #set drug_resistance_report = str(vcf_name) + "_drug_resistance_report"
         #set html_drug_resistance_report = drug_resistance_report + ".html"
         #set txt_drug_resistance_report = drug_resistance_report + ".txt"
         
-        && mv ${html_drug_resistance_report} "$drug_resistance_report_html"
-        && mv ${txt_drug_resistance_report} "$drug_resistance_report_txt"
+        && mv "${html_drug_resistance_report}" $drug_resistance_report_html
+        && mv "${txt_drug_resistance_report}" $drug_resistance_report_txt
     #end if
     ]]>
   </command>
