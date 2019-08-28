@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/COMBAT-TB/tbvcfreport.svg?branch=master)](https://travis-ci.org/COMBAT-TB/tbvcfreport)
 [![Anaconda-Server Badge](https://anaconda.org/thoba/tbvcfreport/badges/version.svg)](https://anaconda.org/thoba/tbvcfreport)
+[![install with bioconda](https://img.shields.io/badge/install%20with-bioconda-brightgreen.svg?style=flat)](http://bioconda.github.io/recipes/tbvcfreport/README.html)
 
-A tool to generate an interactive HTML-based report from SnpEff annotated VCF file(s) with links to the Combat-TB-Explorer.
+Generate an interactive HTML-based report from *M.tb* SnpEff annotated VCF(s) with links to the [COMBAT-TB-eXplorer](https://explorer.sanbi.ac.za/).
 
 ![test-report-img](img/test-report.png)
 
@@ -11,10 +12,9 @@ A tool to generate an interactive HTML-based report from SnpEff annotated VCF fi
 
 **Prerequisites:**
 
-- `python-pip`
 - [SnpEff](http://snpeff.sourceforge.net/SnpEff_manual.html) annotated *M.tuberculosis* VCF file(s).
-- A [Combat-TB-NeoDB](https://github.com/COMBAT-TB/combat-tb-neodb) instance, `tbvcfreport` defaults to [neodb.sanbi.ac.za](https://neodb.sanbi.ac.za).
-  - See [combat-tb-neodb](https://github.com/COMBAT-TB/combat-tb-neodb) if you want a local installation and `export DATABASE_URI=localhost` for `tbvcfreport` to use your local instance.
+- A [COMBAT-TB-NeoDB](https://github.com/COMBAT-TB/combat-tb-neodb) instance, `tbvcfreport` defaults to [neodb.sanbi.ac.za](https://neodb.sanbi.ac.za).
+  - See [documentation](https://github.com/COMBAT-TB/combat-tb-neodb) if you want a local installation and `export DATABASE_URI=localhost` for `tbvcfreport` to use your local instance.
 
 ### Installation
 
@@ -22,6 +22,22 @@ A tool to generate an interactive HTML-based report from SnpEff annotated VCF fi
 
 ```sh
 $ pip install -i https://test.pypi.org/simple/ tbvcfreport
+...
+```
+
+#### Using `conda`
+
+With an activated [Bioconda](https://bioconda.github.io/) channel:
+
+```sh
+$ conda install tbvcfreport
+...
+```
+
+and update with:
+
+```sh
+$ conda update tbvcfreport
 ...
 ```
 
