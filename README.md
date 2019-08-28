@@ -34,13 +34,6 @@ $ conda install tbvcfreport
 ...
 ```
 
-and update with:
-
-```sh
-$ conda update tbvcfreport
-...
-```
-
 #### From source
 
 ```sh
