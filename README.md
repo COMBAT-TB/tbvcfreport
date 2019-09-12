@@ -13,6 +13,8 @@ Generate an interactive HTML-based report from *M.tb* SnpEff annotated VCF(s) wi
 **Prerequisites:**
 
 - [SnpEff](http://snpeff.sourceforge.net/SnpEff_manual.html) annotated *M.tuberculosis* VCF file(s).
+
+**Optional:**
 - A [COMBAT-TB-NeoDB](https://github.com/COMBAT-TB/combat-tb-neodb) instance, `tbvcfreport` defaults to [neodb.sanbi.ac.za](https://neodb.sanbi.ac.za).
   - See [documentation](https://github.com/COMBAT-TB/combat-tb-neodb) if you want a local installation and `export DATABASE_URI=localhost` for `tbvcfreport` to use your local instance.
 
@@ -87,10 +89,8 @@ This will generate a `{vcf-file-name}.html` file in the current working director
 
 ## In Galaxy
 
-:construction:
+We have also added `tbvcfreport` to the [Galaxy](https://github.com/galaxyproject) [Tool Shed](https://toolshed.g2.bx.psu.edu/repository?repository_id=47a4512ab5a77049).
 
-We have also added `tbvcfreport` to the [Galaxy](https://github.com/galaxyproject) [Test Tool Shed](https://testtoolshed.g2.bx.psu.edu/repository?repository_id=0f42e4f01e64b182).
+Kindly see [`this repository`](https://toolshed.g2.bx.psu.edu/repository?repository_id=47a4512ab5a77049) for the latest revision.
 
-Kindly see [`this repository`](https://testtoolshed.g2.bx.psu.edu/repository?repository_id=0f42e4f01e64b182) for the latest revision.
-
-![Galaxy-tbvcfreport](img/tbvcfreport.png)
+![Galaxy-tbvcfreport](img/tbvcfreportgalaxy.png)
