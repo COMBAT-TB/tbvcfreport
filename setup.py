@@ -19,7 +19,7 @@ setup(
     package_data={
         "tbvcfreport": ["templates/*.html"],
     },
-    python_requires=">=3.8",
+    python_requires=">=3.6",
     install_requires=[
         "click",
         "neo4j",
