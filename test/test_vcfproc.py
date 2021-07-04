@@ -6,7 +6,8 @@ from test_cli import TEST_VCF
 
 @pytest.fixture(scope="module")
 def vcf_proc():
-    vcf = VCFProc(vcf_file=TEST_VCF)
+    db_url = "bolt://neodb.sanbi.ac.za:7687"
+    vcf = VCFProc(vcf_file=TEST_VCF, db_url=db_url)
     return vcf
 
 
@@ -14,8 +15,3 @@ def vcf_proc():
 def test_parse(vcf_proc):
     result = vcf_proc.parse()
     assert isinstance(result, list) is True
-
-
-def test_lineage(vcf_proc):
-    result = vcf_proc.find_lineage()
-    assert isinstance(result, dict) is True

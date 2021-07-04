@@ -1,4 +1,30 @@
 {% extends "base.html" %} {% block content %}
+{% if data['lineage'] %}
+<div class="row justify-content-center align-items-center">
+    <table id="lineagereport" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Lineage</th>
+                <th scope="col">Family</th>
+                <th scape="col">Spoligotype</th>
+                <th scope="col">RD</th>
+                <th scope="col">Agreement</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lineage in data['lineage'] %}
+            <tr>
+                <td>{{ lineage['lin'] }}</td>
+                <td>{{ lineage['family'] }}</td>
+                <td>{{ lineage['spoligotype'] }}</td>
+                <td>{{ lineage['rd'] }}</td>
+                <td>{{ lineage['frac'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
 {% if data['variants'] %}
 <div class="row justify-content-center align-items-center">
     <table id="vcfreport" class="table table-bordered table-striped table-hover table-sm" cellspacing="0">

@@ -4,31 +4,42 @@ import json
 
 import click
 
-drug_list = ['isoniazid', 'rifampicin', 'ethambutol',
-             'pyrazinamide', 'streptomycin', 'ethionamide',
-             'fluoroquinolones', 'amikacin', 'capreomycin',
-             'kanamycin', 'para-aminosalicylic_acid',
-             'cycloserine', 'delaminid', 'linezolid',
-             'clofazimine', 'bedaquiline'
-             ]
+drug_list = [
+    "isoniazid",
+    "rifampicin",
+    "ethambutol",
+    "pyrazinamide",
+    "streptomycin",
+    "ethionamide",
+    "fluoroquinolones",
+    "amikacin",
+    "capreomycin",
+    "kanamycin",
+    "para-aminosalicylic_acid",
+    "cycloserine",
+    "delaminid",
+    "linezolid",
+    "clofazimine",
+    "bedaquiline",
+]
 
 drug_names = {
-    'isoniazid': 'Isoniazid',
-    'rifampicin': 'Rifampicin',
-    'ethambutol': 'Ethambutol',
-    'pyrazinamide': 'Pyrazinamide',
-    'streptomycin': 'Streptomycin',
-    'ethionamide': 'Ethionamide',
-    'fluoroquinolones': 'Fluoroquinolones',
-    'amikacin': 'Amikacin',
-    'capreomycin': 'Capreomycin',
-    'kanamycin': 'Kanamycin',
-    'para-aminosalicylic_acid': 'Para-aminosalicylic acid',
-    'linezolid': 'Linezolid',
-    'cycloserine': 'Cycloserine',
-    'delaminid': 'Delaminid',
-    'clofazimine': 'Clofazimine',
-    'bedaquiline': 'Bedaquiline'
+    "isoniazid": "Isoniazid",
+    "rifampicin": "Rifampicin",
+    "ethambutol": "Ethambutol",
+    "pyrazinamide": "Pyrazinamide",
+    "streptomycin": "Streptomycin",
+    "ethionamide": "Ethionamide",
+    "fluoroquinolones": "Fluoroquinolones",
+    "amikacin": "Amikacin",
+    "capreomycin": "Capreomycin",
+    "kanamycin": "Kanamycin",
+    "para-aminosalicylic_acid": "Para-aminosalicylic acid",
+    "linezolid": "Linezolid",
+    "cycloserine": "Cycloserine",
+    "delaminid": "Delaminid",
+    "clofazimine": "Clofazimine",
+    "bedaquiline": "Bedaquiline",
 }
 
 
@@ -51,38 +62,55 @@ class TBProfilerReport:
                 rrs_variant_count += 1
             call_positions.add(POS)
         tbprofiler_data = json.load(self.json_file)
-        dr_data = tbprofiler_data['dr_variants']
-        _drug_resistance = self._drug_resistance(dr_data, call_positions)
+        tbprofiler_version = tbprofiler_data["tbprofiler_version"]
+        tbprofiler_major_version = int(tbprofiler_version.split(".")[0])
+        dr_data = tbprofiler_data["dr_variants"]
+        lineage = tbprofiler_data["lineage"]
+        _drug_resistance = self._drug_resistance(
+            dr_data, call_positions, tbprofiler_major_version
+        )
         for drug_name in drug_names:
             if drug_name in _drug_resistance:
                 drug_resistance_list.append(_drug_resistance[drug_name])
             else:
-                drug_resistance_list.append({
-                    'drug_name': drug_name,
-                    'drug_human_name': drug_names[drug_name],
-                    'resistant': False})
-        return (drug_resistance_list, rrs_variant_count)
+                drug_resistance_list.append(
+                    {
+                        "drug_name": drug_name,
+                        "drug_human_name": drug_names[drug_name],
+                        "resistant": False,
+                    }
+                )
+        return (drug_resistance_list, lineage, rrs_variant_count)
 
     @staticmethod
-    def _drug_resistance(_dr_data, call_positions):
+    def _drug_resistance(_dr_data, call_positions, tbprofiler_version):
         dr_calls_seen, drug_resistance = set(), {}
         for record in _dr_data:
-            drug_name = record['drug']
-            if record['genome_pos'] in dr_calls_seen:
+            if record["genome_pos"] in dr_calls_seen:
                 continue
-            dr_calls_seen.add(record['genome_pos'])
-            if drug_name not in drug_list:
-                click.secho(f"Unknown drug: {drug_name}\n", fg='yellow')
-                continue
-            dr_record = drug_resistance.get(drug_name, {
-                'drug': drug_name,
-                'drug_human_name': drug_names[drug_name],
-                'resistant': True,
-                'snippy_agreement': True, 'variants': []})
-            if record['genome_pos'] not in call_positions:
-                dr_record['snippy_agreement'] = False
-            dr_record['variants'].append((
-                record['gene'], record['change'], round(record['freq'], 2)
-            ))
-            drug_resistance[drug_name] = dr_record
+            dr_calls_seen.add(record["genome_pos"])
+            if tbprofiler_version < 3:
+                variant_drug_names = [record["drug"]]
+            else:
+                variant_drug_names = [drug["drug"] for drug in record["drugs"]]
+            for drug_name in variant_drug_names:
+                if drug_name not in drug_list:
+                    click.secho(f"Unknown drug: {drug_name}\n", fg="yellow")
+                    continue
+                dr_record = drug_resistance.get(
+                    drug_name,
+                    {
+                        "drug": drug_name,
+                        "drug_human_name": drug_names[drug_name],
+                        "resistant": True,
+                        "snippy_agreement": True,
+                        "variants": [],
+                    },
+                )
+                if record["genome_pos"] not in call_positions:
+                    dr_record["snippy_agreement"] = False
+                dr_record["variants"].append(
+                    (record["gene"], record["change"], round(record["freq"], 2))
+                )
+                drug_resistance[drug_name] = dr_record
         return drug_resistance

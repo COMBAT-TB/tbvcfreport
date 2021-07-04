@@ -4,14 +4,9 @@ import os
 
 import click
 
-try:
-    from .report import generate_report
-    from .vcfproc import VCFProc
-    from .tbprofiler import TBProfilerReport
-except ImportError:
-    from report import generate_report
-    from vcfproc import VCFProc
-    from tbprofiler import TBProfilerReport
+from .report import generate_report
+from .vcfproc import VCFProc
+from .tbprofiler import TBProfilerReport
 
 
 def check_vcf(vcf_file):
@@ -32,32 +27,30 @@ def check_vcf(vcf_file):
     return False
 
 
-def parse_and_generate_report(vcf_file, filter_udi, json_report=None):
+def parse_and_generate_report(vcf_file, filter_udi, db_url, json_report=None):
     """Parse VCF file and generate report."""
     drug_resistance_list, rrs_variant_count = [], 0
+    lineage = {}
     vcf_base_name = os.path.basename(vcf_file)
     (vcf_file_name, ext) = os.path.splitext(vcf_base_name)
-    click.secho(f"Processing {vcf_base_name}...\n", fg='green')
+    click.secho(f"Processing {vcf_base_name}...\n", fg="green")
 
-    vcf_proc = VCFProc(vcf_file=vcf_file, filter_udi=filter_udi)
-    lineage = vcf_proc.find_lineage()
+    vcf_proc = VCFProc(vcf_file=vcf_file, db_url=db_url, filter_udi=filter_udi)
     variants = vcf_proc.parse()
 
     if json_report:
-        json_base_name = os.path.basename(
-            os.path.abspath(json_report.name))
+        json_base_name = os.path.basename(os.path.abspath(json_report.name))
         (_, ext) = os.path.splitext(json_base_name)
         if ext != ".json":
             raise TypeError(f"Expected a json file. Found {json_base_name}!")
 
         tbprofiler = TBProfilerReport(json_report, variants)
-        (drug_resistance_list, rrs_variant_count) = tbprofiler.get_data()
-
+        (drug_resistance_list, lineage, rrs_variant_count) = tbprofiler.get_data()
     data = {
-        'variants': variants,
-        'lineage': lineage,
-        'dr_data': drug_resistance_list,
-        'mixed_infection': rrs_variant_count > 1
+        "variants": variants,
+        "lineage": lineage,
+        "dr_data": drug_resistance_list,
+        "mixed_infection": rrs_variant_count > 1,
     }
 
     generate_report(file_name=vcf_file_name, data=data)
@@ -70,13 +63,27 @@ def cli():
 
 
 @cli.command()
-@click.option('-t', '--tbprofiler-report', default=None, type=click.File(),
-              help="TBProfiler json report.")
-@click.option('-f/-nf', '--filter-udi/--no-filter-udi', default=True,
-              show_default=True,
-              help="Filter upstream, downstream and intergenic variants.")
-@click.argument('vcf_dir', type=click.Path(exists=True), required=True)
-def generate(vcf_dir, tbprofiler_report, filter_udi):
+@click.option(
+    "-t",
+    "--tbprofiler-report",
+    default=None,
+    type=click.File(),
+    help="TBProfiler json report.",
+)
+@click.option(
+    "-f/-nf",
+    "--filter-udi/--no-filter-udi",
+    default=True,
+    show_default=True,
+    help="Filter upstream, downstream and intergenic variants.",
+)
+@click.option(
+    "--db_url",
+    default="bolt://neodb.sanbi.ac.za:7687",
+    help="URL to connect to COMBAT TB eXplorer NeoDB",
+)
+@click.argument("vcf_dir", type=click.Path(exists=True), required=True)
+def generate(vcf_dir, tbprofiler_report, db_url, filter_udi):
     """Generate an interactive HTML-based VCF report."""
     if os.path.isdir(vcf_dir):
         for root, dirs, files in os.walk(vcf_dir):
@@ -86,14 +93,14 @@ def generate(vcf_dir, tbprofiler_report, filter_udi):
                 vcf_file = os.path.join(os.path.abspath(vcf_dir), vcf_file)
                 if check_vcf(vcf_file):
                     # TODO: support generating DR reports for "directory mode"
-                    parse_and_generate_report(vcf_file, filter_udi)
+                    parse_and_generate_report(vcf_file, filter_udi, db_url)
     elif os.path.isfile(vcf_dir):
         vcf_file = os.path.abspath(vcf_dir)
         if check_vcf(vcf_file):
-            parse_and_generate_report(vcf_file, filter_udi, tbprofiler_report)
+            parse_and_generate_report(vcf_file, filter_udi, db_url, tbprofiler_report)
     else:
-        click.secho(f"Can't generate report for {vcf_dir}!\n", fg='red')
+        click.secho(f"Can't generate report for {vcf_dir}!\n", fg="red")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     generate()
