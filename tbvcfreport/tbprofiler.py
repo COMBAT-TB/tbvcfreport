@@ -21,6 +21,7 @@ drug_list = [
     "linezolid",
     "clofazimine",
     "bedaquiline",
+    "aminoglycosides"
 ]
 
 drug_names = {
@@ -40,6 +41,7 @@ drug_names = {
     "delaminid": "Delaminid",
     "clofazimine": "Clofazimine",
     "bedaquiline": "Bedaquiline",
+    "aminoglycosides": "Aminoglycosides"
 }
 
 
