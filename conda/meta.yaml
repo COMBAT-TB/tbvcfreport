@@ -1,6 +1,6 @@
 
 {% set name = "tbvcfreport" %}
-{% set version = "0.1.9" %}
+{% set version = "0.1.10" %}
 {% set author = "COMBAT-TB" %}
 
 package:
@@ -9,7 +9,7 @@ package:
 
 source:
   url: "https://github.com/{{ author }}/{{ name }}/archive/{{ version }}.tar.gz"
-  sha256: 6f5ffbaab5dfa4e98679dc8a0f030134f78faaa3c94632c9d4b68a58abd107b3
+  sha256: 146e41af2db41c4a1598616d33733d9a114cfa746e02b1f0780ce639cc4744b9
 
 build:
   noarch: python 
