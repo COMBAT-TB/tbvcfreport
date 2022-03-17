@@ -87,7 +87,7 @@ def generate_txt_report(file_name, data):
         "ALT",
         "CONSEQUENCE",
         "IMPACT",
-        "PATHAWAY",
+        "PATHWAY",
     ]
     snp_data = data.get("variants")
     variants = [
@@ -95,7 +95,7 @@ def generate_txt_report(file_name, data):
             s[16],
             s[3],
             s[4],
-            s[21]["protein"]["uniquename"] if s[21]["protein"] else "",
+            s[21]["protein"]["uniquename"] if "protein" in s[21] and s[21]["protein"] else "NOPROTEIN",
             s[19],
             s[1],
             str(s[17]),
